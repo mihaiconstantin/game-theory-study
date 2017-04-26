@@ -1,6 +1,6 @@
 {{--demographics from--}}
 
-<div class="instruction-box {{$visibility}}">
+<div class="instruction-box">
     @include('partials.elements.__description')
 </div>
 

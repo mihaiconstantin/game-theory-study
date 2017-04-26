@@ -27,12 +27,12 @@ class InstructionController extends Controller
 
     public function start()
     {
-        return view('instruction', ['instruction' => $this->InstructionLoader('instruction.start')]);
+        return view('instruction', ['data' => $this->InstructionLoader('instruction.start')]);
     }
 
     public function gameOverviewOne()
     {
-        return view('instruction', ['instruction' => $this->InstructionLoader('instruction.game-overview-one')]);
+        return view('instruction', ['data' => $this->InstructionLoader('instruction.game-overview-one')]);
     }
 
     public function practice()
@@ -40,19 +40,19 @@ class InstructionController extends Controller
         $instruction = $this->InstructionLoader('instruction.practice');
         $instruction->url_parameters['gameNumber'] = 1;
         $instruction->url_parameters['phaseNumber'] = 2;
-        return view('instruction', ['instruction' => $instruction]);
+        return view('instruction', ['data' => $instruction]);
     }
 
     public function gameOverviewTwo()
     {
-        return view('instruction', ['instruction' => $this->InstructionLoader('instruction.game-overview-two')]);
+        return view('instruction', ['data' => $this->InstructionLoader('instruction.game-overview-two')]);
     }
 
     public function endGame($gameNumber)
     {
         $instruction = $this->InstructionLoader('instruction.end-game');
         $instruction->url_parameters['gameNumber'] = $gameNumber;
-        return view('instruction', ['instruction' => $instruction]);
+        return view('instruction', ['data' => $instruction]);
     }
 
     public function newGame($gameNumber)
@@ -60,12 +60,46 @@ class InstructionController extends Controller
         $instruction = $this->InstructionLoader('instruction.new-game');
         $instruction->url_parameters['gameNumber'] = $gameNumber;
         $instruction->url_parameters['phaseNumber'] = 1;
-        return view('instruction', ['instruction' => $instruction]);
+        return view('instruction', ['data' => $instruction]);
     }
 
     public function amazonCode()
     {
-        return view('instruction', ['instruction' => $this->InstructionLoader('instruction.amazon-code')]);
+        return view('instruction', ['data' => $this->InstructionLoader('instruction.amazon-code')]);
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
