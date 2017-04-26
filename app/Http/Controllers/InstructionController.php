@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instruction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InstructionController extends Controller
 {
     public function start()
     {
-        return 'start';
+        $instruction = DB::table('instructions')->where('current_url', 'instruction/start')->first();
+        return view('instruction', compact('instruction'));
     }
 
     public function gameOverviewOne()

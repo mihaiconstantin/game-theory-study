@@ -16,7 +16,7 @@ class FormController extends Controller
         return 'hexaco';
     }
 
-    public function guess()
+    public function expectation()
     {
         return 'guess';
     }

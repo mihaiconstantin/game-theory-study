@@ -46,7 +46,7 @@ Route::get('instruction/amazon-code', 'InstructionController@amazonCode');
 */
 Route::get('form/demographics', 'FormController@demographics');
 Route::get('form/hexaco', 'FormController@hexaco');
-Route::get('form/guess', 'FormController@guess'); // User will try to guess how well the experiment will go
+Route::get('form/expectation', 'FormController@expectation'); // User will try to guess how well the experiment will go
 Route::get('form/game-question/{gameNumber}', 'FormController@gameQuestion');
 Route::get('form/experiment-feedback', 'FormController@experimentFeedback');
 // TODO: Perhaps another route for the final questionnaire?
