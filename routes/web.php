@@ -27,13 +27,13 @@ Route::get('/', function(){
 | Routes responsible for handling the instructions.
 |
 */
-Route::get('instruction/start', 'InstructionController@start');
-Route::get('instruction/game-overview-one', 'InstructionController@gameOverviewOne');
-Route::get('instruction/practice', 'InstructionController@practice');
-Route::get('instruction/game-overview-two', 'InstructionController@gameOverviewTwo');
-Route::get('instruction/end-game/{gameNumber}', 'InstructionController@endGame');
-Route::get('instruction/new-game/{gameNumber}', 'InstructionController@newGame'); // TODO: condition here for when there are no games left
-Route::get('instruction/amazon-code', 'InstructionController@amazonCode');
+Route::get('instruction/start', 'InstructionController@start')->name('instruction.start');
+Route::get('instruction/game-overview-one', 'InstructionController@gameOverviewOne')->name('instruction.game-overview-one');
+Route::get('instruction/practice', 'InstructionController@practice')->name('instruction.practice');
+Route::get('instruction/game-overview-two', 'InstructionController@gameOverviewTwo')->name('instruction.game-overview-two');
+Route::get('instruction/end-game/{gameNumber}', 'InstructionController@endGame')->name('instruction.end-game');
+Route::get('instruction/new-game/{gameNumber}', 'InstructionController@newGame')->name('instruction.new-game'); // TODO: condition here for when there are no games left
+Route::get('instruction/amazon-code', 'InstructionController@amazonCode')->name('instruction.amazon-code');
 
 
 /*
@@ -44,11 +44,11 @@ Route::get('instruction/amazon-code', 'InstructionController@amazonCode');
 | Routes responsible for handling the forms.
 |
 */
-Route::get('form/demographics', 'FormController@demographics');
-Route::get('form/hexaco', 'FormController@hexaco');
-Route::get('form/expectation', 'FormController@expectation'); // User will try to guess how well the experiment will go
-Route::get('form/game-question/{gameNumber}', 'FormController@gameQuestion');
-Route::get('form/experiment-feedback', 'FormController@experimentFeedback');
+Route::get('form/demographics', 'FormController@demographics')->name('form.demographics');
+Route::get('form/hexaco', 'FormController@hexaco')->name('form.hexaco');
+Route::get('form/expectation', 'FormController@expectation')->name('form.expectation'); // User will try to guess how well the experiment will go
+Route::get('form/game-question/{gameNumber}', 'FormController@gameQuestion')->name('form.game-question');
+Route::get('form/experiment-feedback', 'FormController@experimentFeedback')->name('form.experiment-feedback');
 // TODO: Perhaps another route for the final questionnaire?
 
 
@@ -60,8 +60,8 @@ Route::get('form/experiment-feedback', 'FormController@experimentFeedback');
 | Routes responsible for handling the games.
 |
 */
-Route::get('game/play/{gameNumber}/{phaseNumber}', 'GameController@play');
-Route::get('game/result/{gameNumber}/{phaseNumber}', 'GameController@result');
+Route::get('game/play/{gameNumber}/{phaseNumber}', 'GameController@play')->name('game.play');
+Route::get('game/result/{gameNumber}/{phaseNumber}', 'GameController@result')->name('game.result');
 
 
 
