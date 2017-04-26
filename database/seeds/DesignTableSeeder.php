@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Design;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
 class DesignTableSeeder extends Seeder
