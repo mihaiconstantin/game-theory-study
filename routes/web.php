@@ -49,6 +49,9 @@ Route::get('form/demographics', 'FormController@demographics')->name('form.demog
 Route::post('form/demographics', 'FormController@storeDemographics')->name('form.storeDemographics');
 
 Route::get('form/hexaco', 'FormController@hexaco')->name('form.hexaco');
+Route::post('form/hexaco', 'FormController@storeHexaco')->name('form.storeHexaco');
+
+
 Route::get('form/expectation', 'FormController@expectation')->name('form.expectation'); // User will try to guess how well the experiment will go
 Route::get('form/game-question/{gameNumber}', 'FormController@gameQuestion')->name('form.game-question');
 Route::get('form/experiment-feedback', 'FormController@experimentFeedback')->name('form.experiment-feedback');
