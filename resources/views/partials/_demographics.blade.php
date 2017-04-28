@@ -4,7 +4,7 @@
     @include('partials.elements.__description')
 </div>
 
-<form action="{{URL::route('form.demographics')}}" method="POST">
+<form action="{{URL::route('form.storeDemographics')}}" method="POST">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
     <div class="form-group">
@@ -14,7 +14,7 @@
 
     <div class="form-group">
         <label for="gender">Gender</label>
-        <select class="form-control" id="gender">
+        <select class="form-control" id="gender" name="gender">
             <option>choose an option</option>
             <option>male</option>
             <option>female</option>

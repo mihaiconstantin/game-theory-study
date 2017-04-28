@@ -1,6 +1,8 @@
 {{--HEXACO questionaire--}}
 
-<form action="">
+<form action="{{URL::route('form.storeHexaco')}}" method="POST">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
     <table class="table table-sm hexaco-table">
         <caption>
             @include('partials.elements.__description')
@@ -9,17 +11,17 @@
         <thead>
             <tr>
                 <th></th>
-                @foreach($scale as $step)
+                @foreach($hexaco->scale as $step)
                     <th>{{$step}}</th>
                 @endforeach
             </tr>
         </thead>
 
         <tbody>
-            @foreach($items as $item_nr => $item_text)
+            @foreach($hexaco->items as $item_nr => $item_text)
                 <tr>
                     <td>{{$item_text}}</td>
-                    @for($i = 0; $i < count($scale); $i++)
+                    @for($i = 0; $i < count($hexaco->scale); $i++)
                         <td>
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label custom-control custom-radio">
