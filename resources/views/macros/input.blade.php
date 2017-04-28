@@ -5,6 +5,7 @@
         @if($element->tag_type == 'select')
 
             <select @include('macros._attributes')>
+                <option selected disabled hidden value="">choose an option</option>
                 @foreach($element->select_options as $option)
                     <option>{{$option->value}}</option>
                 @endforeach
