@@ -12,7 +12,13 @@ class FormController extends Controller
 
     public function demographics()
     {
-        $elements = FormElement::with('select_options')->where('current_url', 'form.demographic')->get();
+        $elements = FormElement::with(array(
+            'select_options' => function($query) {
+                $query->orderBy('order');
+            }))
+            ->where('current_url', 'form.demographic')
+            ->orderBy('order')
+            ->get();
         $instruction = $this->InstructionLoader('form.demographics');
 
         return view('forms.demographics', [
@@ -56,8 +62,6 @@ class FormController extends Controller
                 'Welkom in het volgende',
             )
         );
-
-
 
 
 
