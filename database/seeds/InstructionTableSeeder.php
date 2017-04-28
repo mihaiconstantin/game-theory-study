@@ -72,6 +72,25 @@ class InstructionTableSeeder extends Seeder
             'title' => 'Welcome instructions',
             'text' => 'The user has landed on the welcome page. Redirects to "form/demographics'
         ]);
+
+        # # #
+
+        // form/demographics
+        Instruction::create([
+            'current_url' => 'form.demographics',
+            'next_url' => 'form.hexaco',
+            'title' => 'Form demographics title',
+            'text' => 'Form demographics instructions. Redirects to "form/personality'
+        ]);
+
+        // form/hexaco
+        Instruction::create([
+            'current_url' => 'form.hexaco',
+            'next_url' => 'instruction.game-overview-one',
+            'title' => 'Form hexaco title',
+            'text' => 'Form hexaco instructions. Redirects to "form/game-overview-one'
+        ]);
+
     }
 
 }

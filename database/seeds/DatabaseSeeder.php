@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
          $this->call(DesignTableSeeder::class);
          $this->call(ConditionTableSeeder::class);
          $this->call(InstructionTableSeeder::class);
+         $this->call(FormElementTableSeeder::class);
+         $this->call(SelectOptionTableSeeder::class);
     }
 }
