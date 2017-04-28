@@ -2,28 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 class InstructionController extends Controller
 {
-
-    /**
-     * Fetches an App\Models\Instruction object from the database
-     * using the $current_url as a search phrase
-     *
-     * @param string $current_url
-     * @param string $table
-     * @return mixed
-     */
-    protected function InstructionLoader(string $current_url, string $table = 'instructions')
-    {
-        $instruction = DB::table($table)->where('current_url', $current_url)->first();
-        $instruction->url_parameters = [];
-        return $instruction;
-    }
-
-    # # #
 
     public function start()
     {
