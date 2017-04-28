@@ -4,10 +4,12 @@
     @include('partials.elements.__description')
 </div>
 
-<form action="">
+<form action="{{URL::route('form.demographics')}}" method="POST">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
     <div class="form-group">
         <label for="participant_number">Participant number</label>
-        <input type="number" class="form-control" id="participant_number" placeholder="123">
+        <input type="number" class="form-control" id="participant_number" name="participant_number" placeholder="123">
     </div>
 
     <div class="form-group">
@@ -27,3 +29,6 @@
 
     @include('partials.elements.__submit')
 </form>
+
+
+{{--Route::currentRouteName();--}}
