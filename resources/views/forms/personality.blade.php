@@ -5,5 +5,5 @@
 
 {{--main canvas--}}
 @section('content')
-    @include('partials._hexaco')
+    @include('partials._personality')
 @endsection

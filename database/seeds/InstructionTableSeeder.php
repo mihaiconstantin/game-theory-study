@@ -78,17 +78,17 @@ class InstructionTableSeeder extends Seeder
         // form/demographics
         Instruction::create([
             'current_url' => 'form.demographics',
-            'next_url' => 'form.hexaco',
+            'next_url' => 'form.personality',
             'title' => 'Form demographics title',
             'text' => 'Form demographics instructions. Redirects to "form/personality'
         ]);
 
-        // form/hexaco
+        // form/personality
         Instruction::create([
-            'current_url' => 'form.hexaco',
+            'current_url' => 'form.personality',
             'next_url' => 'instruction.game-overview-one',
             'title' => 'Form hexaco title',
-            'text' => 'Form hexaco instructions. Redirects to "form/game-overview-one'
+            'text' => 'Form hexaco instructions (or whatever questionnaire will be used). Redirects to "form/game-overview-one'
         ]);
 
     }
