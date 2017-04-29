@@ -15,6 +15,9 @@ class CreatePersonalityItemsTable extends Migration
     {
         Schema::create('personality_items', function (Blueprint $table) {
             $table->increments('id');
+            $table->tinyInteger('order');
+            $table->string('name')->default('hexaco');
+            $table->string('text');
             $table->timestamps();
         });
     }

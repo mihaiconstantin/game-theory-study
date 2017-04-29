@@ -15,6 +15,9 @@ class CreateItemScalesTable extends Migration
     {
         Schema::create('item_scales', function (Blueprint $table) {
             $table->increments('id');
+            $table->tinyInteger('order');
+            $table->string('name')->default('hexaco');
+            $table->string('text');
             $table->timestamps();
         });
     }
