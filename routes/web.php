@@ -48,13 +48,18 @@ Route::get('instruction/amazon-code', 'InstructionController@amazonCode')->name(
 Route::get('form/demographics', 'FormController@demographics')->name('form.demographics');
 Route::post('form/demographics', 'FormController@storeDemographics')->name('form.storeDemographics');
 
-Route::get('form/personality/{name}', 'FormController@personality')->name('form.personality');
+Route::get('form/personality', 'FormController@personality')->name('form.personality');
 Route::post('form/personality', 'FormController@storePersonality')->name('form.storePersonality');
 
-Route::get('form/expectation', 'FormController@expectation')->name('form.expectation'); // User will try to guess how well the experiment will go
-Route::get('form/game-question/{gameNumber}', 'FormController@gameQuestion')->name('form.game-question');
-Route::get('form/experiment-feedback', 'FormController@experimentFeedback')->name('form.experiment-feedback');
-// TODO: Perhaps another route for the final questionnaire?
+Route::get('form/expectation', 'FormController@expectation')->name('form.expectation'); // User will try to estimate his performance beforehand
+Route::post('form/expectation', 'FormController@storeExpectation')->name('form.storeExpectation');
+
+Route::get('form/game-question/{gameNumber}', 'FormController@gameQuestion')->name('form.gameQuestion');
+Route::post('form/game-question', 'FormController@storeGameQuestion')->name('form.storeGameQuestion');
+
+Route::get('form/feedback', 'FormController@feedback')->name('form.feedback');
+Route::post('form/feedback', 'FormController@storeFeedback')->name('form.storeFeedback');
+
 
 
 /*
