@@ -20,6 +20,7 @@ class CreateSelectOptionsTable extends Migration
             $table->tinyInteger('form_element_id');
             $table->tinyInteger('order');
             $table->string('value');
+            $table->string('text');
 
             $table->timestamps();
         });

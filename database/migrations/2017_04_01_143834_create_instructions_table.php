@@ -17,7 +17,7 @@ class CreateInstructionsTable extends Migration
             $table->increments('id');
             $table->string("context");
             $table->string("title");
-            $table->string("text");
+            $table->text("text");
             $table->timestamps();
         });
     }
