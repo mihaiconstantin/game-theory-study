@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\FormElement;
-use App\Models\SelectOption;
+use App\Models\ItemScale;
+use App\Models\PersonalityItem;
 
 use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
 
+    /*
+     * Display and store the demographics form.
+     * */
     public function demographics()
     {
         $elements = FormElement::with(array(
@@ -30,51 +34,32 @@ class FormController extends Controller
     public function storeDemographics(Request $request)
     {
         // do something with the Request here
-        dd($request->all());
-
-        // return redirect(route($this->InstructionLoader('form.demographics')->next_url));
+        return redirect(route($this->InstructionLoader('form.demographics')->next_url, ['name' => 'hexaco']));
     }
 
 
-    public function hexaco()
+    /*
+     * Display and store the personality form.
+     * */
+    public function personality($name)
     {
-        $instruction = $this->InstructionLoader('form.hexaco');
+        $instruction = $this->InstructionLoader('form.personality');
+        $items = PersonalityItem::getItemsForQuestionnaire($name);
+        $steps = ItemScale::getScaleForQuestionnaire($name);
 
-        $questionnaire = array(
-            'items' => array(
-                1 => 'Item 1',
-                2 => 'Item 2',
-                3 => 'Item 3',
-                4 => 'Item 4',
-                5 => 'Item 5',
-                6 => 'Item 5',
-                7 => 'Item 5',
-                8 => 'Item 5',
-                9 => 'Item 5',
-                10 => 'Item 5',
-                11 => 'Item 5',
-            ),
-            'scale' => array(
-                'Welkom in het volgende',
-                'Welkom in het volgende',
-                'Welkom in het volgende',
-                'Welkom in het volgende',
-                'Welkom in het volgende',
-            )
-        );
-
-
-
-
-        return view('forms.hexaco', [
+        return view('forms.personality', [
             'data' => $instruction,
-            'hexaco' => (object) $questionnaire]);
+            'items' => $items,
+            'steps' => $steps]);
     }
 
-    public function storeHexaco()
+    public function storePersonality(Request $request)
     {
-        return 'hexaco stored';
+        // do something with the Request here
+
+        return redirect(route($this->InstructionLoader('form.personality')->next_url));
     }
+
 
 
     public function expectation()
