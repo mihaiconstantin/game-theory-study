@@ -15,7 +15,9 @@ class PersonalityItemTableSeed extends Seeder
         DB::table('personality_items')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
-        // personality items
+
+        #region hexaco items
+
         App\Models\PersonalityItem::create([
             'order' => '1',
             'text' => 'Item 1'
@@ -40,6 +42,43 @@ class PersonalityItemTableSeed extends Seeder
             'order' => '5',
             'text' => 'Item 5'
         ]);
+
+        #endregion
+
+
+        #region bfi items
+
+        App\Models\PersonalityItem::create([
+            'order' => '1',
+            'text' => 'Item 1',
+            'name' => 'bfi'
+        ]);
+
+        App\Models\PersonalityItem::create([
+            'order' => '2',
+            'text' => 'Item 2',
+            'name' => 'bfi'
+        ]);
+
+        App\Models\PersonalityItem::create([
+            'order' => '3',
+            'text' => 'Item 3',
+            'name' => 'bfi'
+        ]);
+
+        App\Models\PersonalityItem::create([
+            'order' => '4',
+            'text' => 'Item 4',
+            'name' => 'bfi'
+        ]);
+
+        App\Models\PersonalityItem::create([
+            'order' => '5',
+            'text' => 'Item 5',
+            'name' => 'bfi'
+        ]);
+
+        #endregion
 
     }
 }

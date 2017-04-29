@@ -22,21 +22,24 @@ class SelectOptionTableSeeder extends Seeder
         \App\Models\SelectOption::create([
             'form_element_id' => 2,
             'order' => 1,
-            'value' => 'option 1'
+            'value' => 'option 1',
+            'text' => 'text option 1'
         ]);
 
         // option 2
         \App\Models\SelectOption::create([
             'form_element_id' => 2,
             'order' => 2,
-            'value' => 'option 2'
+            'value' => 'option 2',
+            'text' => 'text option 2'
         ]);
 
         // option 3
         \App\Models\SelectOption::create([
             'form_element_id' => 2,
             'order' => 3,
-            'value' => 'option 3'
+            'value' => 'option 3',
+            'text' => 'text option 3'
         ]);
 
         #endregion

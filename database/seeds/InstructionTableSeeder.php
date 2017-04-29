@@ -80,7 +80,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'form.demographics',
             'next_url' => 'form.personality',
             'title' => 'Form demographics title',
-            'text' => 'Form demographics instructions. Redirects to "form/personality'
+            'text' => 'Form demographics instructions. Redirects to "form/personality"'
         ]);
 
         // form/personality
@@ -89,6 +89,30 @@ class InstructionTableSeeder extends Seeder
             'next_url' => 'instruction.game-overview-one',
             'title' => 'Form hexaco title',
             'text' => 'Form hexaco instructions (or whatever questionnaire will be used). Redirects to "form/game-overview-one'
+        ]);
+
+        // form/expectation
+        Instruction::create([
+            'current_url' => 'form.expectation',
+            'next_url' => 'game.play',
+            'title' => 'Form expectation title',
+            'text' => 'Form expectation instructions. Redirects to "game/play/{9}/{9}"'
+        ]);
+
+        // form/feedback
+        Instruction::create([
+            'current_url' => 'form.feedback',
+            'next_url' => 'instruction.amazon-code',
+            'title' => 'Form feedback title',
+            'text' => 'Form feedback instructions. Redirects to "instruction/amazon-code"'
+        ]);
+
+        // form/game-question/(gameNumber)
+        Instruction::create([
+            'current_url' => 'form.game-question',
+            'next_url' => 'instruction.new-game',
+            'title' => 'Form game-question/{gameNumber} title',
+            'text' => 'Form game-question/{gameNumber} instructions. Redirects to "instruction/new-game/{gameNumber}"'
         ]);
 
     }

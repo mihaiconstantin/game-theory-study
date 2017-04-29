@@ -16,12 +16,12 @@ class FormElementTableSeeder extends Seeder
         DB::table('form_elements')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
-        #region seeds for form/demographic
+        #region seeds for form/demographics
 
         // participant number
         \App\Models\FormElement::create([
-            'current_url' => 'form.demographic',
-            'name' => 'demographic.number',
+            'current_url' => 'form.demographics',
+            'name' => 'demographics.number',
             'order' => '1',
             'tag_type' => 'input',
             'attr_name' => 'number',
@@ -33,8 +33,8 @@ class FormElementTableSeeder extends Seeder
 
         // gender select
         \App\Models\FormElement::create([
-            'current_url' => 'form.demographic',
-            'name' => 'demographic.gender',
+            'current_url' => 'form.demographics',
+            'name' => 'demographics.gender',
             'order' => '2',
             'tag_type' => 'select',
             'attr_name' => 'gender',
@@ -44,8 +44,8 @@ class FormElementTableSeeder extends Seeder
 
         // age
         \App\Models\FormElement::create([
-            'current_url' => 'form.demographic',
-            'name' => 'demographic.age',
+            'current_url' => 'form.demographics',
+            'name' => 'demographics.age',
             'order' => '3',
             'tag_type' => 'input',
             'attr_name' => 'age',
@@ -57,8 +57,8 @@ class FormElementTableSeeder extends Seeder
 
         // job
         \App\Models\FormElement::create([
-            'current_url' => 'form.demographic',
-            'name' => 'demographic.job',
+            'current_url' => 'form.demographics',
+            'name' => 'demographics.job',
             'order' => '4',
             'tag_type' => 'input',
             'attr_name' => 'job',
@@ -66,6 +66,40 @@ class FormElementTableSeeder extends Seeder
             'label' => 'Participant job',
             'attr_type' => 'text',
             'attr_placeholder' => 'e.g., programmer'
+        ]);
+
+        #endregion
+
+
+        #region seeds for form/expectation
+
+        // participant expectation
+        \App\Models\FormElement::create([
+            'current_url' => 'form.expectation',
+            'name' => 'expectation.expectation',
+            'order' => '1',
+            'tag_type' => 'textarea',
+            'attr_name' => 'expectation',
+            'attr_id' => 'expectation',
+            'label' => 'Participant\'s expectation',
+            'attr_placeholder' => 'e.g., your expectation'
+        ]);
+
+        #endregion
+
+
+        #region seeds for form/feedback
+
+        // participant feedback
+        \App\Models\FormElement::create([
+            'current_url' => 'form.feedback',
+            'name' => 'expectation.feedback',
+            'order' => '1',
+            'tag_type' => 'textarea',
+            'attr_name' => 'feedback',
+            'attr_id' => 'feedback',
+            'label' => 'Participant\'s feedback',
+            'attr_placeholder' => 'e.g., your feedback'
         ]);
 
         #endregion
