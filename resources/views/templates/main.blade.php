@@ -29,3 +29,7 @@
 @yield('specific_scripts')
 </body>
 </html>
+
+<!--
+    By Mihai Constantin - m.a.constantin@uvt.nl (https://github.com/mihaiconstantin/game-theory-tilburg)
+-->

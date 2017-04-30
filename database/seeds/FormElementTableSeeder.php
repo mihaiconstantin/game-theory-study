@@ -16,6 +16,7 @@ class FormElementTableSeeder extends Seeder
         DB::table('form_elements')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
+
         #region seeds for form/demographics
 
         // participant number
@@ -103,5 +104,6 @@ class FormElementTableSeeder extends Seeder
         ]);
 
         #endregion
+
     }
 }

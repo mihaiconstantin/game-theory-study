@@ -12,6 +12,29 @@ class FormController extends Controller
 {
 
     /*
+     * Display and store the consent form.
+     * */
+    public function consent()
+    {
+        $instruction = $this->InstructionLoader('form.consent');
+
+        return view('forms.consent', [
+            'data' => $instruction
+        ]);
+    }
+
+    public function storeConsent(Request $request)
+    {
+        if ((int) $request['consent'] == 1)
+        {
+            redirect(route('instruction.end'));
+        }
+        return redirect(route($this->InstructionLoader('form.consent')->next_url));
+    }
+
+
+
+    /*
      * Display and store the demographics form.
      * */
     public function demographics()
