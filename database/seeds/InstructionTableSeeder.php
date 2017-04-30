@@ -90,7 +90,7 @@ class InstructionTableSeeder extends Seeder
 
         #region form instructions
 
-        // form/demographics
+        // form/consent
         Instruction::create([
             'current_url' => 'form.consent',
             'next_url' => 'form.demographics',
