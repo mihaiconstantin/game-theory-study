@@ -17,6 +17,9 @@ class InstructionTableSeeder extends Seeder
         DB::table('instructions')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
+
+        #region standalone instructions
+
         // amazon-code
         Instruction::create([
             'current_url' => 'instruction.amazon-code',
@@ -68,12 +71,32 @@ class InstructionTableSeeder extends Seeder
         // start
         Instruction::create([
             'current_url' => 'instruction.start',
-            'next_url' => 'form.demographics',
+            'next_url' => 'form.consent',
             'title' => 'Welcome instructions',
-            'text' => 'The user has landed on the welcome page. Redirects to "form/demographics'
+            'text' => 'The user has landed on the welcome page. Redirects to "form/consent'
         ]);
 
-        # # #
+        // end
+        Instruction::create([
+            'current_url' => 'instruction.end',
+            'next_url' => 'form.consent',
+            'title' => 'Bye bye instructions',
+            'text' => 'The user has landed on the ending page. Redirects to nowhere.'
+        ]);
+
+
+        #endregion
+
+
+        #region form instructions
+
+        // form/demographics
+        Instruction::create([
+            'current_url' => 'form.consent',
+            'next_url' => 'form.demographics',
+            'title' => 'Form consent title',
+            'text' => 'Form consent instructions. Redirects to "form/demographics"'
+        ]);
 
         // form/demographics
         Instruction::create([
@@ -114,6 +137,9 @@ class InstructionTableSeeder extends Seeder
             'title' => 'Form game-question/{gameNumber} title',
             'text' => 'Form game-question/{gameNumber} instructions. Redirects to "instruction/new-game/{gameNumber}"'
         ]);
+
+        #endregion
+
 
     }
 

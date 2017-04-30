@@ -10,10 +10,18 @@ class InstructionController extends Controller
         return view('instruction', ['data' => $this->InstructionLoader('instruction.start')]);
     }
 
+
+    public function end()
+    {
+        return view('instruction', ['data' => $this->InstructionLoader('instruction.end')]);
+    }
+
+
     public function gameOverviewOne()
     {
         return view('instruction', ['data' => $this->InstructionLoader('instruction.game-overview-one')]);
     }
+
 
     public function practice()
     {
@@ -23,10 +31,12 @@ class InstructionController extends Controller
         return view('instruction', ['data' => $instruction]);
     }
 
+
     public function gameOverviewTwo()
     {
         return view('instruction', ['data' => $this->InstructionLoader('instruction.game-overview-two')]);
     }
+
 
     public function endGame($gameNumber)
     {
@@ -35,6 +45,7 @@ class InstructionController extends Controller
         return view('instruction', ['data' => $instruction]);
     }
 
+
     public function newGame($gameNumber)
     {
         $instruction = $this->InstructionLoader('instruction.new-game');
@@ -42,6 +53,7 @@ class InstructionController extends Controller
         $instruction->url_parameters['phaseNumber'] = 1;
         return view('instruction', ['data' => $instruction]);
     }
+
 
     public function amazonCode()
     {

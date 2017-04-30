@@ -34,7 +34,7 @@ Route::get('instruction/game-overview-two', 'InstructionController@gameOverviewT
 Route::get('instruction/end-game/{gameNumber}', 'InstructionController@endGame')->name('instruction.end-game');
 Route::get('instruction/new-game/{gameNumber}', 'InstructionController@newGame')->name('instruction.new-game'); // TODO: condition here for when there are no games left
 Route::get('instruction/amazon-code', 'InstructionController@amazonCode')->name('instruction.amazon-code');
-
+Route::get('instruction/end', 'InstructionController@end')->name('instruction.end');
 
 
 /*
@@ -45,6 +45,9 @@ Route::get('instruction/amazon-code', 'InstructionController@amazonCode')->name(
 | Routes responsible for handling the forms.
 |
 */
+Route::get('form/consent', 'FormController@consent')->name('form.consent');
+Route::post('form/consent', 'FormController@storeConsent')->name('form.storeConsent');
+
 Route::get('form/demographics', 'FormController@demographics')->name('form.demographics');
 Route::post('form/demographics', 'FormController@storeDemographics')->name('form.storeDemographics');
 
