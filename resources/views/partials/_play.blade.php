@@ -6,7 +6,7 @@
 
     <table class="table table-sm choice-table">
         <caption>
-            <div class="condition-title title">{{$condition_name}}: <span id="gameNumber">{{$current_game}}</span></div>
+            <div class="condition-title title">{{$condition_name}} &ndash; Game <span id="gameNumber">{{$current_game}}</span></div>
             <div class="condition-description text-justify">{{$condition_description}}</div>
             <div class="condition-opponent">Opponent name: {{$condition_opponent}}</div>
         </caption>

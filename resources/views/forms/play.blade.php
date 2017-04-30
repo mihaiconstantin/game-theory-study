@@ -2,13 +2,13 @@
 
 {{--score canvas?--}}
 @section('score')
-    {{--@include('partials._score')--}}
+    @include('partials._score')
 @endsection
 
 
 {{--main canvas--}}
 @section('content')
-    @include('partials._choice')
+    @include('partials._play')
 @endsection
 
 
