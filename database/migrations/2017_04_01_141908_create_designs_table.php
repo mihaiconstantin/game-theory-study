@@ -15,13 +15,16 @@ class CreateDesignsTable extends Migration
     {
         Schema::create('designs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("name");
-            $table->string("label");
+            $table->string("name")->unique();
             $table->tinyInteger("iterations");
-            $table->string("outcome_1_values");
-            $table->string("outcome_2_values");
-            $table->string("outcome_3_values");
-            $table->string("outcome_4_values");
+
+            $table->string("outcome_1_value");
+            $table->string("outcome_2_value");
+            $table->string("outcome_3_value");
+            $table->string("outcome_4_value");
+
+            $table->string("label");
+
             $table->string("outcome_1_description");
             $table->string("outcome_2_description");
             $table->string("outcome_3_description");
@@ -29,7 +32,6 @@ class CreateDesignsTable extends Migration
 
             $table->timestamps();
 
-            $table->unique('name');
         });
     }
 

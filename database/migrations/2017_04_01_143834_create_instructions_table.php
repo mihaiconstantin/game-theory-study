@@ -15,7 +15,8 @@ class CreateInstructionsTable extends Migration
     {
         Schema::create('instructions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("context");
+            $table->string("current_url");
+            $table->string("next_url");
             $table->string("title");
             $table->text("text");
             $table->timestamps();

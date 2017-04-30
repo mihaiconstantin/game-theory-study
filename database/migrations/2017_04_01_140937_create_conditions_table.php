@@ -15,20 +15,21 @@ class CreateConditionsTable extends Migration
     {
         Schema::create('conditions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("name");
-            $table->string("location");
+            $table->string("name")->unique();
             $table->string("design_chain");
             $table->string("bias_chain");
-            $table->string("opponent_chain");
-            $table->tinyInteger("randomize_design_iterations");
-            $table->tinyInteger("randomize_design_chain");
-            $table->text("description_competitive");
-            $table->text("description_cooperative");
-            $table->text("description_neutral");
+
+            $table->tinyInteger("random_design_iteration");
+            $table->tinyInteger("random_design_chain");
+
+            $table->string("opponent");
+
+            $table->string("title");
+            $table->text("text_competitive");
+            $table->text("text_cooperative");
+            $table->text("text_neutral");
 
             $table->timestamps();
-
-            $table->unique('name');
         });
     }
 

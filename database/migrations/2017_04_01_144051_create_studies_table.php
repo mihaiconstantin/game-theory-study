@@ -15,12 +15,9 @@ class CreateStudiesTable extends Migration
     {
         Schema::create('studies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("name");
-            $table->tinyInteger("conditions_range_start");
-            $table->tinyInteger("conditions_range_end");
-
+            $table->string("name")->unique();
+            $table->string("condition_set");
             $table->timestamps();
-            $table->unique('name');
         });
     }
 
