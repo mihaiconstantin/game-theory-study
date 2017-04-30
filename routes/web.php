@@ -71,5 +71,7 @@ Route::post('form/feedback', 'FormController@storeFeedback')->name('form.storeFe
 |
 */
 Route::get('game/play/{gameNumber}/{phaseNumber}', 'GameController@play')->name('game.play');
+Route::post('game/play', 'GameController@storePlay')->name('game.storePlay');
+
 Route::get('game/result/{gameNumber}/{phaseNumber}', 'GameController@result')->name('game.result');
 
