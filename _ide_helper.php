@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.21 on 2017-04-29.
+ * Generated for Laravel 5.4.21 on 2017-04-30.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -11445,6 +11445,13 @@ namespace Illuminate\Support\Facades {
     }         
 }
     
+namespace App\Helpers {
+
+    class Generate {
+        
+    }         
+}
+    
     
 namespace {
 
@@ -13482,6 +13489,8 @@ namespace {
             return \Illuminate\Database\Query\Builder::macroCall($method, $parameters);
         }
         }
+    
+    class Generate extends \App\Helpers\Generate {}
     
 }
 
