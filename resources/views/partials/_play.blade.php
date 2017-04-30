@@ -2,7 +2,7 @@
 
 @include('partials.elements.__timestamp')
 
-<div class="condition-iteration {{$visibility}}">
+<div class="condition-iteration">
 
     <table class="table table-sm choice-table">
         <caption>
