@@ -45,12 +45,12 @@ class SessionHelper
 
             // temporary data
             'temp' => [
-                'study_start' => microtime(),
+                'study_start' => null,
                 'study_end' => null,
                 'cheats' => null,
                 'current_game' => null,
                 'current_phase' => null,
-                'is_practice' => true
+                'passed_practice' => null
             ],
 
 
@@ -61,6 +61,8 @@ class SessionHelper
                 'designs' => null
             ],
 
+            // temporary score data
+            'score' => [],
 
             // to be transferred to the database
             'storage' => [
@@ -91,14 +93,10 @@ class SessionHelper
                 ],
 
 
-                'data_practice' => [
-
-                ],
+                'data_practice' => [],
 
 
-                'data_condition' => [
-
-                ]
+                'data_condition' => []
 
 
             ] // end of storage
@@ -108,6 +106,7 @@ class SessionHelper
         $this->extendWithPractice();
         $this->extendWithCondition();
         $this->extendWithUniqueDesigns();
+        $this->extendWithScore();
     }
 
 
@@ -189,6 +188,16 @@ class SessionHelper
 
         $this->skeleton['config']['designs'] = $unique_names_condition;
         $this->skeleton['config']['designs'] = array_flip($this->skeleton['config']['designs']);
+    }
+
+
+    /**
+     * Extends the skeleton with the score empty array.
+     */
+    private function extendWithScore()
+    {
+        $total_designs = count($this->condition->getDesignConfig()['ordered_names']);
+        $this->skeleton['score'] = array_combine(range(1, $total_designs), array_fill(0, $total_designs, 0));
     }
 
     #endregion
