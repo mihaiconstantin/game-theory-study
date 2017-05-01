@@ -232,7 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // custom aliases
-        'Generate' => App\Helpers\Generate::class,
+        'BasicHelper' => App\Helpers\BasicHelper::class,
 
     ],
 
