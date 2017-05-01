@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Helpers\BasicHelper;
 use App\Models\FormElement;
 use App\Models\ItemScale;
 use App\Models\PersonalityItem;
 
+use App\Models\Study;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -25,10 +28,85 @@ class FormController extends Controller
 
     public function storeConsent(Request $request)
     {
-        if ((int) $request['consent'] == 1)
+        if ((int) $request['consent'] == 0)
         {
-            redirect(route('instruction.end'));
+            return redirect(route('instruction.end'));
         }
+
+        // set the session here
+        session([
+
+            // not to be transferred to the database
+            'temp' => [
+                'study_start' => microtime(),
+                'study_end' => null,
+                'cheats' => null,
+            ],
+
+            // to be transferred to the database
+            'storage' => [
+
+                'data_participants' => [
+                    'code'                      => BasicHelper::userCode(),
+                    'study_name'                => env('STUDY'),
+                    'study_time'                => null,
+                    'study_integrity'           => null,
+                    'condition_name'            => null,
+                    'games_played'              => null,
+                    'game_phases_played'        => null,
+                    'practice_phases_played'    => null,
+                ],
+
+
+                'data_forms' => [
+                    'demographic'   => null,
+                    'expectation'   => null,
+                    'feedback'      => null,
+                ],
+
+
+                'data_questionnaires' => [
+                    'personality'   => null,
+                    'game_question' => null,
+                ],
+
+
+                'data_game_phases' => [
+
+                    '0' => [
+                        'game_number'   => null,
+                        'phase_number'  => null,
+                        'play_time'     => null,
+                        'result_time'   => null,
+                        'bias_type'     => null,
+                        'competitive'   => null,
+                        'user_choice'   => null,
+                        'pc_choice'     => null,
+                        'user_outcome'  => null,
+                        'pc_outcome'    => null,
+                    ],
+
+                    '1' => [
+                        'game_number'   => null,
+                        'phase_number'  => null,
+                        'play_time'     => null,
+                        'result_time'   => null,
+                        'bias_type'     => null,
+                        'competitive'   => null,
+                        'user_choice'   => null,
+                        'pc_choice'     => null,
+                        'user_outcome'  => null,
+                        'pc_outcome'    => null,
+                    ]
+
+
+                ]
+
+
+            ] // end of storage
+        ]);
+
+
         return redirect(route($this->InstructionLoader('form.consent')->next_url));
     }
 
