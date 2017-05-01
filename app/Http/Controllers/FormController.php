@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Helpers\BasicHelper;
+use App\Helpers\ConditionParserHelper;
+use App\Helpers\SessionHelper;
+use App\Models\Condition;
 use App\Models\FormElement;
 use App\Models\ItemScale;
 use App\Models\PersonalityItem;
@@ -15,7 +18,7 @@ class FormController extends Controller
 {
 
     /*
-     * Display and store the consent form.
+     * Display the consent form.
      * */
     public function consent()
     {
@@ -26,86 +29,37 @@ class FormController extends Controller
         ]);
     }
 
+    /*
+     * Display and store the demographics form.
+     * */
     public function storeConsent(Request $request)
     {
+        // check if the user agreed to participate
         if ((int) $request['consent'] == 0)
         {
             return redirect(route('instruction.end'));
         }
 
-        // set the session here
-        session([
 
-            // not to be transferred to the database
-            'temp' => [
-                'study_start' => microtime(),
-                'study_end' => null,
-                'cheats' => null,
-            ],
-
-            // to be transferred to the database
-            'storage' => [
-
-                'data_participants' => [
-                    'code'                      => BasicHelper::userCode(),
-                    'study_name'                => env('STUDY'),
-                    'study_time'                => null,
-                    'study_integrity'           => null,
-                    'condition_name'            => null,
-                    'games_played'              => null,
-                    'game_phases_played'        => null,
-                    'practice_phases_played'    => null,
-                ],
+        // prepare general variables to initialize the session storage
+        $study_name = env('STUDY');
+        $condition_name = BasicHelper::randomAssign(env('STUDY'));
+        $practice_name = Study::getColumnsByName($study_name, ['practice'])['practice'];
 
 
-                'data_forms' => [
-                    'demographic'   => null,
-                    'expectation'   => null,
-                    'feedback'      => null,
-                ],
+        // build a session skeleton packed with config data only (i.e., [config])
+        $skeleton = new SessionHelper($condition_name, $practice_name);
 
 
-                'data_questionnaires' => [
-                    'personality'   => null,
-                    'game_question' => null,
-                ],
+        // push the skeleton to the session
+        session($skeleton->getSkeleton());
 
 
-                'data_game_phases' => [
+        // update relevant session keys
 
-                    '0' => [
-                        'game_number'   => null,
-                        'phase_number'  => null,
-                        'play_time'     => null,
-                        'result_time'   => null,
-                        'bias_type'     => null,
-                        'competitive'   => null,
-                        'user_choice'   => null,
-                        'pc_choice'     => null,
-                        'user_outcome'  => null,
-                        'pc_outcome'    => null,
-                    ],
-
-                    '1' => [
-                        'game_number'   => null,
-                        'phase_number'  => null,
-                        'play_time'     => null,
-                        'result_time'   => null,
-                        'bias_type'     => null,
-                        'competitive'   => null,
-                        'user_choice'   => null,
-                        'pc_choice'     => null,
-                        'user_outcome'  => null,
-                        'pc_outcome'    => null,
-                    ]
-
-
-                ]
-
-
-            ] // end of storage
-        ]);
-
+        // dd(
+            // session()->all()
+        // );
 
         return redirect(route($this->InstructionLoader('form.consent')->next_url));
     }
@@ -133,6 +87,7 @@ class FormController extends Controller
     }
 
 
+
     /*
      * Display and store the personality form.
      * */
@@ -154,6 +109,7 @@ class FormController extends Controller
 
         return redirect(route($this->InstructionLoader('form.personality')->next_url));
     }
+
 
 
     /*
@@ -181,6 +137,7 @@ class FormController extends Controller
     }
 
 
+
     /*
      * Display and store the game-question/{gameNumber} form.
      * */
@@ -205,6 +162,7 @@ class FormController extends Controller
             'gameNumber' => '1'
         ]));
     }
+
 
 
     /*

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ConditionParserHelper;
 use App\Helpers\BasicHelper;
+use App\Helpers\DesignParserHelper;
 use App\Models\Condition;
 use App\Models\Design;
 use Illuminate\Http\Request;
@@ -13,9 +14,11 @@ class GameController extends Controller
     public function play($gameNumber, $phaseNumber)
     {
         $c = new ConditionParserHelper(Condition::getCondition('community'));
-        $a = $c->relevantSummary();
-        var_dump($a);
+        $d = new DesignParserHelper(Design::getByName('MD'));
 
+        var_dump($d->getRawDesign());
+
+        var_dump($d->getDesignInfo());
 
         /*$melted_data = array(
             'label' => 'points',
