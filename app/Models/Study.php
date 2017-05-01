@@ -17,4 +17,16 @@ class Study extends Model
         return self::where('name', $name)->first()->toArray();
     }
 
+    /**
+     * Fetch specific columns from studies table by name.
+     *
+     * @param string $name
+     * @param array $columns
+     * @return array
+     */
+    public static function getColumnsByName(string $name, array $columns) : array
+    {
+        return self::where('name', $name)->select($columns)->first()->toArray();
+    }
+
 }
