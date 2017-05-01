@@ -16,18 +16,16 @@ class CreateConditionsTable extends Migration
         Schema::create('conditions', function (Blueprint $table) {
             $table->increments('id');
             $table->string("name")->unique();
+
             $table->string("design_chain");
             $table->string("bias_chain");
+            $table->text("text_chain");
 
             $table->tinyInteger("random_design_iteration");
             $table->tinyInteger("random_design_chain");
 
-            $table->string("opponent");
-
             $table->string("title");
-            $table->text("text_competitive");
-            $table->text("text_cooperative");
-            $table->text("text_neutral");
+            $table->string("opponent");
 
             $table->timestamps();
         });

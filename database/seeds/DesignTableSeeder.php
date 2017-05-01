@@ -18,7 +18,7 @@ class DesignTableSeeder extends Seeder
 
         // practice
         Design::create([
-            'name' => 'practice',
+            'name' => 'PR',
             'iterations' => 2,
             'outcome_1_value' => '1#1;+4#+4',
             'outcome_2_value' => '1#2;+12#+8',

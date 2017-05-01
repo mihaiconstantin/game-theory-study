@@ -27,9 +27,7 @@ class ConditionTableSeeder extends Seeder
             'random_design_chain' => 0,
             'opponent' => 'Robin',
             'title' => 'Training',
-            'text_competitive' => 'Training - competitive description',
-            'text_cooperative' => 'Training - cooperative description',
-            'text_neutral' => 'Training - neutral description'
+            'text_chain' => 'comp#Text comp'
         ]);
 
         // Wall Street
@@ -41,9 +39,7 @@ class ConditionTableSeeder extends Seeder
             'random_design_chain' => 1,
             'opponent' => 'Robin',
             'title' => 'Wall Street',
-            'text_competitive' => 'Wall Street - competitive description',
-            'text_cooperative' => 'Wall Street - cooperative description',
-            'text_neutral' => 'Wall Street - neutral description'
+            'text_chain' => 'comp#Text comp;coop#Text coop;neut#Text neut'
         ]);
 
         // Community
@@ -55,9 +51,7 @@ class ConditionTableSeeder extends Seeder
             'random_design_chain' => 1,
             'opponent' => 'Robin',
             'title' => 'Community',
-            'text_competitive' => 'Community - competitive description',
-            'text_cooperative' => 'Community - cooperative description',
-            'text_neutral' => 'Community - neutral description'
+            'text_chain' => 'comp#Text comp;coop#Text coop;neut#Text neut'
         ]);
 
         // Point Game
@@ -69,9 +63,7 @@ class ConditionTableSeeder extends Seeder
             'random_design_chain' => 1,
             'opponent' => 'Robin',
             'title' => 'Point Game',
-            'text_competitive' => 'Point Game - competitive description',
-            'text_cooperative' => 'Point Game - cooperative description',
-            'text_neutral' => 'Point Game - neutral description'
+            'text_chain' => 'comp#Text comp;coop#Text coop;neut#Text neut'
         ]);
     }
 }
