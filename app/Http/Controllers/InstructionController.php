@@ -13,7 +13,7 @@ class InstructionController extends Controller
 
     public function end()
     {
-        return view('instruction', ['data' => $this->InstructionLoader('instruction.end')]);
+        return view('end', ['data' => $this->InstructionLoader('instruction.end')]);
     }
 
 

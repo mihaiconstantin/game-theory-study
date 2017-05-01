@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Helpers\BasicHelper;
-use App\Helpers\ConditionParserHelper;
 use App\Helpers\SessionHelper;
-use App\Models\Condition;
 use App\Models\FormElement;
 use App\Models\ItemScale;
 use App\Models\PersonalityItem;
@@ -57,6 +55,7 @@ class FormController extends Controller
 
         // update relevant session keys
         session([
+            'temp.consent' => true,
             'temp.study_start' => microtime(),
             'temp.passed_practice' => false,
 
@@ -67,7 +66,7 @@ class FormController extends Controller
             'storage.data_participants.condition_name' => $condition_name
         ]);
 
-
+        // dd(session()->all());
         return redirect(route($this->InstructionLoader('form.consent')->next_url));
     }
 
@@ -78,8 +77,6 @@ class FormController extends Controller
      * */
     public function demographics()
     {
-        dd(session()->all());
-
         $elements = FormElement::getElementForContext('form.demographics');
         $instruction = $this->InstructionLoader('form.demographics');
 

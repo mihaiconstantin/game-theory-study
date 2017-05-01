@@ -45,6 +45,7 @@ class SessionHelper
 
             // temporary data
             'temp' => [
+                'consent' => false,
                 'study_start' => null,
                 'study_end' => null,
                 'cheats' => null,
@@ -267,6 +268,3 @@ class SessionHelper
     #endregion
 
 }
-
-
-// TODO: add mideleware to block all requests if the user hasn't agreed to participate
