@@ -15,6 +15,7 @@ class CreateDataParticipantsTable extends Migration
     {
         Schema::create('data_participants', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('ip');
             $table->string('code', '10')->unique();
 
             $table->string('study_name');
