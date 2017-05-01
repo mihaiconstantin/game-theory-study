@@ -40,6 +40,10 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        'consent' => [
+            \App\Http\Middleware\CheckConsent::class,
+        ]
     ];
 
     /**
