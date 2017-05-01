@@ -157,6 +157,7 @@ class ConditionParserHelper
     {
         return [
             'designs' => $this->designConfig['ordered_names'],
+            'phases' => $this->designConfig['ordered_phases'],
             'ratios' => $this->conditionConfig['ordered_ratio'],
             'biases' => $this->biasConfig['ordered_types'],
             'text' => $this->conditionText,

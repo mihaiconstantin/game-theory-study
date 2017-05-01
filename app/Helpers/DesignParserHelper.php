@@ -3,7 +3,6 @@
 namespace App\Helpers;
 
 
-
 class DesignParserHelper
 {
     private $rawDesign;
@@ -85,6 +84,23 @@ class DesignParserHelper
     #endregion
 
 
+
+    /**
+     * Return only the relevant design configuration for the session.
+     *
+     * @return array
+     */
+    public function relevantSummary() : array
+    {
+        return [
+            'outcomes' => $this->designOutcome,
+            'text' => $this->designText,
+            'info' => $this->designInfo
+        ];
+    }
+
+
+
     #region getters
 
     /**
@@ -133,3 +149,5 @@ class DesignParserHelper
     #endregion
 
 }
+
+// TODO: Perhaps add an interface for both Condition and Design parsers.

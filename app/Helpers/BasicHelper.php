@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 
+use App\Models\Study;
+
 class BasicHelper
 {
 
@@ -15,6 +17,26 @@ class BasicHelper
     public static function userCode(int $length = 10) : string
     {
         return str_random($length);
+    }
+
+
+    /**
+     * Randomly assigns the user to one of the conditions specified in the study configuration.
+     *
+     * @param string $studyName
+     * @return string
+     */
+    public static function randomAssign(string $studyName) : string
+    {
+        $conditions = explode(',',
+            preg_replace(
+                '/\s+/',
+                '',
+                Study::getColumnsByName($studyName, ['condition_set'])['condition_set']
+                )
+            );
+
+        return $conditions[array_rand($conditions)];
     }
 
 
