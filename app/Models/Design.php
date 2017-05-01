@@ -13,8 +13,20 @@ class Design extends Model
      * @param array $columns
      * @return array
      */
-    public static function getByName(string $name, array $columns) : array {
+    public static function getColumnsByName(string $name, array $columns) : array {
         return self::where('name', $name)->select($columns)->first()->toArray();
+    }
+
+
+    /**
+     * Fetch a Design Model by name.
+     *
+     * @param string $name
+     * @return array
+     */
+    public static function getByName(string $name) : array
+    {
+        return self::where('name', $name)->first()->toArray();
     }
 
 }
