@@ -56,10 +56,17 @@ class FormController extends Controller
 
 
         // update relevant session keys
+        session([
+            'temp.study_start' => microtime(),
+            'temp.passed_practice' => false,
 
-        // dd(
-            // session()->all()
-        // );
+            'storage.data_participants.ip' => $request->ip(),
+            'storage.data_participants.code' => BasicHelper::userCode(),
+            'storage.data_participants.study_name' => $study_name,
+            'storage.data_participants.study_time' => microtime(),
+            'storage.data_participants.condition_name' => $condition_name
+        ]);
+
 
         return redirect(route($this->InstructionLoader('form.consent')->next_url));
     }
@@ -71,6 +78,8 @@ class FormController extends Controller
      * */
     public function demographics()
     {
+        dd(session()->all());
+
         $elements = FormElement::getElementForContext('form.demographics');
         $instruction = $this->InstructionLoader('form.demographics');
 
