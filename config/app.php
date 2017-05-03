@@ -182,6 +182,11 @@ return [
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
+        /*
+         * Custom Service Providers...
+         */
+        App\Providers\ComposerServiceProvider::class,
+
     ],
 
     /*
