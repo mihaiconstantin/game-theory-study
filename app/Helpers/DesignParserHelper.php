@@ -77,6 +77,7 @@ class DesignParserHelper
             'id' => $this->rawDesign['id'],
             'name' => $this->rawDesign['name'],
             'phases' => $this->rawDesign['iterations'],
+            'competitive_option' => $this->rawDesign['competitive_option'],
             'label' => $this->rawDesign['label']
         ];
     }

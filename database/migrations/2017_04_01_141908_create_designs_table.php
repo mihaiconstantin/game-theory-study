@@ -16,7 +16,9 @@ class CreateDesignsTable extends Migration
         Schema::create('designs', function (Blueprint $table) {
             $table->increments('id');
             $table->string("name")->unique();
+
             $table->tinyInteger("iterations");
+            $table->enum('competitive_option', ['1', '2'])->default(2);
 
             $table->string("outcome_1_value");
             $table->string("outcome_2_value");
