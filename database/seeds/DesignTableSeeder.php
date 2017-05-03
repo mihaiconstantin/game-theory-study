@@ -19,7 +19,7 @@ class DesignTableSeeder extends Seeder
         // practice
         Design::create([
             'name' => 'PR',
-            'iterations' => 2,
+            'iterations' => 3,
             'outcome_1_value' => '1#1;+4#+4',
             'outcome_2_value' => '1#2;+12#+8',
             'outcome_3_value' => '2#1;+8#+12',
@@ -34,7 +34,7 @@ class DesignTableSeeder extends Seeder
         // MD
         Design::create([
             'name' => 'MD',
-            'iterations' => 2,
+            'iterations' => 10,
             'outcome_1_value' => '1#1;+80#+80',
             'outcome_2_value' => '1#2;-20#+40',
             'outcome_3_value' => '2#1;+40#-20',
@@ -49,7 +49,7 @@ class DesignTableSeeder extends Seeder
         // PD
         Design::create([
             'name' => 'PD',
-            'iterations' => 2,
+            'iterations' => 10,
             'outcome_1_value' => '1#1;+40#+40',
             'outcome_2_value' => '1#2;-20#+80',
             'outcome_3_value' => '2#1;+80#-20',
@@ -64,7 +64,7 @@ class DesignTableSeeder extends Seeder
         // PT
         Design::create([
             'name' => 'PT',
-            'iterations' => 2,
+            'iterations' => 10,
             'outcome_1_value' => '1#1;+10#+10',
             'outcome_2_value' => '1#2;+10#+10',
             'outcome_3_value' => '2#1;+10#+10',

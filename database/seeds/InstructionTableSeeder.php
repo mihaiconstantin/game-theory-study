@@ -72,8 +72,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'instruction.start',
             'next_url' => 'form.consent',
-            'title' => 'Welcome instructions',
-            'text' => 'The user has landed on the welcome page. Redirects to "form/consent'
+            'title' => 'Welcome',
+            'text' => 'Welcome in this study to human behavior. First of all, we want to thank you for participation!<br><br>This study consists of several blocks:<ul><li>Self-report questionnaire</li><li>Practice phase of a game</li><li>Playing a game (9 times)</li><li>Self-report questionnaire about a game (9 times)</li><li>End questions</li></ul>Before you start please fill in the consent form.'
         ]);
 
         // end
@@ -94,8 +94,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'form.consent',
             'next_url' => 'form.demographics',
-            'title' => 'Form consent title',
-            'text' => 'Form consent instructions. Redirects to "form/demographics"'
+            'title' => 'Informed consent',
+            'text' => 'Name of the study: Knowledge and Insight<br><br>You have been invited to participate in this study. Before you begin, we kindly ask you to read this form carefully and sign for consent.<br><br>Researchers:<br>Prof. Dr. J. J. A. Denissen (j.j.a.denissen@uvt.nl) <br>Department of Social Psychology and Department of Developmental Psychology Tilburg University<br><br>Background:The intention of this study is to research and gain knowledge of human behavior. Firstly, we would like to ask you to fill out a questionnaire about how you think about yourself. Subsequently, you will play a game. We are interested in how you make decisions during that game.<br> <br>Procedure:This study will take about 45 minutes. If you at any point wish to withdraw your consent and stop the study, you have the right to do so and will not be penalized. <br><br>Compensation:<br>For your participation you will receive the credit stated on Amazon Mechanical Turk.Confidentiality:<br>When your role with this project is complete, your data will be anonymized. From that time, there will be no record that links the data collected from you with any personal data from which you could be identified. Once anonymized, these data may be made available to researchers via accessible data repositories and possibly used for novel purposes.<br><br>If you have any questions during your participation, you can email the test leader (e.dietvorst@uvt.nl). If you have other questions regarding the study, you can contact the project leader prof. Dr. J. J. A. Denissen (j.j.a.denissen@uvt.nl)'
         ]);
 
         // form/demographics
