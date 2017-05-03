@@ -57,7 +57,7 @@ class FormController extends Controller
         session([
             'temp.consent' => true,
             'temp.study_start' => microtime(),
-            'temp.passed_practice' => false,
+            'temp.passed_practice' => 0, // meaning that the user still needs to pass through the practice phase
 
             'storage.data_participants.ip' => $request->ip(),
             'storage.data_participants.code' => BasicHelper::userCode(),
@@ -87,7 +87,7 @@ class FormController extends Controller
 
     public function storeDemographics(Request $request)
     {
-        session(['storage.data_forms.demographic' => json_encode($request->except(['_token']))]);
+        SessionHelper::pushSerialized($request, 'storage.data_forms.demographic', ['_token']);
 
         return redirect(route($this->InstructionLoader('form.demographics')->next_url));
     }
@@ -99,9 +99,11 @@ class FormController extends Controller
      * */
     public function personality()
     {
+        $questionnaire_name = env('PERSONALITY');
+
         $instruction = $this->InstructionLoader('form.personality');
-        $items = PersonalityItem::getItemsForQuestionnaire('hexaco');
-        $steps = ItemScale::getScaleForQuestionnaire('hexaco');
+        $items = PersonalityItem::getItemsForQuestionnaire($questionnaire_name);
+        $steps = ItemScale::getScaleForQuestionnaire($questionnaire_name);
 
         return view('forms.personality', [
             'data' => $instruction,
@@ -111,8 +113,7 @@ class FormController extends Controller
 
     public function storePersonality(Request $request)
     {
-        // do something with the Request here
-
+        SessionHelper::pushSerialized($request, 'storage.data_questionnaires.personality', ['_token']);
         return redirect(route($this->InstructionLoader('form.personality')->next_url));
     }
 
