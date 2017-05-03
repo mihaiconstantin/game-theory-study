@@ -81,10 +81,10 @@ Route::group(['middleware' => ['consent']], function () {
 */
 Route::group(['middleware' => ['consent']], function () {
     Route::get('practice/play/{gameNumber}/{phaseNumber}', 'GameController@playPractice')->name('practice.play');
-    Route::post('practice/play', 'GameController@storePlayPractice')->name('practice.storePlayPractice');
+    Route::post('practice/play', 'GameController@storePractice')->name('practice.store');
 
-    Route::get('game/play/{gameNumber}/{phaseNumber}', 'GameController@play')->name('game.play');
-    Route::post('game/play', 'GameController@storePlay')->name('game.storePlay');
+    Route::get('game/play/{gameNumber}/{phaseNumber}', 'GameController@playGame')->name('game.play');
+    Route::post('game/play', 'GameController@storeGame')->name('game.store');
 
     Route::get('game/result/{gameNumber}/{phaseNumber}', 'GameController@result')->name('game.result');
 });
