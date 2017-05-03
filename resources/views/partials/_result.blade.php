@@ -1,6 +1,6 @@
 {{--result table: feedback on user's choice--}}
 
-@include('partials.elements.__timestamp')
+@include('partials.elements.__helper_fields')
 
 <div class="condition-iteration-result {{$visibility}}">
 

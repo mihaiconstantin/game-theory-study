@@ -1,7 +1,7 @@
-<form action="{{URL::route('game.storePlay')}}" method="POST">
+<form action="{{URL::route($store_route)}}" method="POST">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <input type="hidden" name="_current_game" value="{{ $current_game }}">
-    <input type="hidden" name="_current_phase" value="{{ $current_iteration }}">
+
+    @include('partials.elements.__helper_fields')
 
     <div class="choice-options text-center">
         <h5>Which option do you choose?</h5>
