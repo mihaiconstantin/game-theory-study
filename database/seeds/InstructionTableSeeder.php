@@ -63,9 +63,9 @@ class InstructionTableSeeder extends Seeder
         // practice
         Instruction::create([
             'current_url' => 'instruction.practice',
-            'next_url' => 'game.play',
+            'next_url' => 'practice.play',
             'title' => 'Practice phase instructions',
-            'text' => 'Practice instructions then user is redirected to "game/play/{0}/{1}'
+            'text' => 'Practice instructions then user is redirected to "practice/play/{1}/{1}'
         ]);
 
         // start

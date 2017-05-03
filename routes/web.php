@@ -71,10 +71,6 @@ Route::group(['middleware' => ['consent']], function () {
 });
 
 
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Routes - game
@@ -84,6 +80,9 @@ Route::group(['middleware' => ['consent']], function () {
 |
 */
 Route::group(['middleware' => ['consent']], function () {
+    Route::get('practice/play/{gameNumber}/{phaseNumber}', 'GameController@playPractice')->name('practice.play');
+    Route::post('practice/play', 'GameController@storePlayPractice')->name('practice.storePlayPractice');
+
     Route::get('game/play/{gameNumber}/{phaseNumber}', 'GameController@play')->name('game.play');
     Route::post('game/play', 'GameController@storePlay')->name('game.storePlay');
 
