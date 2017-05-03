@@ -46,6 +46,60 @@ class SessionHelper
     }
 
 
+    public function setGameAndPhase($current_game, $current_phase)
+    {
+
+
+
+        switch (true)
+        {
+            case ($current_phase == 1):
+                $total_games = count(session('config.practice.designs'));
+                $total_phases = session('config.' . 'practice.' . 'phases.' . $current_game);
+                break;
+
+            // case ($current_phase > )
+
+            //TODO: Figure out the logic here.
+        }
+
+
+
+
+
+
+        if ($current_phase == $total_phases)
+        {
+            $next_game = $current_game + 1;
+            $next_phase = 1;
+        }
+        elseif ($current_phase > $total_phases)
+        {
+            die('cheater');
+        }
+
+        $next_game = $current_game;
+        $next_phase = $current_phase + 1;
+
+
+        session([
+            'temp.current_game' => $current_game,
+            'temp.current_phase' => $current_phase,
+
+            'temp.next_game' => '',
+            'temp.next_phase' => '',
+
+
+        ]);
+
+
+
+
+
+    }
+
+
+
     #region skeleton makers
 
     /**
@@ -66,7 +120,11 @@ class SessionHelper
                 'cheats' => null,
                 'current_game' => null,
                 'current_phase' => null,
-                'passed_practice' => null
+                'next_game' => null,
+                'next_phase' => null,
+                'total_games' => null,
+                'total_phases' => null,
+                'passed_practice' => null,
             ],
 
 

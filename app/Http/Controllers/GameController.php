@@ -5,13 +5,70 @@ namespace App\Http\Controllers;
 use App\Helpers\ConditionParserHelper;
 use App\Helpers\BasicHelper;
 use App\Helpers\DesignParserHelper;
+use App\Helpers\SessionHelper;
 use App\Models\Condition;
 use App\Models\Design;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class GameController extends Controller
 {
-    public function play($gameNumber, $phaseNumber)
+    public function playPractice($gameNumber, $phaseNumber)
+    {
+        $total_games = count(session('config.practice.designs'));
+        $total_phases = session('config.' . 'practice.' . 'phases.' . $gameNumber);
+
+
+        // if ($phaseNumber == count())
+
+
+
+
+        session([
+            'temp.current_game' => $gameNumber,
+            'temp.current_phase' => $phaseNumber,
+
+        ]);
+
+
+
+        dd(
+            session('temp'),
+            session('config'),
+
+            $total_games,
+            $total_phases
+
+        );
+
+
+
+        // condition_name
+        // condition_text
+        // condition_opponent
+
+        // design_outcomes
+        // design_label
+
+        // game_number
+        // phase_number
+        // store_route
+
+        return view('forms.practice');
+    }
+
+    public function storePractice(Request $request)
+    {
+        dd($request->all());
+    }
+
+
+
+
+
+
+
+    public function playGame($gameNumber, $phaseNumber)
     {
         // $c = new ConditionParserHelper(Condition::getCondition('community'));
         // $d = new DesignParserHelper(Design::getByName('MD'));
@@ -38,27 +95,16 @@ class GameController extends Controller
                 '2#2' => '+5#+5'
             )
         );
-        return view('forms.play')->with($melted_data);
+        return view('forms.game')->with($melted_data);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public function storePlay(Request $request)
+    public function storeGame(Request $request)
     {
         // do something with the request
         // figure out the new redirect link
         dd($request->all());
     }
+
 
     public function result($gameNumber, $phaseNumber)
     {
