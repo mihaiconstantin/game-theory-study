@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 use App\Models\Condition;
 use App\Models\Design;
+use Illuminate\Http\Request;
 
 class SessionHelper
 {
@@ -28,6 +29,20 @@ class SessionHelper
 
         // push configuration to the skeleton array
         $this->pushConfig();
+    }
+
+
+    /**
+     * Serialize request data as json and store it in the session at a specific key location.
+     * If data needs to be excluded, the request keys can be passed as an array.
+     *
+     * @param Request $request
+     * @param string $key
+     * @param array $exclude
+     */
+    public static function pushSerialized(Request $request, string $key, array $exclude = [])
+    {
+        session(['storage.data_forms.demographic' => json_encode($request->except($exclude))]);
     }
 
 
