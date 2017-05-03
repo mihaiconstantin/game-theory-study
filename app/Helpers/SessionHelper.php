@@ -42,7 +42,7 @@ class SessionHelper
      */
     public static function pushSerialized(Request $request, string $key, array $exclude = [])
     {
-        session(['storage.data_forms.demographic' => json_encode($request->except($exclude))]);
+        session([$key => json_encode($request->except($exclude))]);
     }
 
 
