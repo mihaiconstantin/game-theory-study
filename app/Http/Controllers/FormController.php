@@ -66,7 +66,6 @@ class FormController extends Controller
             'storage.data_participants.condition_name' => $condition_name
         ]);
 
-        // dd(session()->all());
         return redirect(route($this->InstructionLoader('form.consent')->next_url));
     }
 
@@ -88,7 +87,8 @@ class FormController extends Controller
 
     public function storeDemographics(Request $request)
     {
-        // do something with the Request here
+        session(['storage.data_forms.demographic' => json_encode($request->except(['_token']))]);
+
         return redirect(route($this->InstructionLoader('form.demographics')->next_url));
     }
 

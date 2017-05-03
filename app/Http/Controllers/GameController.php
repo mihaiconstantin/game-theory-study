@@ -13,14 +13,14 @@ class GameController extends Controller
 {
     public function play($gameNumber, $phaseNumber)
     {
-        $c = new ConditionParserHelper(Condition::getCondition('community'));
-        $d = new DesignParserHelper(Design::getByName('MD'));
+        // $c = new ConditionParserHelper(Condition::getCondition('community'));
+        // $d = new DesignParserHelper(Design::getByName('MD'));
+        //
+        // var_dump($d->getRawDesign());
+        //
+        // var_dump($d->getDesignInfo());
 
-        var_dump($d->getRawDesign());
-
-        var_dump($d->getDesignInfo());
-
-        /*$melted_data = array(
+        $melted_data = array(
             'label' => 'points',
             'game_score' => 123,
             'current_game' => $gameNumber,
@@ -37,8 +37,8 @@ class GameController extends Controller
                 '2#1' => '+40#-20',
                 '2#2' => '+5#+5'
             )
-        );*/
-        // return view('forms.play')->with($melted_data);
+        );
+        return view('forms.play')->with($melted_data);
     }
 
 
