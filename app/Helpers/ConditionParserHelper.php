@@ -6,6 +6,8 @@ use App\Models\Design;
 
 class ConditionParserHelper
 {
+    // ordered keys of the fields refer to the game numbers, not randomization
+
     private $rawCondition;
 
     private $designConfig;
@@ -27,10 +29,77 @@ class ConditionParserHelper
         $this->loadConditionInfo();
         $this->loadConditionText();
 
+        // randomize the order of the designs (games)
         if ($rawCondition['random_design_chain'] == 1)
         {
             $this->randomizeDesignOrder();
         }
+
+
+        // randomize the competitive behaviour within each design (game)
+        if ($rawCondition['random_design_iteration'] == 1)
+        {
+            $this->randomizePhasesOrder();
+        }
+    }
+
+
+    /**
+     * Return only the relevant configuration for the session.
+     *
+     * @return array
+     */
+    public function relevantSummary() : array
+    {
+        return [
+            'designs' => $this->designConfig['ordered_names'],
+            'phases' => $this->designConfig['ordered_phases'],
+            'ratios' => $this->conditionConfig['ordered_ratio'],
+            'competitive' => $this->conditionConfig['ordered_competitive'],
+            'biases' => $this->biasConfig['ordered_types'],
+            'text' => $this->conditionText,
+            'info' => $this->conditionInfo
+        ];
+    }
+
+
+    /**
+     * Randomizes the order the designs are played.
+     */
+    private function randomizeDesignOrder()
+    {
+        $order = range(1, count($this->designConfig['ordered_names']));
+        shuffle($order);
+
+        array_multisort($order,
+            $this->designConfig['ordered_names'],
+            $this->designConfig['ordered_phases'],
+            $this->biasConfig['ordered_types'],
+            $this->biasConfig['ordered_values'],
+            $this->conditionConfig['ordered_ratio'],
+            $this->conditionConfig['ordered_competitive']
+        );
+
+        $this->designConfig['ordered_names'] = BasicHelper::reindexArray($this->designConfig['ordered_names']);
+        $this->designConfig['ordered_phases'] = BasicHelper::reindexArray($this->designConfig['ordered_phases']);
+        $this->biasConfig['ordered_types'] = BasicHelper::reindexArray($this->biasConfig['ordered_types']);
+        $this->biasConfig['ordered_values'] = BasicHelper::reindexArray($this->biasConfig['ordered_values']);
+        $this->conditionConfig['ordered_ratio'] = BasicHelper::reindexArray($this->conditionConfig['ordered_ratio']);
+        $this->conditionConfig['ordered_competitive'] = BasicHelper::reindexArray($this->conditionConfig['ordered_competitive']);
+    }
+
+
+    /**
+     * Randomizes the competitive behaviour within each game (phases aka iterations).
+     */
+    private function randomizePhasesOrder()
+    {
+        for ($i = 1; $i < count($this->conditionConfig['ordered_competitive']); $i++)
+        {
+            shuffle($this->conditionConfig['ordered_competitive'][$i]);
+            $this->conditionConfig['ordered_competitive'][$i] = BasicHelper::reindexArray($this->conditionConfig['ordered_competitive'][$i]);
+        }
+
     }
 
 
@@ -107,12 +176,27 @@ class ConditionParserHelper
 
     /**
      * Must run after loadDesignConfig and loadBiasConfig. Loads the configuration for the bias ration per game.
+     *
+     * And.
+     *
+     * Loads the configuration for phases played within each game.
+     * Each each game (key : int) contains the phases (value : array).
+     * The phases array contains the phase order (key) and the PC behaviour (competitive | not competitive).
+     * By default, if not randomized, competitive behaviour is at the top of the phases array.
+     *
      */
     private function loadConditionConfig()
     {
         foreach ($this->designConfig['ordered_phases'] as $game_number => $phases)
         {
+            // store the ratios ordered for each game number
             $this->conditionConfig['ordered_ratio'][$game_number] = ceil(($this->biasConfig['ordered_values'][$game_number] / 100) * $phases);
+
+            // store the competitive behaviour ordered for each game and for each phase
+            $ordered_competitive = array_fill(1, $this->conditionConfig['ordered_ratio'][$game_number], 1);
+            $ordered_cooperative = array_fill($this->conditionConfig['ordered_ratio'][$game_number] + 1, $phases - $this->conditionConfig['ordered_ratio'][$game_number], 0);
+
+            $this->conditionConfig['ordered_competitive'][$game_number] = $ordered_competitive + $ordered_cooperative;
         }
     }
 
@@ -145,50 +229,8 @@ class ConditionParserHelper
         ];
     }
 
+
     #endregion
-
-
-    /**
-     * Return only the relevant configuration for the session.
-     *
-     * @return array
-     */
-    public function relevantSummary() : array
-    {
-        return [
-            'designs' => $this->designConfig['ordered_names'],
-            'phases' => $this->designConfig['ordered_phases'],
-            'ratios' => $this->conditionConfig['ordered_ratio'],
-            'biases' => $this->biasConfig['ordered_types'],
-            'text' => $this->conditionText,
-            'info' => $this->conditionInfo
-        ];
-    }
-
-
-    /**
-     * Randomizes the order the designs are played.
-     */
-    private function randomizeDesignOrder()
-    {
-        $order = range(1, count($this->designConfig['ordered_names']));
-        shuffle($order);
-
-        array_multisort($order,
-            $this->designConfig['ordered_names'],
-            $this->designConfig['ordered_phases'],
-            $this->biasConfig['ordered_types'],
-            $this->biasConfig['ordered_values'],
-            $this->conditionConfig['ordered_ratio']
-        );
-
-        $this->designConfig['ordered_names'] = BasicHelper::reindexArray($this->designConfig['ordered_names']);
-        $this->designConfig['ordered_phases'] = BasicHelper::reindexArray($this->designConfig['ordered_phases']);
-        $this->biasConfig['ordered_types'] = BasicHelper::reindexArray($this->biasConfig['ordered_types']);
-        $this->biasConfig['ordered_values'] = BasicHelper::reindexArray($this->biasConfig['ordered_values']);
-        $this->conditionConfig['ordered_ratio'] = BasicHelper::reindexArray($this->conditionConfig['ordered_ratio']);
-
-    }
 
 
     #region getters
