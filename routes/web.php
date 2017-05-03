@@ -32,7 +32,7 @@ Route::group(['middleware' => ['consent']], function () {
     Route::get('instruction/practice', 'InstructionController@practice')->name('instruction.practice');
     Route::get('instruction/game-overview-two', 'InstructionController@gameOverviewTwo')->name('instruction.game-overview-two');
     Route::get('instruction/end-game/{gameNumber}', 'InstructionController@endGame')->name('instruction.end-game');
-    Route::get('instruction/new-game/{gameNumber}', 'InstructionController@newGame')->name('instruction.new-game'); // TODO: condition here for when there are no games left
+    Route::get('instruction/new-game/{gameNumber}', 'InstructionController@newGame')->name('instruction.new-game');
     Route::get('instruction/amazon-code', 'InstructionController@amazonCode')->name('instruction.amazon-code');
 });
 
@@ -90,3 +90,8 @@ Route::group(['middleware' => ['consent']], function () {
     Route::get('game/result/{gameNumber}/{phaseNumber}', 'GameController@result')->name('game.result');
 });
 
+
+/**
+ * TODO: Move the group middleware under the appropriate controller constructor.
+ *
+ */

@@ -10,7 +10,3 @@
 @section('content')
     @include('partials._play')
 @endsection
-
-
-
-{{--TODO: turn the div with the choice into a form--}}

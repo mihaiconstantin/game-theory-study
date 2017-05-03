@@ -244,7 +244,8 @@ class SessionHelper
         $design_names = array_keys($this->skeleton['config']['designs']);
         $designs = Design::whereIn('name', $design_names)->get()->toArray();
 
-        foreach ($designs as $design) {
+        foreach ($designs as $design)
+        {
             $parsed_design = new DesignParserHelper($design);
             $this->skeleton['config']['designs'][$design['name']] = $parsed_design->relevantSummary();
         }

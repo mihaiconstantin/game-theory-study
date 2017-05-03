@@ -12,7 +12,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    # # #
 
     /**
      * Fetches an App\Models\Instruction object from the database
@@ -29,3 +28,11 @@ class Controller extends BaseController
         return $instruction;
     }
 }
+
+/**
+ * TODO: Later we might want to add server-side validations for the form inputs.
+ *       For now we will use that if the user is going to do something fishy
+ *       he probably isn't a reliable source of information in the study.
+ *
+ * TODO: Refactor the InstructionLoader into an appropriate query scope.
+ */

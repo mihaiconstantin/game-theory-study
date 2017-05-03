@@ -150,4 +150,7 @@ class DesignParserHelper
 
 }
 
-// TODO: Perhaps add an interface for both Condition and Design parsers.
+/**
+ * TODO: Unify the Condition and Design parsers under a common interface.
+ *
+ */
