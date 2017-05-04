@@ -20,27 +20,27 @@ class ItemScaleTableSeed extends Seeder
 
         App\Models\ItemScale::create([
             'order' => '1',
-            'text' => 'step 1'
+            'text' => 'strongly disagree'
         ]);
 
         App\Models\ItemScale::create([
             'order' => '2',
-            'text' => 'step 2'
+            'text' => 'disagree'
         ]);
 
         App\Models\ItemScale::create([
             'order' => '3',
-            'text' => 'step 3'
+            'text' => 'neither agree nor disagree'
         ]);
 
         App\Models\ItemScale::create([
             'order' => '4',
-            'text' => 'step 4'
+            'text' => 'agree'
         ]);
 
         App\Models\ItemScale::create([
             'order' => '5',
-            'text' => 'step 5'
+            'text' => 'strongly agree'
         ]);
 
         #endregion
@@ -50,32 +50,67 @@ class ItemScaleTableSeed extends Seeder
 
         App\Models\ItemScale::create([
             'order' => '1',
-            'text' => 'step 1',
+            'text' => 'strongly disagree',
             'name' => 'bfi'
         ]);
 
         App\Models\ItemScale::create([
             'order' => '2',
-            'text' => 'step 2',
+            'text' => 'disagree',
             'name' => 'bfi'
         ]);
 
         App\Models\ItemScale::create([
             'order' => '3',
-            'text' => 'step 3',
+            'text' => 'neither agree nor disagree',
             'name' => 'bfi'
         ]);
 
         App\Models\ItemScale::create([
             'order' => '4',
-            'text' => 'step 4',
+            'text' => 'agree',
             'name' => 'bfi'
         ]);
 
         App\Models\ItemScale::create([
             'order' => '5',
-            'text' => 'step 5',
+            'text' => 'strongly agree',
             'name' => 'bfi'
+        ]);
+
+        #endregion
+
+
+        #region in-between-games scale
+
+        App\Models\ItemScale::create([
+            'order' => '1',
+            'text' => 'strongly disagree',
+            'name' => 'game_question'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '2',
+            'text' => 'disagree',
+            'name' => 'game_question'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '3',
+            'text' => 'neither agree nor disagree',
+            'name' => 'game_question'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '4',
+            'text' => 'agree',
+            'name' => 'game_question'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '5',
+            'text' => 'strongly agree',
+            'name' => 'game_question'
         ]);
 
         #endregion

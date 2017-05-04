@@ -19,17 +19,17 @@ class FormElementTableSeeder extends Seeder
 
         #region seeds for form/demographics
 
-        // participant number
+        // age
         \App\Models\FormElement::create([
             'current_url' => 'form.demographics',
-            'name' => 'demographics.number',
+            'name' => 'demographics.age',
             'order' => '1',
             'tag_type' => 'input',
-            'attr_name' => 'number',
-            'attr_id' => 'number',
-            'label' => 'Participant number',
+            'attr_name' => 'age',
+            'attr_id' => 'age',
+            'label' => 'What is your age age?',
             'attr_type' => 'number',
-            'attr_placeholder' => 'e.g., 123'
+            'attr_placeholder' => 'e.g., 30'
         ]);
 
         // gender select
@@ -40,34 +40,53 @@ class FormElementTableSeeder extends Seeder
             'tag_type' => 'select',
             'attr_name' => 'gender',
             'attr_id' => 'gender',
-            'label' => 'Participant gender',
+            'label' => 'What is your gender?',
         ]);
 
-        // age
+        // marital status select
         \App\Models\FormElement::create([
             'current_url' => 'form.demographics',
-            'name' => 'demographics.age',
+            'name' => 'demographics.martial',
             'order' => '3',
-            'tag_type' => 'input',
-            'attr_name' => 'age',
-            'attr_id' => 'age',
-            'label' => 'Participant age',
-            'attr_type' => 'number',
-            'attr_placeholder' => 'e.g., 24'
+            'tag_type' => 'select',
+            'attr_name' => 'marital',
+            'attr_id' => 'marital',
+            'label' => 'What is your marital status?',
         ]);
 
-        // job
+        // ethnicity select
         \App\Models\FormElement::create([
             'current_url' => 'form.demographics',
-            'name' => 'demographics.job',
+            'name' => 'demographics.ethnicity',
             'order' => '4',
-            'tag_type' => 'input',
-            'attr_name' => 'job',
-            'attr_id' => 'job',
-            'label' => 'Participant job',
-            'attr_type' => 'text',
-            'attr_placeholder' => 'e.g., programmer'
+            'tag_type' => 'select',
+            'attr_name' => 'ethnicity',
+            'attr_id' => 'ethnicity',
+            'label' => 'To which racial or ethnic group do you most identify?',
         ]);
+
+        // education select
+        \App\Models\FormElement::create([
+            'current_url' => 'form.demographics',
+            'name' => 'demographics.education',
+            'order' => '5',
+            'tag_type' => 'select',
+            'attr_name' => 'education',
+            'attr_id' => 'education',
+            'label' => 'What is the highest degree or level of school you have completed?',
+        ]);
+
+        // employment select
+        \App\Models\FormElement::create([
+            'current_url' => 'form.demographics',
+            'name' => 'demographics.employment',
+            'order' => '6',
+            'tag_type' => 'select',
+            'attr_name' => 'employment',
+            'attr_id' => 'employment',
+            'label' => 'What is your current employment status?',
+        ]);
+
 
         #endregion
 
@@ -79,11 +98,10 @@ class FormElementTableSeeder extends Seeder
             'current_url' => 'form.expectation',
             'name' => 'expectation.expectation',
             'order' => '1',
-            'tag_type' => 'textarea',
+            'tag_type' => 'select',
             'attr_name' => 'expectation',
             'attr_id' => 'expectation',
-            'label' => 'Participant\'s expectation',
-            'attr_placeholder' => 'e.g., your expectation'
+            'label' => 'Your expectation:',
         ]);
 
         #endregion
@@ -91,16 +109,37 @@ class FormElementTableSeeder extends Seeder
 
         #region seeds for form/feedback
 
-        // participant feedback
+        // unclear parts
         \App\Models\FormElement::create([
             'current_url' => 'form.feedback',
-            'name' => 'expectation.feedback',
+            'name' => 'feedback.unclear',
             'order' => '1',
             'tag_type' => 'textarea',
-            'attr_name' => 'feedback',
-            'attr_id' => 'feedback',
-            'label' => 'Participant\'s feedback',
-            'attr_placeholder' => 'e.g., your feedback'
+            'attr_name' => 'unclear',
+            'attr_id' => 'unclear',
+            'label' => 'I did not understand the following instructions:',
+        ]);
+
+        // related parts
+        \App\Models\FormElement::create([
+            'current_url' => 'form.feedback',
+            'name' => 'feedback.related',
+            'order' => '2',
+            'tag_type' => 'select',
+            'attr_name' => 'related',
+            'attr_id' => 'related',
+            'label' => 'Do you think the different components of this study are related?',
+        ]);
+
+        // details
+        \App\Models\FormElement::create([
+            'current_url' => 'form.feedback',
+            'name' => 'feedback.details',
+            'order' => '3',
+            'tag_type' => 'textarea',
+            'attr_name' => 'details',
+            'attr_id' => 'details',
+            'label' => 'If yes, please explain why you think the different components of this study are related',
         ]);
 
         #endregion
