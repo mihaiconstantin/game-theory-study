@@ -27,18 +27,14 @@ Route::get('/', function(){
 | Routes responsible for handling the instructions.
 |
 */
-Route::group(['middleware' => ['consent']], function () {
-    Route::get('instruction/game-overview-one', 'InstructionController@gameOverviewOne')->name('instruction.game-overview-one');
-    Route::get('instruction/practice', 'InstructionController@practice')->name('instruction.practice');
-    Route::get('instruction/game-overview-two', 'InstructionController@gameOverviewTwo')->name('instruction.game-overview-two');
-    Route::get('instruction/end-game/{gameNumber}', 'InstructionController@endGame')->name('instruction.end-game');
-    Route::get('instruction/new-game/{gameNumber}', 'InstructionController@newGame')->name('instruction.new-game');
-    Route::get('instruction/amazon-code', 'InstructionController@amazonCode')->name('instruction.amazon-code');
-});
+Route::get('instruction/start'                  , 'InstructionController@start')            ->name('instruction.start');
+Route::get('instruction/announcement'           , 'InstructionController@announcement')     ->name('instruction.announcement');
+Route::get('instruction/practice'               , 'InstructionController@practice')         ->name('instruction.practice');
+Route::get('instruction/condition'              , 'InstructionController@gameOverviewTwo')  ->name('instruction.condition'      );
+Route::get('instruction/new-game/{gameNumber}'  , 'InstructionController@newGame')          ->name('instruction.new-game');
+Route::get('instruction/amazon-code'            , 'InstructionController@amazonCode')       ->name('instruction.amazon-code');
+Route::get('instruction/end'                    , 'InstructionController@end')              ->name('instruction.end');
 
-
-Route::get('instruction/start', 'InstructionController@start')->name('instruction.start');
-Route::get('instruction/end', 'InstructionController@end')->name('instruction.end');
 
 
 /*
@@ -49,26 +45,19 @@ Route::get('instruction/end', 'InstructionController@end')->name('instruction.en
 | Routes responsible for handling the forms.
 |
 */
-Route::get('form/consent', 'FormController@consent')->name('form.consent');
-Route::post('form/consent', 'FormController@storeConsent')->name('form.storeConsent');
+Route::get('form/consent'                   , 'FormController@consent')             ->name('form.consent');
+Route::get('form/demographics'              , 'FormController@demographics')        ->name('form.demographics');
+Route::get('form/questionnaire/{name}'      , 'FormController@questionnaire')       ->name('form.questionnaire');
+Route::get('form/expectation'               , 'FormController@expectation')         ->name('form.expectation');
+Route::get('form/game-question/{gameNumber}', 'FormController@gameQuestion')        ->name('form.gameQuestion');
+Route::get('form/feedback'                  , 'FormController@feedback')            ->name('form.feedback');
 
-
-Route::group(['middleware' => ['consent']], function () {
-    Route::get('form/demographics', 'FormController@demographics')->name('form.demographics');
-    Route::post('form/demographics', 'FormController@storeDemographics')->name('form.storeDemographics');
-
-    Route::get('form/personality', 'FormController@personality')->name('form.personality')->middleware('consent');
-    Route::post('form/personality', 'FormController@storePersonality')->name('form.storePersonality');
-
-    Route::get('form/expectation', 'FormController@expectation')->name('form.expectation'); // User will try to estimate his performance beforehand
-    Route::post('form/expectation', 'FormController@storeExpectation')->name('form.storeExpectation');
-
-    Route::get('form/game-question/{gameNumber}', 'FormController@gameQuestion')->name('form.gameQuestion');
-    Route::post('form/game-question', 'FormController@storeGameQuestion')->name('form.storeGameQuestion');
-
-    Route::get('form/feedback', 'FormController@feedback')->name('form.feedback');
-    Route::post('form/feedback', 'FormController@storeFeedback')->name('form.storeFeedback');
-});
+Route::post('form/consent'                  , 'FormController@storeConsent')        ->name('form.storeConsent');
+Route::post('form/demographics'             , 'FormController@storeDemographics')   ->name('form.storeDemographics');
+Route::post('form/personality'              , 'FormController@storeQuestionnaire')  ->name('form.storeQuestionnaire');
+Route::post('form/expectation'              , 'FormController@storeExpectation')    ->name('form.storeExpectation');
+Route::post('form/game-question'            , 'FormController@storeGameQuestion')   ->name('form.storeGameQuestion');
+Route::post('form/feedback'                 , 'FormController@storeFeedback')       ->name('form.storeFeedback');
 
 
 /*
@@ -79,18 +68,9 @@ Route::group(['middleware' => ['consent']], function () {
 | Routes responsible for handling the games.
 |
 */
-Route::group(['middleware' => ['consent']], function () {
-    Route::get('practice/play/{gameNumber}/{phaseNumber}', 'GameController@playPractice')->name('practice.play');
-    Route::post('practice/play', 'GameController@storePractice')->name('practice.store');
+Route::get('practice/play/{gameNumber}/{phaseNumber}'   , 'GameController@playPractice')    ->name('practice.play');
+Route::get('game/play/{gameNumber}/{phaseNumber}'       , 'GameController@playGame')        ->name('game.play');
+Route::get('game/result/{gameNumber}/{phaseNumber}'     , 'GameController@result')          ->name('game.result');
 
-    Route::get('game/play/{gameNumber}/{phaseNumber}', 'GameController@playGame')->name('game.play');
-    Route::post('game/play', 'GameController@storeGame')->name('game.store');
-
-    Route::get('game/result/{gameNumber}/{phaseNumber}', 'GameController@result')->name('game.result');
-});
-
-
-/**
- * TODO: Move the group middleware under the appropriate controller constructor.
- *
- */
+Route::post('practice/play'                             , 'GameController@storePractice')   ->name('practice.store');
+Route::post('game/play'                                 , 'GameController@storeGame')       ->name('game.store');

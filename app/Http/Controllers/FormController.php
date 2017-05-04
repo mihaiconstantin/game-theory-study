@@ -14,6 +14,13 @@ use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('consent')->except('consent');
+    }
+
+
+
 
     /*
      * Display the consent form.
@@ -22,9 +29,7 @@ class FormController extends Controller
     {
         $instruction = $this->InstructionLoader('form.consent');
 
-        return view('forms.consent', [
-            'data' => $instruction
-        ]);
+        return view('forms.consent', ['data' => $instruction]);
     }
 
     /*
@@ -57,7 +62,7 @@ class FormController extends Controller
         session([
             'temp.consent' => true,
             'temp.study_start' => microtime(),
-            'temp.passed_practice' => 0, // meaning that the user still needs to pass through the practice phase
+            'temp.passed_practice' => 0,
 
             'storage.data_participants.ip' => $request->ip(),
             'storage.data_participants.code' => BasicHelper::userCode(),
@@ -65,6 +70,7 @@ class FormController extends Controller
             'storage.data_participants.study_time' => microtime(),
             'storage.data_participants.condition_name' => $condition_name
         ]);
+
 
         return redirect(route($this->InstructionLoader('form.consent')->next_url));
     }
@@ -88,7 +94,6 @@ class FormController extends Controller
     public function storeDemographics(Request $request)
     {
         SessionHelper::pushSerialized($request, 'storage.data_forms.demographic', ['_token']);
-
         return redirect(route($this->InstructionLoader('form.demographics')->next_url));
     }
 
@@ -97,7 +102,7 @@ class FormController extends Controller
     /*
      * Display and store the personality form.
      * */
-    public function personality()
+    public function questionnaire($name)
     {
         $questionnaire_name = env('PERSONALITY');
 
@@ -111,7 +116,7 @@ class FormController extends Controller
             'steps' => $steps]);
     }
 
-    public function storePersonality(Request $request)
+    public function storeQuestionnaire(Request $request)
     {
         SessionHelper::pushSerialized($request, 'storage.data_questionnaires.personality', ['_token']);
         return redirect(route($this->InstructionLoader('form.personality')->next_url));
