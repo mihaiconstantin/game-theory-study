@@ -139,6 +139,7 @@ class FormElementTableSeeder extends Seeder
             'tag_type' => 'textarea',
             'attr_name' => 'details',
             'attr_id' => 'details',
+            'attr_required' => 0,
             'label' => 'If yes, please explain why you think the different components of this study are related',
         ]);
 

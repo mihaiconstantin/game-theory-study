@@ -32,7 +32,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'form.consent',
             'next_url' => 'form.demographics',
             'title' => 'Informed consent',
-            'text' => 'Name of the study: Knowledge and Insight<br><br>You have been invited to participate in this study. Before you begin, we kindly ask you to read this form carefully and sign for consent.<br><br>Researchers:<br>Prof. Dr. J. J. A. Denissen (j.j.a.denissen@uvt.nl) <br>Department of Social Psychology and Department of Developmental Psychology Tilburg University<br><br>Background:The intention of this study is to research and gain knowledge of human behavior. Firstly, we would like to ask you to fill out a questionnaire about how you think about yourself. Subsequently, you will play a game. We are interested in how you make decisions during that game.<br> <br>Procedure:This study will take about 45 minutes. If you at any point wish to withdraw your consent and stop the study, you have the right to do so and will not be penalized. <br><br>Compensation:<br>For your participation you will receive the credit stated on Amazon Mechanical Turk.Confidentiality:<br>When your role with this project is complete, your data will be anonymized. From that time, there will be no record that links the data collected from you with any personal data from which you could be identified. Once anonymized, these data may be made available to researchers via accessible data repositories and possibly used for novel purposes.<br><br>If you have any questions during your participation, you can email the test leader (e.dietvorst@uvt.nl). If you have other questions regarding the study, you can contact the project leader prof. Dr. J. J. A. Denissen (j.j.a.denissen@uvt.nl)'
+            'text' => '<b>Name of the study:</b> Knowledge and Insight<br><br>You have been invited to participate in this study. Before you begin, we kindly ask you to read this form carefully and sign for consent.<br><br><b>Researchers:</b><br>Prof. Dr. J. J. A. Denissen <i>(j.j.a.denissen@uvt.nl)</i><small> Department of Social Psychology and Department of Developmental Psychology Tilburg University</small><br><br><b>Background:</b><br>The intention of this study is to research and gain knowledge of human behavior. Firstly, we would like to ask you to fill out a questionnaire about how you think about yourself. Subsequently, you will play a game. We are interested in how you make decisions during that game.<br><br><b>Procedure:</b><br>This study will take about 45 minutes. If you at any point wish to withdraw your consent and stop the study, you have the right to do so and will not be penalized.<br><br><b>Compensation:</b><br>For your participation you will receive the credit stated on Amazon Mechanical Turk.<br><br><b>Confidentiality:</b><br>When your role with this project is complete, your data will be anonymized. From that time, there will be no record that links the data collected from you with any personal data from which you could be identified. Once anonymized, these data may be made available to researchers via accessible data repositories and possibly used for novel purposes.<br><br>If you have any questions during your participation, you can email the test leader <i>(e.dietvorst@uvt.nl)</i>.<br>If you have other questions regarding the study, you can contact the project leader prof. Dr. J. J. A. Denissen <i>(j.j.a.denissen@uvt.nl).</i>'
         ]);
 
 
@@ -41,20 +41,20 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'form.demographics',
             'next_url' => 'form.questionnaire',
             'title' => 'Demographics',
-            'text' => 'Please fill out the following questions about yourself:'
+            'text' => 'Please fill out the following questions about yourself.'
         ]);
 
 
         // form.questionnaire/{hexaco}
         Instruction::create([
             'current_url' => 'form.questionnaire',
-            'next_url' => 'instruction.game-announcement',
+            'next_url' => 'instruction.announcement',
             'title' => 'Questionnaire',
             'text' => 'On the following pages, you will find a series of statements about you. Please read each statement and decide how much you agree or disagree with that statement. Then indicate your response using the following scale:<ul>	<li>5 = strongly agree</li><li>4 = agree</li><li>3 = neutral (neither agree nor disagree)</li><li>2 = disagree</li><li>1 = strongly disagree</li></ul>Please answer every statement, even if you are not completely sure of your response.'
         ]);
 
 
-        // instruction.game-announcement
+        // instruction.announcement
         Instruction::create([
             'current_url' => 'instruction.announcement',
             'next_url' => 'instruction.practice',
@@ -80,7 +80,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.condition',
             'next_url' => 'form.expectation',
             'title' => 'Game phase',
-            'text' => 'You finished the practice phase and are about to start the game phase.<br><br>You are expected to play 9 games, each consisting of 10 rounds. After each game you are invited to answer questions about the game you played.<br><br>Please pay attention: there are little variations in each games, therefore always read the text and take a close look at the table before making a decision. <br><br>Good luck!'
+            'text' => 'You finished the practice phase and are about to start the game phase.<br><br>You are expected to play 9 games, each consisting of 10 rounds. After each game you are invited to answer questions about the game you played.<br><br><b>Please pay attention: <span class="text-danger">there are little variations in each games, therefore always read the text and take a close look at the table before making a decision.</span></b><br><br>Good luck!'
         ]);
 
 
@@ -109,8 +109,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'instruction.new-game',
             'next_url' => 'game.play',
-            'title' => 'New game {gameNumber}',
-            'text' => 'User finds out that a new game is about to start. Redirects to "game/play/{gameNumber}/{phaseNumber}"'
+            'title' => 'New Game',
+            'text' => 'User finds out that a new game is about to start.'
         ]);
 
 
@@ -122,7 +122,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.debriefing',
             'next_url' => 'form.feedback',
             'title' => 'Debriefing',
-            'text' => 'While playing this experiment you were told to play with another player. However, during the whole time this was a computer.<br><br>We find it important to debrief you about this because the reactions of the computer might have affected you, positively or negatively.<br><br>Now you know it was a computer, so you know you do not have to take these responses personal.'
+            'text' => 'While playing this experiment you were told to play with another player. However, during the whole time this was a computer.<br><br>We find it important to debrief you about this because the reactions of the computer might have affected you, positively or negatively.<br><br><b>Now you know it was a computer</b>, so you know you do not have to take these responses personal.'
         ]);
 
 
@@ -140,7 +140,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.amazon-code',
             'next_url' => 'instruction.start',
             'title' => 'Finish',
-            'text' => 'Thank you for you participation. If you have any questions concerning this study please contact our test leader (e.dietvorst@uvt.nl).<br><br>Lastly, you automatically receive a random code in order to fill out on Amazon Mechanical Turk. This code is evidence that you participated and finished our study.<br><br>Your code is: {randomCode}.'
+            'text' => 'Thank you for you participation. If you have any questions concerning this study please contact our test leader <i>(e.dietvorst@uvt.nl)</i>.<br><br>Lastly, you automatically receive a random code in order to fill out on Amazon Mechanical Turk. This code is evidence that you participated and finished our study.'
         ]);
 
 
@@ -150,8 +150,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'instruction.end',
             'next_url' => 'form.consent',
-            'title' => 'Bye bye instructions',
-            'text' => 'The user has landed on the ending page. Redirects to nowhere.'
+            'title' => 'We respect your choice',
+            'text' => 'Hope to see you next time. Best of luck!'
         ]);
 
 
