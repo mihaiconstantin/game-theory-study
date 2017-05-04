@@ -94,7 +94,7 @@ class ConditionParserHelper
      */
     private function randomizePhasesOrder()
     {
-        for ($i = 1; $i < count($this->conditionConfig['ordered_competitive']); $i++)
+        for ($i = 1; $i <= count($this->conditionConfig['ordered_competitive']); $i++)
         {
             shuffle($this->conditionConfig['ordered_competitive'][$i]);
             $this->conditionConfig['ordered_competitive'][$i] = BasicHelper::reindexArray($this->conditionConfig['ordered_competitive'][$i]);
