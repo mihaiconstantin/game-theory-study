@@ -185,7 +185,7 @@ return [
         /*
          * Custom Service Providers...
          */
-        App\Providers\ComposerServiceProvider::class,
+
 
     ],
 
