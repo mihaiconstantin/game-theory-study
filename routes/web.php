@@ -35,6 +35,7 @@ Route::get('instruction/new-game/{gameNumber}'  , 'InstructionController@newGame
 Route::get('instruction/debriefing'             , 'InstructionController@debriefing')       ->name('instruction.debriefing');
 Route::get('instruction/amazon-code'            , 'InstructionController@amazonCode')       ->name('instruction.amazon-code');
 Route::get('instruction/end'                    , 'InstructionController@end')              ->name('instruction.end');
+Route::get('instruction/not-allowed'            , 'InstructionController@notAllowed')       ->name('instruction.not-allowed');
 
 
 

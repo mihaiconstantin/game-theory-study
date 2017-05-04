@@ -16,7 +16,7 @@ class FormController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('consent')->except(['consent', 'storeConsent']);
+        $this->middleware('consent')->except(['consent', 'storeConsent', 'notAllowed']);
     }
 
 
@@ -38,10 +38,16 @@ class FormController extends Controller
     public function storeConsent(Request $request)
     {
         // check if the user agreed to participate
+        // or if he is trying to participate twice
         if ((int) $request['consent'] == 0)
         {
-            return redirect(route('instruction.end'));
+            return redirect()->route('instruction.end');
         }
+        elseif (session('temp.finish'))
+        {
+            return redirect()->route('instruction.not-allowed');
+        }
+
 
 
         // prepare general variables to initialize the session storage

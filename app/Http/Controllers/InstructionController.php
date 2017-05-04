@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class InstructionController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('consent')->except(['start', 'end']);
+        $this->middleware('consent')->except(['start', 'end', 'amazonCode', 'notAllowed']);
     }
 
 
@@ -67,9 +69,32 @@ class InstructionController extends Controller
 
     public function amazonCode()
     {
-        return view('amazon', ['data' => $this->InstructionLoader('instruction.amazon-code')]);
+        // marking the end of the experiment <- useful for InstructionController@storeConsent
+
+        $code = null;
+
+        if (session('temp.consent'))
+        {
+            session([
+                'temp.finish' => true,
+                'temp.study_end' => microtime()
+            ]);
+
+            $code = session('storage.data_participants.code');
+        }
+
+        return view('amazon', [
+            'data' => $this->InstructionLoader('instruction.amazon-code'),
+            'code' => $code
+        ]);
     }
 
+
+    public function notAllowed()
+    {
+        return view('end', ['data' => $this->InstructionLoader('instruction.not-allowed')]);
+    }
+    
 }
 
 

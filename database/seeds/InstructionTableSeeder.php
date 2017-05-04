@@ -149,10 +149,22 @@ class InstructionTableSeeder extends Seeder
         // end
         Instruction::create([
             'current_url' => 'instruction.end',
-            'next_url' => 'form.consent',
+            'next_url' => 'instruction.start',
             'title' => 'We respect your choice',
             'text' => 'Hope to see you next time. Best of luck!'
         ]);
+
+
+        // in case he tries to play again
+
+        // end
+        Instruction::create([
+            'current_url' => 'instruction.not-allowed',
+            'next_url' => 'instruction.start',
+            'title' => 'Not allowed',
+            'text' => '<span class="text-danger"><b>You already participated in this experiment.</b></span> If you think this message is a mistake, please contact our test leader <i>(e.dietvorst@uvt.nl)</i> in order to clarify the situation.'
+        ]);
+
 
 
     }

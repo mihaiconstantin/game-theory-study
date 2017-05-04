@@ -92,6 +92,7 @@ class SessionHelper
                 'total_games' => null,
                 'total_phases' => null,
                 'passed_practice' => null,
+                'finish' => false,
             ],
 
 
