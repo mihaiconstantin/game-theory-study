@@ -1,12 +1,13 @@
 @extends('templates.main')
 
+
 {{--score canvas?--}}
 @section('score')
-    @include('partials._score')
+    {{--@include('partials._score')--}}
 @endsection
 
 
 {{--main canvas--}}
 @section('content')
-    @include('partials._play')
+    {{--@include('partials._play')--}}
 @endsection

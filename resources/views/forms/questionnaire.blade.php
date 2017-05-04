@@ -1,9 +1,9 @@
 @extends('templates.main')
 
-{{--score canvas?--}}
+{{--no score canvas--}}
 
 
 {{--main canvas--}}
 @section('content')
-    @include('partials._play')
+    @include('partials._questionnaire')
 @endsection

@@ -1,5 +1,6 @@
 {{--score box--}}
 
+
 <div class="box box-transparent">
 
     <table class="table table-sm score-table">
