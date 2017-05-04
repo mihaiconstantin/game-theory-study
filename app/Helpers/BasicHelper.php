@@ -80,9 +80,4 @@ class BasicHelper
         }, explode(';', $chain));
     }
 
-
 }
-
-/**
- * TODO: Remove the BasicHelper from app/config.php.
- */

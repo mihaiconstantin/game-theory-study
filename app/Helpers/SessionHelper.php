@@ -7,6 +7,7 @@ use App\Models\Condition;
 use App\Models\Design;
 use Illuminate\Http\Request;
 
+
 class SessionHelper
 {
     private $skeleton;
@@ -24,8 +25,10 @@ class SessionHelper
         // store the summary for the practice
         $this->practice = new ConditionParserHelper(Condition::getCondition($practice_name));
 
+
         // make the skeleton array that will be pushed on demand to the session
         $this->extendSkeleton();
+
 
         // push configuration to the skeleton array
         $this->pushConfig();
@@ -46,58 +49,22 @@ class SessionHelper
     }
 
 
-    public function setGameAndPhase($current_game, $current_phase)
+    /**
+     * Determines the next game and phase number.
+     * They are determined using session data.
+     * For example, session config.designs.
+     * Using all nine jumping scenarios.
+     *
+     *
+     * Can be be a job for a middleware.
+     *
+     * @param string $context
+     * @param int $current_game
+     * @param int $current_phase
+     */
+    public static function setNextGameAndPhase(string $context, int $current_game, int $current_phase)
     {
-
-
-
-        switch (true)
-        {
-            case ($current_phase == 1):
-                $total_games = count(session('config.practice.designs'));
-                $total_phases = session('config.' . 'practice.' . 'phases.' . $current_game);
-                break;
-
-            // case ($current_phase > )
-
-            //TODO: Figure out the logic here.
-        }
-
-
-
-
-
-
-        if ($current_phase == $total_phases)
-        {
-            $next_game = $current_game + 1;
-            $next_phase = 1;
-        }
-        elseif ($current_phase > $total_phases)
-        {
-            die('cheater');
-        }
-
-        $next_game = $current_game;
-        $next_phase = $current_phase + 1;
-
-
-        session([
-            'temp.current_game' => $current_game,
-            'temp.current_phase' => $current_phase,
-
-            'temp.next_game' => '',
-            'temp.next_phase' => '',
-
-
-        ]);
-
-
-
-
-
     }
-
 
 
     #region skeleton makers
