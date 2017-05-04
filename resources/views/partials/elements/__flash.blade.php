@@ -1,9 +1,7 @@
 @if($flash = session('message'))
-    <hr>
 
     <div id="flash-message" class="alert alert-danger" role="alert">
-        {{$flash}}
+        <strong>{{$flash}}</strong>
     </div>
 
-    <hr>
 @endif

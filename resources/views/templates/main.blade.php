@@ -17,7 +17,7 @@
 
         <div id="score-canvas" class="flex-item-score-canvas">
             @yield('score')
-            @include('partials.elements.__flash')
+            {{--@include('partials.elements.__flash')--}}
         </div>
 
         <div id="content-canvas" class="flex-item-content-canvas box box-white">
