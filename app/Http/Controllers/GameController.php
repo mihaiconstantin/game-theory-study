@@ -39,9 +39,9 @@ class GameController extends Controller
     public function playPractice($gameNumber, $phaseNumber)
     {
         // SessionHelper::setNextGameAndPhase('practice', $gameNumber, $phaseNumber);
-        dd(session('config'));
+        // dd(session('config'));
 
-        return view('forms.practice');
+        return view('forms.game');
     }
 
 

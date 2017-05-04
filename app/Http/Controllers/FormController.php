@@ -16,7 +16,7 @@ class FormController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('consent')->except('consent');
+        $this->middleware('consent')->except(['consent', 'storeConsent']);
     }
 
 
@@ -46,11 +46,11 @@ class FormController extends Controller
 
         // prepare general variables to initialize the session storage
         $study_name = env('STUDY');
-        $condition_name = BasicHelper::randomAssign(env('STUDY'));
+        $condition_name = BasicHelper::randomAssign($study_name);
         $practice_name = Study::getColumnsByName($study_name, ['practice'])['practice'];
 
 
-        // build a session skeleton packed with config data only (i.e., [config])
+        // build a session skeleton packed with config data only (i.e., ['config'])
         $skeleton = new SessionHelper($condition_name, $practice_name);
 
 
@@ -94,7 +94,7 @@ class FormController extends Controller
     public function storeDemographics(Request $request)
     {
         SessionHelper::pushSerialized($request, 'storage.data_forms.demographic', ['_token']);
-        return redirect(route($this->InstructionLoader('form.demographics')->next_url));
+        return redirect(route($this->InstructionLoader('form.demographics')->next_url, ['name' => 'hexaco']));
     }
 
 
@@ -104,22 +104,22 @@ class FormController extends Controller
      * */
     public function questionnaire($name)
     {
-        $questionnaire_name = env('PERSONALITY');
+        $instruction = $this->InstructionLoader('form.questionnaire');
+        $items = PersonalityItem::getItemsForQuestionnaire($name);
+        $steps = ItemScale::getScaleForQuestionnaire($name);
 
-        $instruction = $this->InstructionLoader('form.personality');
-        $items = PersonalityItem::getItemsForQuestionnaire($questionnaire_name);
-        $steps = ItemScale::getScaleForQuestionnaire($questionnaire_name);
-
-        return view('forms.personality', [
+        return view('forms.questionnaire', [
             'data' => $instruction,
             'items' => $items,
-            'steps' => $steps]);
+            'steps' => $steps,
+            'name' => $name
+        ]);
     }
 
     public function storeQuestionnaire(Request $request)
     {
-        SessionHelper::pushSerialized($request, 'storage.data_questionnaires.personality', ['_token']);
-        return redirect(route($this->InstructionLoader('form.personality')->next_url));
+        SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire'), ['_token']);
+        return redirect(route($this->InstructionLoader('form.questionnaire')->next_url));
     }
 
 
@@ -140,7 +140,7 @@ class FormController extends Controller
 
     public function storeExpectation(Request $request)
     {
-        // do something with the request
+        SessionHelper::pushSerialized($request, 'storage.data_forms.expectation', ['_token']);
 
         return redirect(route($this->InstructionLoader('form.expectation')->next_url, [
             'gameNumber' => '1',
@@ -156,19 +156,21 @@ class FormController extends Controller
     public function gameQuestion($gameNumber)
     {
         $instruction = $this->InstructionLoader('form.game-question');
-        $items = PersonalityItem::getItemsForQuestionnaire('bfi');
-        $steps = ItemScale::getScaleForQuestionnaire('bfi');
+        $items = PersonalityItem::getItemsForQuestionnaire('game_question');
+        $steps = ItemScale::getScaleForQuestionnaire('game_question');
 
         return view('forms.game_question', [
             'data' => $instruction,
             'items' => $items,
             'steps' => $steps,
-            'gameNumber' => $gameNumber]);
+            'gameNumber' => $gameNumber,
+            'name' => 'game_question'
+        ]);
     }
 
     public function storeGameQuestion(Request $request)
     {
-        // do something with the request
+        SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire') . '.' . request('_game_number'), ['_token']);
 
         return redirect(route($this->InstructionLoader('form.game-question')->next_url, [
             'gameNumber' => '1'
@@ -193,7 +195,7 @@ class FormController extends Controller
 
     public function storeFeedback(Request $request)
     {
-        // do something with the request
+        SessionHelper::pushSerialized($request, 'storage.data_forms.feedback', ['_token']);
 
         return redirect(route($this->InstructionLoader('form.feedback')->next_url));
     }

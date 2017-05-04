@@ -26,7 +26,7 @@ class InstructionController extends Controller
 
     public function announcement()
     {
-        return view('instruction', ['data' => $this->InstructionLoader('instruction.game-overview-one')]);
+        return view('instruction', ['data' => $this->InstructionLoader('instruction.announcement')]);
     }
 
 
@@ -41,23 +41,33 @@ class InstructionController extends Controller
 
     public function condition()
     {
-        return view('instruction', ['data' => $this->InstructionLoader('instruction.game-overview-two')]);
+        return view('instruction', ['data' => $this->InstructionLoader('instruction.condition')]);
     }
 
 
     public function newGame($gameNumber)
     {
-        return 'stop';
-        // $instruction = $this->InstructionLoader('instruction.new-game');
-        // $instruction->url_parameters['gameNumber'] = $gameNumber;
-        // $instruction->url_parameters['phaseNumber'] = 1;
-        // return view('instruction', ['data' => $instruction]);
+        $instruction = $this->InstructionLoader('instruction.new-game');
+        // TODO: change to array and correct url parameters
+        $instruction->url_parameters['gameNumber'] = $gameNumber;
+        $instruction->url_parameters['phaseNumber'] = 1;
+
+        return view('instruction', [
+            'data' => $instruction,
+            'gameNumber' => $gameNumber
+        ]);
+    }
+
+
+    public function debriefing()
+    {
+        return view('instruction', ['data' => $this->InstructionLoader('instruction.debriefing')]);
     }
 
 
     public function amazonCode()
     {
-        return view('instruction', ['data' => $this->InstructionLoader('instruction.amazon-code')]);
+        return view('amazon', ['data' => $this->InstructionLoader('instruction.amazon-code')]);
     }
 
 }

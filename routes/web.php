@@ -30,8 +30,9 @@ Route::get('/', function(){
 Route::get('instruction/start'                  , 'InstructionController@start')            ->name('instruction.start');
 Route::get('instruction/announcement'           , 'InstructionController@announcement')     ->name('instruction.announcement');
 Route::get('instruction/practice'               , 'InstructionController@practice')         ->name('instruction.practice');
-Route::get('instruction/condition'              , 'InstructionController@gameOverviewTwo')  ->name('instruction.condition'      );
+Route::get('instruction/condition'              , 'InstructionController@condition')        ->name('instruction.condition');
 Route::get('instruction/new-game/{gameNumber}'  , 'InstructionController@newGame')          ->name('instruction.new-game');
+Route::get('instruction/debriefing'             , 'InstructionController@debriefing')       ->name('instruction.debriefing');
 Route::get('instruction/amazon-code'            , 'InstructionController@amazonCode')       ->name('instruction.amazon-code');
 Route::get('instruction/end'                    , 'InstructionController@end')              ->name('instruction.end');
 
@@ -54,7 +55,7 @@ Route::get('form/feedback'                  , 'FormController@feedback')        
 
 Route::post('form/consent'                  , 'FormController@storeConsent')        ->name('form.storeConsent');
 Route::post('form/demographics'             , 'FormController@storeDemographics')   ->name('form.storeDemographics');
-Route::post('form/personality'              , 'FormController@storeQuestionnaire')  ->name('form.storeQuestionnaire');
+Route::post('form/questionnaire'            , 'FormController@storeQuestionnaire')  ->name('form.storeQuestionnaire');
 Route::post('form/expectation'              , 'FormController@storeExpectation')    ->name('form.storeExpectation');
 Route::post('form/game-question'            , 'FormController@storeGameQuestion')   ->name('form.storeGameQuestion');
 Route::post('form/feedback'                 , 'FormController@storeFeedback')       ->name('form.storeFeedback');

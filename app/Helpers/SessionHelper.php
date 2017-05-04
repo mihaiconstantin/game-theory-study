@@ -129,8 +129,8 @@ class SessionHelper
 
 
                 'data_questionnaires' => [
-                    'personality'   => null,
-                    'game_question' => null,
+                    // 'personality'   => null,
+                    // 'game_question' => null,
                 ],
 
 
