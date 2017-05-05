@@ -30,6 +30,17 @@ class DataParticipant extends Model
 
 
     /**
+     * Relationship with DataForm (child)
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function data_config()
+    {
+        return $this->hasOne('App\Models\DataConfig');
+    }
+
+
+    /**
      * Relationship with DataGamePhases (child)
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
