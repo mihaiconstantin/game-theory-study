@@ -4,6 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @property mixed id
+ * @property int ip
+ * @property int code
+ * @property int study_name
+ * @property int study_time
+ * @property int study_integrity
+ * @property int condition_name
+ * @property int opponent_name
+ * @property int games_played
+ * @property int game_phases_played
+ * @property int practice_phases_played
+ */
 class DataParticipant extends Model
 {
 
@@ -19,17 +33,6 @@ class DataParticipant extends Model
 
 
     /**
-     * Relationship with DataQuestionnaire (child
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function data_questionnaire()
-    {
-        return $this->hasOne('App\Models\DataQuestionnaire');
-    }
-
-
-    /**
      * Relationship with DataForm (child)
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -37,6 +40,17 @@ class DataParticipant extends Model
     public function data_config()
     {
         return $this->hasOne('App\Models\DataConfig');
+    }
+
+
+    /**
+     * Relationship with DataQuestionnaire (child
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function data_questionnaire()
+    {
+        return $this->hasOne('App\Models\DataQuestionnaire');
     }
 
 

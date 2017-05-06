@@ -50,21 +50,206 @@ class SessionHelper
 
 
     /**
+     * Builds an array that can be use to overwrite the appropriate array within the session storage.
+     *
+     * @param $context
+     * @param $current_game
+     * @param $current_phase
+     * @param Request $request
+     * @return array
+     */
+    public static function fillGameResult($context, $current_game, $current_phase, Request $request) : array
+    {
+        $competitive = session('config.' . $context . '.competitive')[$current_game][$current_phase];
+
+        $pc_choice = $competitive == 0 ? 1 : 2;
+
+        $user_choice = $request->input('option');
+
+        $outcomes = explode('#', session('config.designs.' . session('config.' . $context . '.designs')[$current_game] . '.outcomes')[$user_choice . '#' . $pc_choice]);
+
+
+        return [
+            'game_number'       => $current_game,
+            'phase_number'      => $current_phase,
+            'start_play_time'   => null,
+            'end_play_time'     => $request->input('_time'),
+            'start_result_time' => null,
+            'end_result_time'   => null,
+            'bias_type'         => session('config.' . $context . '.biases')[$current_game],
+            'competitive'       => $competitive,
+            'user_choice'       => $user_choice,
+            'pc_choice'         => $pc_choice,
+            'user_outcome'      => $outcomes[0],
+            'pc_outcome'        => $outcomes[1]
+        ];
+
+    }
+
+
+    /**
      * Determines the next game and phase number.
      * They are determined using session data.
      * For example, session config.designs.
      * Using all nine jumping scenarios.
      *
      *
-     * Can be be a job for a middleware.
+     * Can it be a job for a middleware?
      *
      * @param string $context
-     * @param int $current_game
-     * @param int $current_phase
+     * @param string $previous_url
+     * @return array
+     * @throws \Exception
      */
-    public static function setNextGameAndPhase(string $context, int $current_game, int $current_phase)
+    public static function whereNext(string $context, string $previous_url) : array
     {
+        $current_game = null;
+        $current_phase = null;
+        $next_game = null;
+        $next_phase = null;
+
+
+        $previous_url = array_values(explode('/', $previous_url));
+
+
+        // make sure that the request comes from game.play URL <- otherwise we cannot determine the previous paramaters
+        if ($previous_url[4] != 'play')
+        {
+            throw new \Exception('Illegal non-game URL. Coming to GameController@store from an URL other than game.play.');
+        }
+
+
+        // was the game played in the correct bounds?
+        if (array_key_exists($previous_url[5], session('config.' . $context . '.designs')))
+        {
+            $current_game = $previous_url[5];
+        }
+
+
+        // was the game phase played in the correct bounds?
+        if ($current_game && array_key_exists($previous_url[6], session('config.' . $context . '.competitive')[$current_game]))
+        {
+            $current_phase = $previous_url[6];
+        }
+
+
+        // At this point we know whether the game page for which the post request came is from a
+        // valid URL and we can safely determine the parameters for the next game and phase.
+        if ($current_game && $current_phase)
+        {
+            $total_games = count(session('config.' . $context . '.designs'));
+            $total_phases = session('config.' . $context . '.phases.' . $current_game);
+
+
+            // four possible cases of increments <- assuming correctness
+            if ($current_game == $total_games && $current_phase == $total_phases)
+            {
+                $next_game = 0;
+                $next_phase = 0;
+            }
+            elseif ($current_game == $total_games && $current_phase < $total_phases)
+            {
+                $next_game = $current_game;
+                $next_phase = $current_phase + 1;
+            }
+            elseif ($current_game < $total_games && $current_phase == $total_phases)
+            {
+                $next_game = $current_game + 1;
+                $next_phase = 1;
+            }
+            elseif ($current_game < $total_games && $current_phase < $total_phases)
+            {
+                $next_game = $current_game;
+                $next_phase = $current_phase + 1;
+            }
+        }
+
+
+        // output everything: null values if things went wrong, numeric values if right
+        return [
+            'current_game' => $current_game,
+            'current_phase' => $current_phase,
+            'next_game' => $next_game,
+            'next_phase' => $next_phase
+        ];
     }
+
+
+    #region fetchers
+
+    /**
+     * Fetches the data for the play table given the appropriate context (i.e., practice or condition).
+     *
+     * @param $context
+     * @param $current_game
+     * @param $current_phase
+     * @return array
+     */
+    public static function fetchGameViewData($context, $current_game, $current_phase) : array
+    {
+        return [
+            'condition_name'        => session('config.' . $context . '.info.title'),
+            'condition_text'        => session('config.' . $context . '.text.' . session('config.' . $context . '.biases')[$current_game]),
+            'condition_opponent'    => session('config.' . $context . '.info.opponent'),
+            'design_outcomes'       => session('config.designs.' . session('config.' . $context . '.designs')[$current_game] . '.outcomes'),
+            'design_label'          => session('config.designs.' . session('config.' . $context . '.designs')[$current_game] . '.info.label'),
+            'game_number'           => $current_game,
+            'phase_number'          => $current_phase
+        ];
+    }
+
+
+    /**
+     * Fetches the data for the result table given the appropriate context (i.e., practice or condition).
+     *
+     * @param $context
+     * @param $current_game
+     * @param $current_phase
+     * @return array
+     */
+    public static function fetchResultViewData($context, $current_game, $current_phase) : array
+    {
+        $base_key_storage = 'storage.data_' . $context . '.' . $current_game . '.' . $current_phase . '.';
+        $base_key_designs = 'config.designs.' . session('config.' . $context . '.designs.' . $current_game) . '.';
+
+        $user_choice = session($base_key_storage . 'user_choice');
+        $pc_choice = session($base_key_storage . 'pc_choice');
+        $outcome = session($base_key_designs . 'text.' . $user_choice . '#' . $pc_choice);
+
+        return [
+            'condition_name'             => session('config.' . $context . '.info.title'),
+            'game_number'                => $current_game,
+            'phase_number'               => $current_phase,
+            'design_outcome_description' => $outcome,
+            'condition_opponent'         => session('config.' . $context . '.info.opponent'),
+            'design_label'               => session($base_key_designs . 'info.label'),
+            'user_choice'                => $user_choice,
+            'pc_choice'                  => $pc_choice,
+            'user_outcome'               => session($base_key_storage . 'user_outcome'),
+            'pc_outcome'                 => session($base_key_storage . 'pc_outcome'),
+            'store_route'                => $context == 'condition' ? 'game.store' : 'practice.store'
+        ];
+
+    }
+
+
+    /**
+     * Fetches the data for the score table given the (only for condition).
+     *
+     * @param $current_game
+     * @return array
+     */
+    public static function fetchScoreViewData($current_game) : array
+    {
+        return [
+            'total_games' => count(session('config.condition.designs')),
+            'total_phases' => session('config.condition.phases.' . $current_game),
+            'game_score' => array_sum(session('score'))
+        ];
+    }
+    
+
+    #endregion
 
 
     #region skeleton makers
@@ -81,18 +266,18 @@ class SessionHelper
 
             // temporary data
             'temp' => [
-                'consent' => false,
-                'study_start' => null,
-                'study_end' => null,
-                'cheats' => null,
-                'current_game' => null,
-                'current_phase' => null,
-                'next_game' => null,
-                'next_phase' => null,
-                'total_games' => null,
-                'total_phases' => null,
-                'passed_practice' => null,
-                'finish' => false,
+                'study_start'       => null,
+                'study_end'         => null,
+
+                'cheats'            => null,
+
+                'next_game'         => null,
+                'next_phase'        => null,
+
+                'consent'           => false,
+                'passed_practice'   => false,
+                'show_score'        => false,
+                'finish'            => false
             ],
 
 
@@ -110,6 +295,7 @@ class SessionHelper
             'storage' => [
 
                 'data_participants' => [
+                    'id'                        => null,
                     'ip'                        => null,
                     'code'                      => null,
                     'study_name'                => null,
@@ -164,16 +350,18 @@ class SessionHelper
             for ($j = 1; $j <= $this->practice->getDesignConfig()['ordered_phases'][$i]; $j++)
             {
                 $temp[$i][$j] = array(
-                    'game_number'   => null,
-                    'phase_number'  => null,
-                    'play_time'     => null,
-                    'result_time'   => null,
-                    'bias_type'     => null,
-                    'competitive'   => null,
-                    'user_choice'   => null,
-                    'pc_choice'     => null,
-                    'user_outcome'  => null,
-                    'pc_outcome'    => null,
+                    'game_number'       => null,
+                    'phase_number'      => null,
+                    'start_play_time'   => null,
+                    'end_play_time'     => null,
+                    'start_result_time' => null,
+                    'end_result_time'   => null,
+                    'bias_type'         => null,
+                    'competitive'       => null,
+                    'user_choice'       => null,
+                    'pc_choice'         => null,
+                    'user_outcome'      => null,
+                    'pc_outcome'        => null,
                 );
             }
         }
@@ -194,16 +382,18 @@ class SessionHelper
             for ($j = 1; $j <= $this->condition->getDesignConfig()['ordered_phases'][$i]; $j++)
             {
                 $temp[$i][$j] = array(
-                    'game_number'   => null,
-                    'phase_number'  => null,
-                    'play_time'     => null,
-                    'result_time'   => null,
-                    'bias_type'     => null,
-                    'competitive'   => null,
-                    'user_choice'   => null,
-                    'pc_choice'     => null,
-                    'user_outcome'  => null,
-                    'pc_outcome'    => null,
+                    'game_number'       => null,
+                    'phase_number'      => null,
+                    'start_play_time'   => null,
+                    'end_play_time'     => null,
+                    'start_result_time' => null,
+                    'end_result_time'   => null,
+                    'bias_type'         => null,
+                    'competitive'       => null,
+                    'user_choice'       => null,
+                    'pc_choice'         => null,
+                    'user_outcome'      => null,
+                    'pc_outcome'        => null,
                 );
             }
         }
