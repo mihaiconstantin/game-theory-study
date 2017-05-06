@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\BasicHelper;
 use App\Helpers\SessionHelper;
+use App\Models\DataConfig;
+use App\Models\DataParticipant;
 use App\Models\FormElement;
 use App\Models\ItemScale;
 use App\Models\PersonalityItem;
@@ -14,12 +16,11 @@ use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
+
     public function __construct()
     {
-        $this->middleware('consent')->except(['consent', 'storeConsent', 'notAllowed']);
+        $this->middleware('consent')->except(['consent', 'storeConsent']);
     }
-
-
 
 
     /*
@@ -32,13 +33,15 @@ class FormController extends Controller
         return view('forms.consent', ['data' => $instruction]);
     }
 
+
     /*
      * Display and store the demographics form.
      * */
     public function storeConsent(Request $request)
     {
-        // check if the user agreed to participate
-        // or if he is trying to participate twice
+        // Determine if the user agreed to participate or if
+        // he is trying to participate again too soon < 2h.
+
         if ((int) $request['consent'] == 0)
         {
             return redirect()->route('instruction.end');
@@ -49,38 +52,80 @@ class FormController extends Controller
         }
 
 
+        // Prepare the general variables needed to initialize the session storage process.
 
-        // prepare general variables to initialize the session storage
         $study_name = env('STUDY');
         $condition_name = BasicHelper::randomAssign($study_name);
         $practice_name = Study::getColumnsByName($study_name, ['practice'])['practice'];
 
 
-        // build a session skeleton packed with config data only (i.e., ['config'])
+        // Build a session skeleton packed with config data only (i.e., ['config']).
+        // This might be a good place to initialize a new DataParticipant model
+        // and store the config data to the database. Immediately after that,
+        // push the auto-generated id to session so later we can use the
+        // Eloquent relationships to store the remaining data easily.
+
         $skeleton = new SessionHelper($condition_name, $practice_name);
 
 
-        // push the skeleton to the session
+        // Push the skeleton to the session.
+
         session($skeleton->getSkeleton());
 
 
-        // update relevant session keys
+        // Instantiate a new Eloquent DataParticipant object to
+        // store the config and push the id to session. Don't
+        // mind about the data_participant fields, those
+        // will be bulk inserted later.
+
+        $dataParticipant = new DataParticipant();
+
+        $dataParticipant->ip = $request->ip();
+        $dataParticipant->code = BasicHelper::userCode();
+        $dataParticipant->study_name = $study_name;
+        $dataParticipant->study_time = 0;
+        $dataParticipant->study_integrity = 0;
+        $dataParticipant->condition_name = $condition_name;
+        $dataParticipant->opponent_name = $skeleton->getSkeleton()['config']['condition']['info']['opponent'];
+        $dataParticipant->games_played = 0;
+        $dataParticipant->game_phases_played = 0;
+        $dataParticipant->practice_phases_played = 0;
+
+        // Save the parent object to the database.
+
+        $dataParticipant->save();
+
+        // Prepare the config config child.
+
+        $dataConfig = new DataConfig();
+        $dataConfig->config = json_encode($skeleton->getSkeleton()['config']);
+
+        // Store the child associated to the parent.
+
+        $dataParticipant->data_config()->save($dataConfig);
+
+
+        // Update whatever session keys are relevant to be updated now.
+        // Make sure to store the id of the newly constructed model,
+        // as we will use it later to append data via Eloquent.
+
         session([
             'temp.consent' => true,
             'temp.study_start' => microtime(),
-            'temp.passed_practice' => 0,
+            'temp.passed_practice' => false,
 
-            'storage.data_participants.ip' => $request->ip(),
-            'storage.data_participants.code' => BasicHelper::userCode(),
+            'storage.data_participants.id' => $dataParticipant->id,
+            'storage.data_participants.ip' => $dataParticipant->ip,
+            'storage.data_participants.code' => $dataParticipant->code,
             'storage.data_participants.study_name' => $study_name,
-            'storage.data_participants.study_time' => microtime(),
             'storage.data_participants.condition_name' => $condition_name
         ]);
 
 
-        return redirect(route($this->InstructionLoader('form.consent')->next_url));
-    }
+        // Send the redirect. The user has successfully started the experiment.
 
+        return redirect(route($this->InstructionLoader('form.consent')['next_url']));
+    }
 
 
     /*
@@ -100,9 +145,9 @@ class FormController extends Controller
     public function storeDemographics(Request $request)
     {
         SessionHelper::pushSerialized($request, 'storage.data_forms.demographic', ['_token']);
-        return redirect(route($this->InstructionLoader('form.demographics')->next_url, ['name' => 'hexaco']));
-    }
 
+        return redirect(route($this->InstructionLoader('form.demographics')['next_url'], ['name' => 'hexaco']));
+    }
 
 
     /*
@@ -125,9 +170,14 @@ class FormController extends Controller
     public function storeQuestionnaire(Request $request)
     {
         SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire'), ['_token']);
-        return redirect(route($this->InstructionLoader('form.questionnaire')->next_url));
-    }
 
+        if (request('_questionnaire') == 'hexaco')
+        {
+            return redirect(route('form.questionnaire', ['name' => 'bfi']));
+        }
+
+        return redirect(route('instruction.announcement'));
+    }
 
 
     /*
@@ -148,12 +198,13 @@ class FormController extends Controller
     {
         SessionHelper::pushSerialized($request, 'storage.data_forms.expectation', ['_token']);
 
-        return redirect(route($this->InstructionLoader('form.expectation')->next_url, [
-            'gameNumber' => '1',
-            'phaseNumber' => '1'
+        session(['temp.passed_practice' => true]);
+
+        return redirect(route($this->InstructionLoader('form.expectation')['next_url'], [
+            'gameNumber' => 1,
+            'phaseNumber' => 1
         ]));
     }
-
 
 
     /*
@@ -178,11 +229,24 @@ class FormController extends Controller
     {
         SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire') . '.' . request('_game_number'), ['_token']);
 
-        return redirect(route($this->InstructionLoader('form.game-question')->next_url, [
-            'gameNumber' => '1'
+        // if there are no games left redirect to debriefing
+        if (session('temp.next_game') == 0)
+        {
+            // It's fair enough to mark the study as finished, because he just
+            // answered the last game evaluation, meaning that we only want
+            // him to answer a feedback form and it's over. However, this
+            // isn't as important, and it can be skipped.
+
+            session(['temp.finish' => true]);
+
+
+            return redirect()->route('instruction.debriefing');
+        }
+
+        return redirect(route($this->InstructionLoader('form.game-question')['next_url'], [
+            'gameNumber' => session('temp.next_game')
         ]));
     }
-
 
 
     /*
@@ -203,7 +267,7 @@ class FormController extends Controller
     {
         SessionHelper::pushSerialized($request, 'storage.data_forms.feedback', ['_token']);
 
-        return redirect(route($this->InstructionLoader('form.feedback')->next_url));
+        return redirect(route($this->InstructionLoader('form.feedback')['next_url']));
     }
 
 }

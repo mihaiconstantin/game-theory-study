@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instruction;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -15,16 +15,23 @@ class Controller extends BaseController
 
     /**
      * Fetches an App\Models\Instruction object from the database
-     * using the $current_url as a search phrase
+     * using the $current_url as a search phrase.
      *
      * @param string $current_url
-     * @param string $table
-     * @return mixed
+     * @return array
      */
-    protected function InstructionLoader(string $current_url, string $table = 'instructions')
+    protected function InstructionLoader(string $current_url) : array
     {
-        $instruction = DB::table($table)->where('current_url', $current_url)->first();
-        $instruction->url_parameters = [];
+        $instruction = Instruction::getColumnsByUrl($current_url, [
+            'current_url', 'next_url', 'title', 'text'
+        ]);
+
+        // Assign an array of empty parameters for routes that do not need them.
+        // For the routes that require parameters, we will append on demand.
+
+        $instruction['parameters'] = [];
+
+
         return $instruction;
     }
 }
@@ -33,6 +40,4 @@ class Controller extends BaseController
  * TODO: Later we might want to add server-side validations for the form inputs.
  *       For now we will use that if the user is going to do something fishy
  *       he probably isn't a reliable source of information in the study.
- *
- * TODO: Refactor the InstructionLoader into an appropriate query scope.
  */

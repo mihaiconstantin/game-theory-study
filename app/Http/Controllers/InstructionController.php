@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+use App\Helpers\SessionHelper;
 
 class InstructionController extends Controller
 {
@@ -35,8 +36,10 @@ class InstructionController extends Controller
     public function practice()
     {
         $instruction = $this->InstructionLoader('instruction.practice');
-        $instruction->url_parameters['gameNumber'] = 1;
-        $instruction->url_parameters['phaseNumber'] = 1;
+
+        $instruction['parameters']['gameNumber'] = 1;
+        $instruction['parameters']['phaseNumber'] = 1;
+
         return view('instruction', ['data' => $instruction]);
     }
 
@@ -50,14 +53,11 @@ class InstructionController extends Controller
     public function newGame($gameNumber)
     {
         $instruction = $this->InstructionLoader('instruction.new-game');
-        // TODO: change to array and correct url parameters
-        $instruction->url_parameters['gameNumber'] = $gameNumber;
-        $instruction->url_parameters['phaseNumber'] = 1;
 
-        return view('instruction', [
-            'data' => $instruction,
-            'gameNumber' => $gameNumber
-        ]);
+        $instruction['parameters']['gameNumber'] = $gameNumber;
+        $instruction['parameters']['phaseNumber'] = 1;
+
+        return view('instruction', ['data' => $instruction]);
     }
 
 
@@ -69,19 +69,20 @@ class InstructionController extends Controller
 
     public function amazonCode()
     {
-        // marking the end of the experiment <- useful for InstructionController@storeConsent
-
         $code = null;
 
-        if (session('temp.consent'))
+        // The finish key here means that the user has responded the latest
+        // game evaluation form, assuming that he honestly went through
+        // all the games and phases. Therefore, we can provide him a
+        // code as a result of his participation.
+
+        if (session('temp.finish'))
         {
-            session([
-                'temp.finish' => true,
-                'temp.study_end' => microtime()
-            ]);
+            session(['temp.study_end' => microtime()]);
 
             $code = session('storage.data_participants.code');
         }
+
 
         return view('amazon', [
             'data' => $this->InstructionLoader('instruction.amazon-code'),
@@ -92,45 +93,11 @@ class InstructionController extends Controller
 
     public function notAllowed()
     {
+        dd(
+          session()->all()
+        );
+
         return view('end', ['data' => $this->InstructionLoader('instruction.not-allowed')]);
     }
     
 }
-
-
-/**
- * TODO: Refactor the views from passing the values via properties to array keys.
- *
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
