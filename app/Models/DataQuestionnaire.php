@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataQuestionnaire extends Model
 {
+
+    protected $fillable = ['personality', 'game_question'];
+
+
     /**
      * Relationship with parent DataParticipant.
      *

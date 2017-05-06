@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\DataArchiveHelper;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -20,6 +21,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DataParticipant extends Model
 {
+    protected $fillable = [
+        'ip',
+        'code',
+        'study_name',
+        'study_time',
+        'study_integrity',
+        'condition_name',
+        'opponent_name',
+        'games_played',
+        'game_phases_played',
+        'practice_phases_played'
+    ];
+
+
 
     /**
      * Relationship with DataForm (child)

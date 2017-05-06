@@ -6,6 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataGamePhase extends Model
 {
+
+    protected $fillable = [
+        'phase_context',
+        'game_number',
+        'phase_number',
+        'play_time',
+        'bias_type',
+        'competitive',
+        'user_choice',
+        'pc_choice',
+        'user_outcome',
+        'pc_outcome'
+    ];
+
+
     /**
      * Relationship with parent DataParticipant.
      *

@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DataConfig extends Model
 {
+
+   protected $fillable = ['config'];
+
+
     /**
      * Relationship with parent DataParticipant.
      *

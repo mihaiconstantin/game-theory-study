@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class DataForm extends Model
 {
 
+    protected $fillable = ['demographic', 'expectation', 'feedback'];
+
+
+
     /**
      * Relationship with parent DataParticipant.
      *
