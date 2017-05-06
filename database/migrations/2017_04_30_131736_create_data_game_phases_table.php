@@ -17,20 +17,21 @@ class CreateDataGamePhasesTable extends Migration
             $table->increments('id');
             $table->integer('data_participant_id');
 
+            $table->string('phase_context');
+
             $table->integer('game_number');
             $table->integer('phase_number');
 
-            $table->integer('play_time');
-            $table->integer('result_time');
+            $table->float('play_time', 15, 6);
 
             $table->string('bias_type'); //comp, coop, or neut
             $table->boolean('competitive');
 
-            $table->string('user_choice');
-            $table->string('pc_choice');
+            $table->integer('user_choice');
+            $table->integer('pc_choice');
 
-            $table->string('user_outcome');
-            $table->string('pc_outcome');
+            $table->integer('user_outcome');
+            $table->integer('pc_outcome');
 
             $table->timestamps();
         });

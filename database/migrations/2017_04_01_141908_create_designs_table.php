@@ -27,10 +27,10 @@ class CreateDesignsTable extends Migration
 
             $table->string("label");
 
-            $table->string("outcome_1_description");
-            $table->string("outcome_2_description");
-            $table->string("outcome_3_description");
-            $table->string("outcome_4_description");
+            $table->text("outcome_1_description");
+            $table->text("outcome_2_description");
+            $table->text("outcome_3_description");
+            $table->text("outcome_4_description");
 
             $table->timestamps();
 

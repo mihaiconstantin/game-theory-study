@@ -17,7 +17,7 @@ class CreateDataConfigsTable extends Migration
             $table->increments('id');
             $table->integer('data_participant_id');
 
-            $table->text('config');
+            $table->longText('config');
 
             $table->timestamps();
         });

@@ -17,8 +17,8 @@ class CreateConditionsTable extends Migration
             $table->increments('id');
             $table->string("name")->unique();
 
-            $table->string("design_chain");
-            $table->string("bias_chain");
+            $table->text("design_chain");
+            $table->text("bias_chain");
             $table->text("text_chain");
 
             $table->tinyInteger("random_design_iteration");
