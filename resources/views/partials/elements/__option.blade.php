@@ -1,4 +1,4 @@
-<form action="{{URL::route($store_route)}}" method="POST">
+<form action="{{URL::route('game.store')}}" method="POST">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
     @include('partials.elements.__helper_fields')
