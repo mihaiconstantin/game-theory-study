@@ -18,9 +18,6 @@ class GameController extends Controller
 
     public function play($gameNumber, $phaseNumber)
     {
-        // var_dump(session('temp'));
-        // var_dump(session('storage.data_practice'));
-
         // Given the context <- comparison will be carried within the practice | condition storage container.
 
         $context = session('temp.passed_practice') ? 'condition' : 'practice';
@@ -210,9 +207,6 @@ class GameController extends Controller
 
     public function result($gameNumber, $phaseNumber)
     {
-        // var_dump(session('temp'));
-        // var_dump(session('storage.data_practice'));
-
         $link = 'game.play';
         $parameters = ['gameNumber' => session('temp.next_game'), 'phaseNumber' => session('temp.next_phase')];
 
@@ -224,7 +218,7 @@ class GameController extends Controller
         // otherwise the link will always be passed down the view
         // since the is true condition will always hold true.
 
-        if (($gameNumber < session('temp.next_game') || session('temp.next_game') == 0) && session('temp.passed_practice'))
+        if (($gameNumber < session('temp.next_game') || (!is_null(session('temp.next_game')) && session('temp.next_game') == 0 )) && session('temp.passed_practice'))
         {
             $link = 'form.gameQuestion';
             $parameters = ['gameNumber' => $gameNumber];
@@ -244,7 +238,7 @@ class GameController extends Controller
 
         $context = 'condition';
 
-        if (!session('temp.passed_practice'))
+        if (!session('temp.passed_practice') || !is_null(session('temp.blink')))
         {
             $context = 'practice';
         }
