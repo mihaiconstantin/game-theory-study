@@ -12,6 +12,7 @@ use App\Models\PersonalityItem;
 use App\Models\Study;
 use Illuminate\Http\Request;
 
+
 class FormController extends Controller
 {
 
@@ -265,6 +266,7 @@ class FormController extends Controller
 
 
         // Time to store the data to the database.
+        // Or log it to the file if it fails...
 
         $archive = new DataArchiveHelper(session('storage'), session('config'));
         $archive->saveArchive();

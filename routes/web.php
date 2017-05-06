@@ -70,7 +70,7 @@ Route::post('form/feedback'                 , 'FormController@storeFeedback')   
 | Routes responsible for handling the games.
 |
 */
-Route::get('game/play/{gameNumber}/{phaseNumber}'                   , 'GameController@play')            ->name('game.play');
-Route::get('game/result/{gameNumber}/{phaseNumber}'                 , 'GameController@result')          ->name('game.result');
+Route::get('game/play/{gameNumber}/{phaseNumber}'    , 'GameController@play')     ->name('game.play');
+Route::get('game/result/{gameNumber}/{phaseNumber}'  , 'GameController@result')   ->name('game.result');
 
-Route::post('game/store/'                                           , 'GameController@store')           ->name('game.store');
+Route::post('game/store/'                            , 'GameController@store')    ->name('game.store');
