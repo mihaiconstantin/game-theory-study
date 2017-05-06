@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 
 use App\Helpers\BasicHelper;
+use App\Helpers\DataArchiveHelper;
 use App\Helpers\SessionHelper;
-use App\Models\DataConfig;
-use App\Models\DataParticipant;
 use App\Models\FormElement;
 use App\Models\ItemScale;
 use App\Models\PersonalityItem;
-
 use App\Models\Study;
 use Illuminate\Http\Request;
 
@@ -23,6 +21,7 @@ class FormController extends Controller
     }
 
 
+
     /*
      * Display the consent form.
      * */
@@ -32,7 +31,6 @@ class FormController extends Controller
 
         return view('forms.consent', ['data' => $instruction]);
     }
-
 
     /*
      * Display and store the demographics form.
@@ -73,50 +71,15 @@ class FormController extends Controller
         session($skeleton->getSkeleton());
 
 
-        // Instantiate a new Eloquent DataParticipant object to
-        // store the config and push the id to session. Don't
-        // mind about the data_participant fields, those
-        // will be bulk inserted later.
-
-        $dataParticipant = new DataParticipant();
-
-        $dataParticipant->ip = $request->ip();
-        $dataParticipant->code = BasicHelper::userCode();
-        $dataParticipant->study_name = $study_name;
-        $dataParticipant->study_time = 0;
-        $dataParticipant->study_integrity = 0;
-        $dataParticipant->condition_name = $condition_name;
-        $dataParticipant->opponent_name = $skeleton->getSkeleton()['config']['condition']['info']['opponent'];
-        $dataParticipant->games_played = 0;
-        $dataParticipant->game_phases_played = 0;
-        $dataParticipant->practice_phases_played = 0;
-
-        // Save the parent object to the database.
-
-        $dataParticipant->save();
-
-        // Prepare the config config child.
-
-        $dataConfig = new DataConfig();
-        $dataConfig->config = json_encode($skeleton->getSkeleton()['config']);
-
-        // Store the child associated to the parent.
-
-        $dataParticipant->data_config()->save($dataConfig);
-
-
         // Update whatever session keys are relevant to be updated now.
-        // Make sure to store the id of the newly constructed model,
-        // as we will use it later to append data via Eloquent.
 
         session([
             'temp.consent' => true,
-            'temp.study_start' => microtime(),
+            'temp.study_start' => microtime(true),
             'temp.passed_practice' => false,
 
-            'storage.data_participants.id' => $dataParticipant->id,
-            'storage.data_participants.ip' => $dataParticipant->ip,
-            'storage.data_participants.code' => $dataParticipant->code,
+            'storage.data_participants.ip' => $request->ip(),
+            'storage.data_participants.code' => BasicHelper::userCode(),
             'storage.data_participants.study_name' => $study_name,
             'storage.data_participants.condition_name' => $condition_name
         ]);
@@ -229,17 +192,10 @@ class FormController extends Controller
     {
         SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire') . '.' . request('_game_number'), ['_token']);
 
-        // if there are no games left redirect to debriefing
+        // If there are no games left redirect to the debriefing instructions.
+
         if (session('temp.next_game') == 0)
         {
-            // It's fair enough to mark the study as finished, because he just
-            // answered the last game evaluation, meaning that we only want
-            // him to answer a feedback form and it's over. However, this
-            // isn't as important, and it can be skipped.
-
-            session(['temp.finish' => true]);
-
-
             return redirect()->route('instruction.debriefing');
         }
 
@@ -265,7 +221,56 @@ class FormController extends Controller
 
     public function storeFeedback(Request $request)
     {
+        // This is the page of choice where we actually store the data.
+        // First let's compute the total time he spent in the study.
+        // Additionally, we can determine other relevant keys.
+
+        // Since we are saving data here, we need to make
+        // sure that the user doesn't resubmit the form
+        // causing data override. Thus, allow him to
+        // pass by only once on this page.
+
+        // It's fair enough to mark the study as finished, because he just
+        // answered the last game form, meaning that it's finally over.
+        // On subsequent requests to the same page, if he already
+        // visited this page, he will not be allowed to submit
+        // the form again, because the redirect will trigger.
+
+        if (session('temp.finish'))
+        {
+            return redirect()->route('instruction.not-allowed');
+        }
+
+
+        // Redirect if this isn't the first time he comes here.
+
+        session(['temp.finish' => true]);
+
+
+        // Set some relevant session keys.
+
+        $study_end = microtime(true);
+        $base_key = 'storage.data_participants.';
+
+        session([
+            'temp.study_end' => $study_end,
+
+            $base_key . 'study_time'                => session('temp.study_end') - session('temp.study_start'),
+            $base_key . 'game_phases_played'        => BasicHelper::totalPhasesPlayed('condition'),
+            $base_key . 'practice_phases_played'    => BasicHelper::totalPhasesPlayed('practice')
+        ]);
+
+
         SessionHelper::pushSerialized($request, 'storage.data_forms.feedback', ['_token']);
+
+
+        // Time to store the data to the database.
+
+        $archive = new DataArchiveHelper(session('storage'), session('config'));
+        $archive->saveArchive();
+
+
+        // This concludes the business.
 
         return redirect(route($this->InstructionLoader('form.feedback')['next_url']));
     }
