@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use App\Helpers\SessionHelper;
-
 class InstructionController extends Controller
 {
 
@@ -78,8 +76,6 @@ class InstructionController extends Controller
 
         if (session('temp.finish'))
         {
-            session(['temp.study_end' => microtime()]);
-
             $code = session('storage.data_participants.code');
         }
 
@@ -93,10 +89,6 @@ class InstructionController extends Controller
 
     public function notAllowed()
     {
-        dd(
-          session()->all()
-        );
-
         return view('end', ['data' => $this->InstructionLoader('instruction.not-allowed')]);
     }
     

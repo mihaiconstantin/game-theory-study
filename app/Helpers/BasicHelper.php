@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 use App\Models\Study;
 
+
 class BasicHelper
 {
 
@@ -78,6 +79,34 @@ class BasicHelper
         return array_map(function($n) {
             return explode('#', $n)[0];
         }, explode(';', $chain));
+    }
+
+
+    /**
+     * Count how many phases did the user played in total, for the
+     * appropriate context. These numbers should also match the
+     * numbers of rows in the data_game_phases table.
+     *
+     * @param $context
+     * @return int
+     */
+    public static function totalPhasesPlayed($context) : int
+    {
+        $phases_played = 0;
+
+        foreach (session('storage.data_' . $context) as $game_number => $phases_values)
+        {
+            foreach ($phases_values as $phase_number => $phase_value)
+            {
+                if ($phase_value['user_choice'] != null)
+                {
+                    $phases_played++;
+                }
+            }
+        }
+
+
+        return (int) $phases_played;
     }
 
 }
