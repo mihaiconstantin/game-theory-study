@@ -8,6 +8,8 @@ use App\Models\DataForm;
 use App\Models\DataGamePhase;
 use App\Models\DataParticipant;
 use App\Models\DataQuestionnaire;
+use Illuminate\Contracts\Logging\Log;
+
 
 class DataArchiveHelper
 {
@@ -19,6 +21,7 @@ class DataArchiveHelper
     private $data_forms;
     private $data_game_phases;
     private $data_config;
+
 
 
     public function __construct($session_storage, $session_config)
@@ -33,6 +36,7 @@ class DataArchiveHelper
         $this->loadGamePhase();
         $this->loadConfig();
     }
+
 
 
     /**
@@ -62,16 +66,24 @@ class DataArchiveHelper
 
         try {
             // Save the data.
+
             $dataParticipant->save();
 
             $dataParticipant->data_config()->save($dataConfig);
             $dataParticipant->data_form()->save($dataForm);
             $dataParticipant->data_questionnaire()->save($dataQuestionnaire);
             $dataParticipant->data_game_phases()->saveMany($collectionDataGamePhase);
-
         }
         catch (\Exception $e)
         {
+            Log::critical('Error while saving|code:' . $this->data_participants['code'], [
+                $this->data_participants,
+                $this->data_config,
+                $this->data_forms,
+                $this->data_questionnaires,
+                $this->data_game_phases
+            ]);
+
             $status = false;
         }
 
@@ -79,7 +91,6 @@ class DataArchiveHelper
         return $status;
 
     }
-
 
 
     /**
@@ -221,23 +232,7 @@ class DataArchiveHelper
         return $this->data_config;
     }
 
-
-    /**
-     * Gets the id of the current participant on session.
-     *
-     * @return int
-     */
-    public function getId() : int
-    {
-        return $this->id;
-    }
-
     #endregion
-
-
-
-
-
 
 }
 
