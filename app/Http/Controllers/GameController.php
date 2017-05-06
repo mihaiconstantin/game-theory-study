@@ -18,6 +18,7 @@ class GameController extends Controller
 
     public function play($gameNumber, $phaseNumber)
     {
+
         // Given the context <- comparison will be carried within the practice | condition storage container.
 
         $context = session('temp.passed_practice') ? 'condition' : 'practice';
@@ -141,8 +142,6 @@ class GameController extends Controller
                 $base_key . '.phase_number'      => $data['phase_number'],
                 $base_key . '.start_play_time'   => $data['start_play_time'],
                 $base_key . '.end_play_time'     => $data['end_play_time'],
-                // $base_key . '.start_result_time' => $data['start_result_time'],
-                // $base_key . '.end_result_time'   => $data['end_result_time'],
                 $base_key . '.bias_type'         => $data['bias_type'],
                 $base_key . '.competitive'       => $data['competitive'],
                 $base_key . '.user_choice'       => $data['user_choice'],
@@ -238,10 +237,11 @@ class GameController extends Controller
 
         $context = 'condition';
 
-        if (session('temp.passed_practice') && session('blink'))
+        if (!session('temp.passed_practice') || session('blink'))
         {
             $context = 'practice';
         }
+
 
         // Preparing the data that will be passed down to the view.
 
