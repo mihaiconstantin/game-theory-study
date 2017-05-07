@@ -8,13 +8,13 @@ use App\Models\DataParticipant;
 
 class DataReconstructHelper
 {
-    private $collection;
+    protected $collection;
 
-    private $dataParticipants;
-    private $dataConfigs;
-    private $dataForms;
-    private $dataQuestionnaires;
-    private $dataGamePhases;
+    protected $dataParticipants;
+    protected $dataConfigs;
+    protected $dataForms;
+    protected $dataQuestionnaires;
+    protected $dataGamePhases;
 
 
 
@@ -90,7 +90,7 @@ class DataReconstructHelper
      * Specialize decoder for table data_forms. It decodes
      * all json fields to array key-value pairs.
      */
-    private function decodeDataForms()
+    protected function decodeDataForms()
     {
         foreach ($this->dataForms as $index => $dataForm)
         {
@@ -109,7 +109,7 @@ class DataReconstructHelper
      * It decodes all json fields to array key-value
      * pairs.
      */
-    private function decodeDataQuestionnaires()
+    protected function decodeDataQuestionnaires()
     {
         foreach ($this->dataQuestionnaires as $index => $dataQuestionnaire)
         {
