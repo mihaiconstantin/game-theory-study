@@ -10,6 +10,7 @@ use App\Models\FormElement;
 use App\Models\ItemScale;
 use App\Models\PersonalityItem;
 use App\Models\Study;
+use App\Models\StudyLoader;
 use Illuminate\Http\Request;
 
 
@@ -53,7 +54,7 @@ class FormController extends Controller
 
         // Prepare the general variables needed to initialize the session storage process.
 
-        $study_name = env('STUDY');
+        $study_name = StudyLoader::getLoadedStudy();
         $condition_name = BasicHelper::randomAssign($study_name);
         $practice_name = Study::getColumnsByName($study_name, ['practice'])['practice'];
 

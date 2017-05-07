@@ -24,9 +24,3 @@ class CheckConsent
         return $next($request);
     }
 }
-
-
-/**
- * TODO: Add another middleware to prevent link-jumping.
- *
- */
