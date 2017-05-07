@@ -8,7 +8,7 @@ use App\Models\DataForm;
 use App\Models\DataGamePhase;
 use App\Models\DataParticipant;
 use App\Models\DataQuestionnaire;
-use Illuminate\Contracts\Logging\Log;
+use Illuminate\Support\Facades\Log;
 
 
 class DataArchiveHelper
@@ -142,15 +142,15 @@ class DataArchiveHelper
 
         foreach ($this->session['data_questionnaires'] as $questionnaire_name => $data)
         {
-            if (is_array($data))
+            if (!is_array($data))
             {
-                $this->data_questionnaires['game_question'] = json_encode($data);
+                $personality[$questionnaire_name] = $data;
             }
-
-            $personality[$questionnaire_name] = $data;
         }
 
         $this->data_questionnaires['personality'] = json_encode($personality);
+        $this->data_questionnaires['game_question'] = json_encode($this->session['data_questionnaires']['game_question']);
+
 
         unset($personality);
     }
