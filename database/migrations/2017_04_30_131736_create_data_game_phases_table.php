@@ -22,7 +22,7 @@ class CreateDataGamePhasesTable extends Migration
             $table->integer('game_number');
             $table->integer('phase_number');
 
-            $table->float('play_time', 15, 6);
+            $table->string('play_time');
 
             $table->string('bias_type'); //comp, coop, or neut
             $table->boolean('competitive');

@@ -19,7 +19,7 @@ class CreateDataParticipantsTable extends Migration
             $table->string('code', '10')->unique();
 
             $table->string('study_name');
-            $table->float('study_time', 15, 6);
+            $table->string('study_time');
 
             $table->string('condition_name');
 

@@ -238,13 +238,14 @@ class FormController extends Controller
         // visited this page, he will not be allowed to submit
         // the form again, because the redirect will trigger.
 
+        // Redirect if this isn't the first time he comes here.
+
         if (session('temp.finish'))
         {
             return redirect()->route('instruction.not-allowed');
         }
 
-
-        // Redirect if this isn't the first time he comes here.
+        // If it is the first time he comes here, then leave a trail.
 
         session(['temp.finish' => true]);
 
