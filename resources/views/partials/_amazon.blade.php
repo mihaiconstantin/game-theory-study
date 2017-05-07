@@ -10,7 +10,7 @@
             @if($code)
 
                 <h4 class="card-title">{{$code}}</h4>
-                <p class="card-text text-danger"><strong>Place this code into Amazon M-Turk to validate your participation.</strong></p>
+                <p class="card-text text-danger"><strong>Paste this code into Amazon Mechanical Turk to validate your participation.</strong></p>
                 <a href="http://www.google.com" target="_blank" id="finish" class="btn btn-primary">Go now</a>
 
             @else
