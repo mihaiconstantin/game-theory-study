@@ -33,5 +33,5 @@ function disableContextMenu() {
 
 // run
 
-// disableContextMenu();
+disableContextMenu();
 
