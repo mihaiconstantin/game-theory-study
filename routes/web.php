@@ -74,3 +74,27 @@ Route::get('game/play/{gameNumber}/{phaseNumber}'    , 'GameController@play')   
 Route::get('game/result/{gameNumber}/{phaseNumber}'  , 'GameController@result')   ->name('game.result');
 
 Route::post('game/store/'                            , 'GameController@store')    ->name('game.store');
+
+
+/*
+|--------------------------------------------------------------------------
+| Routes - admin
+|--------------------------------------------------------------------------
+|
+| Routes responsible for handling admin actions.
+|
+*/
+
+// Export the dataset for the current study.
+
+Route::get('admin/export', function() {
+
+    $study_name = \App\Models\StudyLoader::getLoadedStudy();
+
+    $export = new \App\Helpers\DataExportHelper($study_name);
+    $file = $export->zip('hexaco', 'bfi', $study_name);
+
+    return response()->download($file, $name = null, ['Content-Type' => 'application/zip']);
+
+})->middleware('auth');
+
