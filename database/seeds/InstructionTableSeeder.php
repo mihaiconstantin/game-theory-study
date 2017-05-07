@@ -2,7 +2,7 @@
 
 use App\Models\Instruction;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Schema;
+
 
 class InstructionTableSeeder extends Seeder
 {
@@ -48,9 +48,18 @@ class InstructionTableSeeder extends Seeder
         // form.questionnaire/{hexaco}
         Instruction::create([
             'current_url' => 'form.questionnaire',
-            'next_url' => 'instruction.announcement',
+            'next_url' => 'form.questionnaire',
             'title' => 'Questionnaire',
             'text' => 'On the following pages, you will find a series of statements about you. Please read each statement and decide how much you agree or disagree with that statement. Then indicate your response using the following scale:<ul>	<li>5 = strongly agree</li><li>4 = agree</li><li>3 = neutral (neither agree nor disagree)</li><li>2 = disagree</li><li>1 = strongly disagree</li></ul>Please answer every statement, even if you are not completely sure of your response.'
+        ]);
+
+
+        // form.questionnaire/{bfi}
+        Instruction::create([
+            'current_url' => 'form.questionnaire',
+            'next_url' => 'instruction.announcement',
+            'title' => 'Questionnaire',
+            'text' => 'Here are a number of characteristics that may or may not apply to you. For example, do you agree that you are someone who likes to spend time with others? Please indicate your response using the following scale:<ul><li>5 = strongly agree</li><li>4 = agree</li><li>3 = neutral (neither agree nor disagree)</li><li>2 = disagree</li><li>1 = strongly disagree</li></ul> <br><br> I see myself as someone who &hellip;'
         ]);
 
 
@@ -66,7 +75,7 @@ class InstructionTableSeeder extends Seeder
         // instruction.practice
         Instruction::create([
             'current_url' => 'instruction.practice',
-            'next_url' => 'practice.play',
+            'next_url' => 'game.play',
             'title' => 'Practice game',
             'text' => 'You are about to play the practice phase with another player. The practice phase consists of three rounds. The money units you can earn in each situation are displayed in the table of each game.'
         ]);
@@ -110,7 +119,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.new-game',
             'next_url' => 'game.play',
             'title' => 'New Game',
-            'text' => 'User finds out that a new game is about to start.'
+            'text' => 'You are about to start a new game. Please click the button to continue.'
         ]);
 
 

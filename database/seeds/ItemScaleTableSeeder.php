@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ItemScaleTableSeed extends Seeder
+class ItemScaleTableSeeder extends Seeder
 {
     /**
      * Run the item_scales table seeds.

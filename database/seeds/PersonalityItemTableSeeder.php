@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PersonalityItemTableSeed extends Seeder
+class PersonalityItemTableSeeder extends Seeder
 {
     /**
      * Run the personality_items table seeds.
