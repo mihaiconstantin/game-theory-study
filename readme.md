@@ -1,6 +1,6 @@
-## Game Theory and personality
+## Game Theory and Personality
 
-**Online experiment on Game Theory and personality** *Tilburg School of Social and Behavioral Sciences - Department of Developmental Psychology and Social Psychology.*
+**Online experiment on Game Theory and personality** *Tilburg School of Social and Behavioral Sciences - Departments of Developmental Psychology and Social Psychology.*
 
 **Few words about this project**
  - The aim is to explore the link between several personality traits in the context of a Game Theory scenario.
