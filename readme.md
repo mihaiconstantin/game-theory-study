@@ -17,7 +17,7 @@
   - This project does not include by default the `CRUD` interface we use. To easily interact with the database, we use [Voyager](https://github.com/the-control-group/voyager) (with some appropriate customizations). You can find the exported [tables related to Voyager here](https://github.com/mihaiconstantin/game-theory-tilburg/blob/master/game-theory-voyager-setup.sql).
 
 ## Installation
- *We assume you have an webserver (e.g., `Apache`) and a `MySql`/ `MariaDB` installation in place.*
+ *We assume you have a webserver (e.g., `Apache`) and a `MySql`/ `MariaDB` installation in place.*
  
  Then, follow these steps:
   - make sure you have `composer` installed on your machine check [this resource](https://getcomposer.org/doc/00-intro.md)
