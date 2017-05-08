@@ -16,7 +16,7 @@
   - By default, this project comes with `seeds` (aka the configuration that was used in this study) that you can easily run for a fully replication.
   - This project does not include by default the `CRUD` interface we use. To easily interact with the database, we use [Voyager](https://github.com/the-control-group/voyager) (with some appropriate customizations). You can find the exported [tables related to Voyager here](https://github.com/mihaiconstantin/game-theory-tilburg/blob/master/game-theory-voyager-setup.sql).
 
-**Installation**
+## Installation
  *We assume you have an webserver (e.g., `Apache`) and a `MySql`/ `MariaDB` installation in place.*
  
  Then, follow these steps:
