@@ -48,6 +48,21 @@ class InstructionController extends Controller
     }
 
 
+    public function score($gameNumber)
+    {
+        $instruction = $this->InstructionLoader('instruction.score');
+
+        // Insert the score within the placeholders.
+        $text = str_replace('{{user_score}}', '<span class="badge .badge-pill badge-primary">' . session('score.' . $gameNumber . '.user') . '</span>', $instruction['text']);
+        $text = str_replace('{{pc_score}}', '<span class="badge .badge-pill badge-primary">' . session('score.' . $gameNumber . '.pc') . '</span>', $text);
+        $instruction['text'] = $text;
+
+        $instruction['parameters']['gameNumber'] = $gameNumber;
+
+        return view('instruction', ['data' => $instruction]);
+    }
+
+
     public function newGame($gameNumber)
     {
         $instruction = $this->InstructionLoader('instruction.new-game');
@@ -91,5 +106,5 @@ class InstructionController extends Controller
     {
         return view('end', ['data' => $this->InstructionLoader('instruction.not-allowed')]);
     }
-    
+
 }

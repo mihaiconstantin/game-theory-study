@@ -242,10 +242,10 @@ class SessionHelper
         return [
             'total_games' => count(session('config.condition.designs')),
             'total_phases' => session('config.condition.phases.' . $current_game),
-            'game_score' => array_sum(session('score'))
+            'game_score' => session('score.' . $current_game . '.user')
         ];
     }
-    
+
 
     #endregion
 
@@ -421,7 +421,10 @@ class SessionHelper
     private function extendWithScore()
     {
         $total_designs = count($this->condition->getDesignConfig()['ordered_names']);
-        $this->skeleton['score'] = array_combine(range(1, $total_designs), array_fill(0, $total_designs, 0));
+        // $this->skeleton['score'] = array_combine(range(1, $total_designs), array_fill(0, $total_designs, 0));
+        $this->skeleton['score'] = array_combine(
+            range(1, $total_designs),
+            array_fill(0, $total_designs, ['user' => 0, 'pc' => 0]));
     }
 
     #endregion

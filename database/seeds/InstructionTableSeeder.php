@@ -102,10 +102,19 @@ class InstructionTableSeeder extends Seeder
         ]);
 
 
-        // playing here... <- game/play/{gameNumber}/{phaseNumber} -> to form.game-question/{gameNumber}
+        // playing here... <- game/play/{gameNumber}/{phaseNumber} -> to instruction.score/{gameNumber}
 
 
-        // form.game-question/{gameNumber}
+        // instruction.score/{gameNumber}
+        Instruction::create([
+            'current_url' => 'instruction.score',
+            'next_url' => 'form.gameQuestion',
+            'title' => 'Points earned for the current game',
+            'text' => 'Feedback regarding the points. Use {{ user_score }} in your text to print the user\'s score for the current game, or {{ pc_score }} to print the score of the pc (without inner spaces).'
+        ]);
+
+
+        // form.gameQuestion/{gameNumber}
         Instruction::create([
             'current_url' => 'form.game-question',
             'next_url' => 'instruction.new-game',

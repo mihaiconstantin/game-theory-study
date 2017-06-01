@@ -18,7 +18,6 @@ class GameController extends Controller
 
     public function play($gameNumber, $phaseNumber)
     {
-
         // Given the context <- comparison will be carried within the practice | condition storage container.
 
         $context = session('temp.passed_practice') ? 'condition' : 'practice';
@@ -30,7 +29,6 @@ class GameController extends Controller
         {
             session(['temp.show_score' => true]);
         }
-
 
 
         // Since the next game and phase parameters are determined on the POST request
@@ -156,7 +154,8 @@ class GameController extends Controller
             if ($context == 'condition')
             {
                 session([
-                    'score.' . $parameter['current_game'] => session('score')[$parameter['current_game']] + $data['user_outcome']
+                    'score.' . $parameter['current_game'] . '.user' => session('score')[$parameter['current_game']]['user'] + $data['user_outcome'],
+                    'score.' . $parameter['current_game'] . '.pc' => session('score')[$parameter['current_game']]['pc'] + $data['pc_outcome']
                 ]);
             }
 
@@ -219,7 +218,7 @@ class GameController extends Controller
 
         if (($gameNumber < session('temp.next_game') || (!is_null(session('temp.next_game')) && session('temp.next_game') == 0 )) && session('temp.passed_practice'))
         {
-            $link = 'form.gameQuestion';
+            $link = 'instruction.score';
             $parameters = ['gameNumber' => $gameNumber];
         }
 

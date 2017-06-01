@@ -31,6 +31,7 @@ Route::get('instruction/start'                  , 'InstructionController@start')
 Route::get('instruction/announcement'           , 'InstructionController@announcement')     ->name('instruction.announcement');
 Route::get('instruction/practice'               , 'InstructionController@practice')         ->name('instruction.practice');
 Route::get('instruction/condition'              , 'InstructionController@condition')        ->name('instruction.condition');
+Route::get('instruction/score/{gameNumber}'     , 'InstructionController@score')            ->name('instruction.score');
 Route::get('instruction/new-game/{gameNumber}'  , 'InstructionController@newGame')          ->name('instruction.new-game');
 Route::get('instruction/debriefing'             , 'InstructionController@debriefing')       ->name('instruction.debriefing');
 Route::get('instruction/amazon-code'            , 'InstructionController@amazonCode')       ->name('instruction.amazon-code');
@@ -85,6 +86,8 @@ Route::post('game/store/'                            , 'GameController@store')  
 |
 */
 
+
+// TODO: Refactor this into a controller and dynamically fetch the names of the questionnaires.
 // Export the dataset for the current study.
 
 Route::get('admin/export', function() {
