@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
--- Host:                         
--- Server version:               5.7.17-0ubuntu0.16.04.2 - (Ubuntu)
--- Server OS:                    Linux
+-- Host:                         127.0.0.1
+-- Server version:               10.1.14-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
 -- HeidiSQL Version:             9.1.0.4867
 -- --------------------------------------------------------
 
@@ -17,17 +17,17 @@ USE `game_theory_2`;
 
 -- Dumping structure for table game_theory_2.categories
 CREATE TABLE IF NOT EXISTS `categories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `parent_id` int(10) unsigned DEFAULT NULL,
-  `order` int(11) NOT NULL DEFAULT '1',
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `categories_slug_unique` (`slug`),
-  KEY `categories_parent_id_foreign` (`parent_id`),
-  CONSTRAINT `categories_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`parent_id` int(10) unsigned DEFAULT NULL,
+	`order` int(11) NOT NULL DEFAULT '1',
+	`name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `categories_slug_unique` (`slug`),
+	KEY `categories_parent_id_foreign` (`parent_id`),
+	CONSTRAINT `categories_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.categories: ~0 rows (approximately)
@@ -38,22 +38,22 @@ DELETE FROM `categories`;
 
 -- Dumping structure for table game_theory_2.data_rows
 CREATE TABLE IF NOT EXISTS `data_rows` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `data_type_id` int(10) unsigned NOT NULL,
-  `field` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `required` tinyint(1) NOT NULL DEFAULT '0',
-  `browse` tinyint(1) NOT NULL DEFAULT '1',
-  `read` tinyint(1) NOT NULL DEFAULT '1',
-  `edit` tinyint(1) NOT NULL DEFAULT '1',
-  `add` tinyint(1) NOT NULL DEFAULT '1',
-  `delete` tinyint(1) NOT NULL DEFAULT '1',
-  `details` text COLLATE utf8mb4_unicode_ci,
-  `order` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `data_rows_data_type_id_foreign` (`data_type_id`),
-  CONSTRAINT `data_rows_data_type_id_foreign` FOREIGN KEY (`data_type_id`) REFERENCES `data_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`data_type_id` int(10) unsigned NOT NULL,
+	`field` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`display_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`required` tinyint(1) NOT NULL DEFAULT '0',
+	`browse` tinyint(1) NOT NULL DEFAULT '1',
+	`read` tinyint(1) NOT NULL DEFAULT '1',
+	`edit` tinyint(1) NOT NULL DEFAULT '1',
+	`add` tinyint(1) NOT NULL DEFAULT '1',
+	`delete` tinyint(1) NOT NULL DEFAULT '1',
+	`details` text COLLATE utf8mb4_unicode_ci,
+	`order` int(11) NOT NULL DEFAULT '1',
+	PRIMARY KEY (`id`),
+	KEY `data_rows_data_type_id_foreign` (`data_type_id`),
+	CONSTRAINT `data_rows_data_type_id_foreign` FOREIGN KEY (`data_type_id`) REFERENCES `data_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.data_rows: ~109 rows (approximately)
@@ -89,18 +89,18 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 	(61, 7, 'opponent', 'text', 'Opponent', 1, 1, 1, 1, 1, 1, NULL, 9),
 	(62, 7, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, NULL, 10),
 	(63, 7, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 11),
-	(64, 8, 'id', 'number', 'Id', 1, 1, 0, 0, 0, 0, NULL, 1),
-	(65, 8, 'ip', 'text', 'Ip', 1, 1, 0, 0, 0, 0, NULL, 2),
-	(66, 8, 'code', 'text', 'Code', 1, 1, 0, 0, 0, 0, NULL, 3),
-	(67, 8, 'study_name', 'text', 'Study Name', 1, 1, 0, 0, 0, 0, NULL, 4),
-	(68, 8, 'study_time', 'checkbox', 'Study Time', 1, 0, 0, 0, 0, 0, NULL, 5),
-	(69, 8, 'condition_name', 'text', 'Condition Name', 1, 1, 0, 0, 0, 0, NULL, 6),
-	(70, 8, 'game_phases_played', 'text', 'Game Phases Played', 1, 1, 0, 0, 0, 0, NULL, 7),
-	(71, 8, 'practice_phases_played', 'text', 'Practice Phases Played', 1, 0, 0, 0, 0, 0, NULL, 8),
-	(72, 8, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, NULL, 9),
+	(64, 8, 'id', 'number', 'Id', 1, 1, 1, 0, 0, 0, NULL, 1),
+	(65, 8, 'ip', 'text', 'Ip', 1, 1, 1, 0, 0, 0, NULL, 2),
+	(66, 8, 'code', 'text', 'Code', 1, 1, 1, 0, 0, 0, NULL, 3),
+	(67, 8, 'study_name', 'text', 'Study Name', 1, 1, 1, 0, 0, 0, NULL, 4),
+	(68, 8, 'study_time', 'checkbox', 'Study Time', 1, 1, 1, 0, 0, 0, NULL, 5),
+	(69, 8, 'condition_name', 'text', 'Condition Name', 1, 1, 1, 0, 0, 0, NULL, 6),
+	(70, 8, 'game_phases_played', 'text', 'Game Phases Played', 1, 1, 1, 0, 0, 0, NULL, 7),
+	(71, 8, 'practice_phases_played', 'text', 'Practice Phases Played', 1, 0, 1, 0, 0, 0, NULL, 8),
+	(72, 8, 'created_at', 'timestamp', 'Created At', 0, 0, 1, 0, 0, 0, NULL, 9),
 	(73, 8, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 10),
-	(74, 9, 'id', 'checkbox', 'Id', 1, 0, 0, 0, 0, 0, NULL, 1),
-	(75, 9, 'name', 'checkbox', 'Name', 1, 1, 1, 1, 1, 1, NULL, 2),
+	(74, 9, 'id', 'number', 'Id', 1, 0, 0, 0, 0, 0, NULL, 1),
+	(75, 9, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, NULL, 2),
 	(76, 9, 'iterations', 'number', 'Iterations', 1, 1, 1, 1, 1, 1, NULL, 3),
 	(77, 9, 'competitive_option', 'number', 'Competitive Option', 1, 1, 1, 1, 1, 1, NULL, 4),
 	(78, 9, 'outcome_1_value', 'text', 'Outcome 1 Value', 1, 0, 1, 1, 1, 1, NULL, 5),
@@ -121,7 +121,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 	(93, 10, 'text', 'rich_text_box', 'Text', 1, 1, 1, 1, 1, 1, NULL, 5),
 	(94, 10, 'created_at', 'timestamp', 'Created At', 0, 0, 0, 0, 0, 0, NULL, 6),
 	(95, 10, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 7),
-	(96, 11, 'id', 'checkbox', 'Id', 1, 0, 0, 0, 0, 0, NULL, 1),
+	(96, 11, 'id', 'number', 'Id', 1, 1, 1, 0, 0, 0, NULL, 1),
 	(97, 11, 'current_url', 'text', 'Current Url', 1, 1, 1, 1, 1, 1, NULL, 2),
 	(98, 11, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, NULL, 3),
 	(99, 11, 'order', 'number', 'Order', 1, 1, 1, 1, 1, 1, NULL, 4),
@@ -174,22 +174,22 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 
 -- Dumping structure for table game_theory_2.data_types
 CREATE TABLE IF NOT EXISTS `data_types` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name_singular` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name_plural` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `model_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `controller` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `generate_permissions` tinyint(1) NOT NULL DEFAULT '0',
-  `server_side` tinyint(4) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `data_types_name_unique` (`name`),
-  UNIQUE KEY `data_types_slug_unique` (`slug`)
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`display_name_singular` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`display_name_plural` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`icon` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`model_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`controller` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`generate_permissions` tinyint(1) NOT NULL DEFAULT '0',
+	`server_side` tinyint(4) NOT NULL DEFAULT '0',
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `data_types_name_unique` (`name`),
+	UNIQUE KEY `data_types_slug_unique` (`slug`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.data_types: ~13 rows (approximately)
@@ -214,12 +214,12 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 
 -- Dumping structure for table game_theory_2.menus
 CREATE TABLE IF NOT EXISTS `menus` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `menus_name_unique` (`name`)
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `menus_name_unique` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.menus: ~1 rows (approximately)
@@ -232,22 +232,22 @@ INSERT INTO `menus` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 -- Dumping structure for table game_theory_2.menu_items
 CREATE TABLE IF NOT EXISTS `menu_items` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `menu_id` int(10) unsigned DEFAULT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `target` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self',
-  `icon_class` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `color` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parent_id` int(11) DEFAULT NULL,
-  `order` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `route` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parameters` text COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  KEY `menu_items_menu_id_foreign` (`menu_id`),
-  CONSTRAINT `menu_items_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`menu_id` int(10) unsigned DEFAULT NULL,
+	`title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`target` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self',
+	`icon_class` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`color` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`parent_id` int(11) DEFAULT NULL,
+	`order` int(11) NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`route` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`parameters` text COLLATE utf8mb4_unicode_ci,
+	PRIMARY KEY (`id`),
+	KEY `menu_items_menu_id_foreign` (`menu_id`),
+	CONSTRAINT `menu_items_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.menu_items: ~24 rows (approximately)
@@ -263,7 +263,7 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 	(9, 1, 'Menu Builder', '/admin/menus', '_self', 'voyager-list', NULL, 8, 1, '2017-05-07 21:33:07', '2017-05-07 22:51:52', NULL, NULL),
 	(10, 1, 'Database', '/admin/database', '_self', 'voyager-data', NULL, 8, 2, '2017-05-07 21:33:07', '2017-05-07 22:51:52', NULL, NULL),
 	(11, 1, 'Settings', '/admin/settings', '_self', 'voyager-settings', NULL, 8, 3, '2017-05-07 21:33:07', '2017-05-07 22:51:52', NULL, NULL),
-	(12, 1, 'Datasets', 'admin/export', '_blank', 'voyager-file-text', '#000000', 17, 2, '2017-05-07 21:46:15', '2017-05-07 23:16:32', NULL, ''),
+	(12, 1, 'Export Data', 'admin/export', '_blank', 'voyager-file-text', '#000000', 17, 2, '2017-05-07 21:46:15', '2017-05-08 10:24:33', NULL, ''),
 	(13, 1, 'Conditions', 'admin/conditions', '_self', 'voyager-controller', '#000000', 16, 1, '2017-05-07 22:25:29', '2017-05-07 22:48:55', NULL, ''),
 	(14, 1, 'Participants', 'admin/data-participants', '_self', 'voyager-people', '#000000', 17, 1, '2017-05-07 22:39:30', '2017-05-07 23:16:32', NULL, ''),
 	(15, 1, 'Designs', 'admin/designs', '_self', 'voyager-paint-bucket', '#000000', 16, 2, '2017-05-07 22:47:30', '2017-05-07 23:12:22', NULL, ''),
@@ -277,75 +277,26 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 	(23, 1, 'Current Study', 'admin/study-loaders', '_self', 'voyager-medal-rank-star', '#000000', 16, 4, '2017-05-07 23:46:55', '2017-05-07 23:52:05', NULL, ''),
 	(24, 1, 'Questionnaires', '', '_self', 'voyager-paper-plane', '#000000', NULL, 4, '2017-05-07 23:56:18', '2017-05-07 23:56:37', NULL, ''),
 	(25, 1, 'Items', 'admin/personality-items', '_self', 'voyager-font', '#000000', 24, 1, '2017-05-07 23:57:25', '2017-05-07 23:57:32', NULL, ''),
-	(26, 1, 'Scales', 'item-scales', '_self', 'voyager-sort', '#000000', 24, 2, '2017-05-07 23:58:01', '2017-05-07 23:58:07', NULL, '');
+	(26, 1, 'Scales', 'admin/item-scales', '_self', 'voyager-sort', '#000000', 24, 2, '2017-05-07 23:58:01', '2017-05-08 08:39:14', NULL, '');
 /*!40000 ALTER TABLE `menu_items` ENABLE KEYS */;
-
-
--- Dumping structure for table game_theory_2.migrations
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table game_theory_2.migrations: ~34 rows (approximately)
-DELETE FROM `migrations`;
-/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-	(1, '2014_10_12_000000_create_users_table', 1),
-	(2, '2014_10_12_100000_create_password_resets_table', 1),
-	(3, '2017_04_01_140937_create_conditions_table', 1),
-	(4, '2017_04_01_141908_create_designs_table', 1),
-	(5, '2017_04_01_143834_create_instructions_table', 1),
-	(6, '2017_04_01_144051_create_studies_table', 1),
-	(7, '2017_04_28_113641_create_select_options_table', 1),
-	(8, '2017_04_28_113754_create_form_elements_table', 1),
-	(9, '2017_04_28_174726_create_personality_items_table', 1),
-	(10, '2017_04_28_175249_create_item_scales_table', 1),
-	(11, '2017_04_30_131606_create_data_participants_table', 1),
-	(12, '2017_04_30_131638_create_data_forms_table', 1),
-	(13, '2017_04_30_131656_create_data_questionnaires_table', 1),
-	(14, '2017_04_30_131736_create_data_game_phases_table', 1),
-	(15, '2017_05_05_182954_create_data_configs_table', 1),
-	(16, '2017_05_07_135612_create_study_loaders_table', 1),
-	(17, '2016_01_01_000000_add_voyager_user_fields', 2),
-	(18, '2016_01_01_000000_create_data_types_table', 2),
-	(19, '2016_01_01_000000_create_pages_table', 2),
-	(20, '2016_01_01_000000_create_posts_table', 2),
-	(21, '2016_02_15_204651_create_categories_table', 2),
-	(22, '2016_05_19_173453_create_menu_table', 2),
-	(23, '2016_10_21_190000_create_roles_table', 2),
-	(24, '2016_10_21_190000_create_settings_table', 2),
-	(25, '2016_11_30_135954_create_permission_table', 2),
-	(26, '2016_11_30_141208_create_permission_role_table', 2),
-	(27, '2016_12_26_201236_data_types__add__server_side', 2),
-	(28, '2017_01_13_000000_add_route_to_menu_items_table', 2),
-	(29, '2017_01_14_005015_create_translations_table', 2),
-	(30, '2017_01_15_000000_add_permission_group_id_to_permissions_table', 2),
-	(31, '2017_01_15_000000_create_permission_groups_table', 2),
-	(32, '2017_01_15_000000_make_table_name_nullable_in_permissions_table', 2),
-	(33, '2017_03_06_000000_add_controller_to_data_types_table', 2),
-	(34, '2017_04_21_000000_add_order_to_data_rows_table', 2);
-/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 
 -- Dumping structure for table game_theory_2.pages
 CREATE TABLE IF NOT EXISTS `pages` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `author_id` int(11) NOT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `pages_slug_unique` (`slug`)
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`author_id` int(11) NOT NULL,
+	`title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`excerpt` text COLLATE utf8mb4_unicode_ci,
+	`body` text COLLATE utf8mb4_unicode_ci,
+	`image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`meta_description` text COLLATE utf8mb4_unicode_ci,
+	`meta_keywords` text COLLATE utf8mb4_unicode_ci,
+	`status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `pages_slug_unique` (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.pages: ~0 rows (approximately)
@@ -354,30 +305,16 @@ DELETE FROM `pages`;
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 
 
--- Dumping structure for table game_theory_2.password_resets
-CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  KEY `password_resets_email_index` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table game_theory_2.password_resets: ~0 rows (approximately)
-DELETE FROM `password_resets`;
-/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
-
-
 -- Dumping structure for table game_theory_2.permissions
 CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `table_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `permission_group_id` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `permissions_key_index` (`key`)
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`table_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`permission_group_id` int(10) unsigned DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	KEY `permissions_key_index` (`key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.permissions: ~69 rows (approximately)
@@ -458,10 +395,10 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 
 -- Dumping structure for table game_theory_2.permission_groups
 CREATE TABLE IF NOT EXISTS `permission_groups` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `permission_groups_name_unique` (`name`)
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `permission_groups_name_unique` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.permission_groups: ~0 rows (approximately)
@@ -472,13 +409,13 @@ DELETE FROM `permission_groups`;
 
 -- Dumping structure for table game_theory_2.permission_role
 CREATE TABLE IF NOT EXISTS `permission_role` (
-  `permission_id` int(10) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`permission_id`,`role_id`),
-  KEY `permission_role_permission_id_index` (`permission_id`),
-  KEY `permission_role_role_id_index` (`role_id`),
-  CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
+	`permission_id` int(10) unsigned NOT NULL,
+	`role_id` int(10) unsigned NOT NULL,
+	PRIMARY KEY (`permission_id`,`role_id`),
+	KEY `permission_role_permission_id_index` (`permission_id`),
+	KEY `permission_role_role_id_index` (`role_id`),
+	CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+	CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.permission_role: ~69 rows (approximately)
@@ -559,23 +496,23 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 
 -- Dumping structure for table game_theory_2.posts
 CREATE TABLE IF NOT EXISTS `posts` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `author_id` int(11) NOT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seo_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
-  `featured` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `posts_slug_unique` (`slug`)
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`author_id` int(11) NOT NULL,
+	`category_id` int(11) DEFAULT NULL,
+	`title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`seo_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`excerpt` text COLLATE utf8mb4_unicode_ci NOT NULL,
+	`body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+	`image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`meta_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+	`meta_keywords` text COLLATE utf8mb4_unicode_ci NOT NULL,
+	`status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
+	`featured` tinyint(1) NOT NULL DEFAULT '0',
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `posts_slug_unique` (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.posts: ~0 rows (approximately)
@@ -586,13 +523,13 @@ DELETE FROM `posts`;
 
 -- Dumping structure for table game_theory_2.roles
 CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `roles_name_unique` (`name`)
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`display_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `roles_name_unique` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.roles: ~2 rows (approximately)
@@ -606,35 +543,41 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`, `updated_at`) V
 
 -- Dumping structure for table game_theory_2.settings
 CREATE TABLE IF NOT EXISTS `settings` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` text COLLATE utf8mb4_unicode_ci,
-  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `order` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `settings_key_unique` (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`display_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`value` text COLLATE utf8mb4_unicode_ci NOT NULL,
+	`details` text COLLATE utf8mb4_unicode_ci,
+	`type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`order` int(11) NOT NULL DEFAULT '1',
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `settings_key_unique` (`key`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table game_theory_2.settings: ~0 rows (approximately)
+-- Dumping data for table game_theory_2.settings: ~5 rows (approximately)
 DELETE FROM `settings`;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`, `order`) VALUES
+	(1, 'admin_description', 'Login description', 'Welcome to the Game Theory and Personality dashboard!', NULL, 'text_area', 0),
+	(2, 'admin_title', 'Admin Title', 'Individual Differences', NULL, 'text', 1),
+	(3, 'admin_icon_image', 'Admin Icon Image', 'settings/May2017/1HiPkKp8QQ9U2KHOPofI.png', NULL, 'image', 2),
+	(4, 'admin_bg_image', 'Background image', 'settings/May2017/PHcCBXnJvF7bpWyE0R00.jpg', NULL, 'image', 3),
+	(5, 'admin_favicon', 'Admin Favicon', 'settings/June2017/IAYfG1anSM2vvhb6qgEe.png', NULL, 'image', 4);
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 
 -- Dumping structure for table game_theory_2.translations
 CREATE TABLE IF NOT EXISTS `translations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `table_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `column_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foreign_key` int(10) unsigned NOT NULL,
-  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `translations_table_name_column_name_foreign_key_locale_unique` (`table_name`,`column_name`,`foreign_key`,`locale`)
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`table_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`column_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`foreign_key` int(10) unsigned NOT NULL,
+	`locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`value` text COLLATE utf8mb4_unicode_ci NOT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `translations_table_name_column_name_foreign_key_locale_unique` (`table_name`,`column_name`,`foreign_key`,`locale`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table game_theory_2.translations: ~0 rows (approximately)
@@ -642,3 +585,6 @@ DELETE FROM `translations`;
 /*!40000 ALTER TABLE `translations` DISABLE KEYS */;
 /*!40000 ALTER TABLE `translations` ENABLE KEYS */;
 
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
