@@ -22,3 +22,5 @@
         @endif
     </div>
 @endforeach
+
+{{--TODO: At the end, add another else-if to check if the input is of number type and enable the min and max attributes.--}}
