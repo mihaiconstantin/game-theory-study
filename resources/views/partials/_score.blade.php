@@ -7,8 +7,13 @@
         <table class="table table-sm score-table">
             <tbody>
                 <tr>
-                    <th>Total {{$data['design_label']}}:</th>
-                    <td class="text-right"><span id="gameScore" class="badge .badge-pill badge-primary" data-game-score="{{$data['game_score']}}">{{$data['game_score']}}</span></td>
+                    <th>Your {{$data['design_label']}}:</th>
+                    <td class="text-right"><span id="gameScore" class="badge .badge-pill badge-primary" data-game-score="{{$data['user_game_score']}}">{{$data['user_game_score']}}</span></td>
+                </tr>
+
+                <tr>
+                    <td>Other's {{$data['design_label']}}:</td>
+                    <td class="text-right"><span id="gameScore" class="badge .badge-pill badge-danger" data-game-score="{{$data['pc_game_score']}}">{{$data['pc_game_score']}}</span></td>
                 </tr>
 
                 <tr>

@@ -242,7 +242,8 @@ class SessionHelper
         return [
             'total_games' => count(session('config.condition.designs')),
             'total_phases' => session('config.condition.phases.' . $current_game),
-            'game_score' => session('score.' . $current_game . '.user')
+            'user_game_score' => session('score.' . $current_game . '.user'),
+            'pc_game_score' => session('score.' . $current_game . '.pc'),
         ];
     }
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Condition;
+
 class InstructionController extends Controller
 {
 
@@ -50,14 +52,59 @@ class InstructionController extends Controller
 
     public function score($gameNumber)
     {
-        $instruction = $this->InstructionLoader('instruction.score');
+
+        // Determine the condition played and compute the score division based on the maximum score
+        // obtained by the user or the computer. Glue the resulted division to the text variable.
+        $condition = session('config.condition.info.name');
+
+        // Determining what the user and the pc obtained.
+        $user_score = session('score.' . $gameNumber . '.user');
+        $pc_score = session('score.' . $gameNumber . '.pc');
+
+        // Determining what the user and the pc gain.
+        switch ($condition)
+        {
+            case 'wallstreet':
+                $user_gains = $user_score;
+                $pc_gains = $pc_score;
+
+                break;
+            case 'community':
+                $user_gains = ($user_score + $pc_score) / 2;
+                $pc_gains = ($user_score + $pc_score) / 2;
+
+                break;
+            case 'point':
+                $user_gains = (.75 * $user_score) + (.25 * $pc_score);
+                $pc_gains = (.75 * $pc_score) + (.25 * $user_score);
+                break;
+
+            default:
+                throw new \Exception('No score division logic specified for condition "' . $condition . '".');
+                break;
+        }
+
+
+        // Fetch the appropriate text from the database.
+        $text = Condition::where('name', $condition)->value('text_division');
 
         // Insert the score within the placeholders.
-        $text = str_replace('{{user_score}}', '<span class="badge .badge-pill badge-primary">' . session('score.' . $gameNumber . '.user') . '</span>', $instruction['text']);
-        $text = str_replace('{{pc_score}}', '<span class="badge .badge-pill badge-primary">' . session('score.' . $gameNumber . '.pc') . '</span>', $text);
-        $instruction['text'] = $text;
+        $text = str_replace('{{user_gains}}', '<span class="badge .badge-pill badge-primary">' . $user_gains . '</span>', $text);
+        $text = str_replace('{{pc_gains}}',   '<span class="badge .badge-pill badge-danger">'  . $pc_gains .   '</span>', $text);
 
+
+        // Fetch the text associated with this instruction view. Then attach
+        // the modified text to the data passed down to the view. End by
+        // preparing the remaining parameters.
+        // TODO: it is redundant to have an instruction loader here
+        //       since we already store the text in the database
+        //       table that represents the conditions. Maybe
+        //       it only helps with the URLs & the title.
+        $instruction = $this->InstructionLoader('instruction.score');
+
+        $instruction['text'] = $text;
         $instruction['parameters']['gameNumber'] = $gameNumber;
+
 
         return view('instruction', ['data' => $instruction]);
     }

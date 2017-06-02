@@ -57,36 +57,36 @@ class SelectOptionTableSeeder extends Seeder
             'text' => 'single'
         ]);
 
-        // married
+        // in a relationship
         \App\Models\SelectOption::create([
             'form_element_id' => 3,
             'order' => 2,
             'value' => 2,
+            'text' => 'in a relationship'
+        ]);
+
+        // married
+        \App\Models\SelectOption::create([
+            'form_element_id' => 3,
+            'order' => 3,
+            'value' => 3,
             'text' => 'married'
         ]);
 
         // separated
         \App\Models\SelectOption::create([
             'form_element_id' => 3,
-            'order' => 3,
-            'value' => 3,
+            'order' => 4,
+            'value' => 4,
             'text' => 'separated'
         ]);
 
-        // windowed
-        \App\Models\SelectOption::create([
-            'form_element_id' => 3,
-            'order' => 4,
-            'value' => 4,
-            'text' => 'windowed'
-        ]);
-
-        // divorced
+        // other
         \App\Models\SelectOption::create([
             'form_element_id' => 3,
             'order' => 5,
             'value' => 5,
-            'text' => 'divorced'
+            'text' => 'other'
         ]);
 
         #endregion
@@ -211,6 +211,14 @@ class SelectOptionTableSeeder extends Seeder
             'text' => 'doctorate degree'
         ]);
 
+        // other
+        \App\Models\SelectOption::create([
+            'form_element_id' => 5,
+            'order' => 10,
+            'value' => 10,
+            'text' => 'other'
+        ]);
+
         #endregion
 
 
@@ -280,6 +288,13 @@ class SelectOptionTableSeeder extends Seeder
             'text' => 'unable to work'
         ]);
 
+        // other
+        \App\Models\SelectOption::create([
+            'form_element_id' => 6,
+            'order' => 9,
+            'value' => 9,
+            'text' => 'other'
+        ]);
 
         #endregion
 
@@ -288,11 +303,32 @@ class SelectOptionTableSeeder extends Seeder
 
     #region expectation
 
+        # region understanding options
+
+        // yes
+        \App\Models\SelectOption::create([
+            'form_element_id' => 7,
+            'order' => 1,
+            'value' => 1,
+            'text' => 'yes'
+        ]);
+
+        // no
+        \App\Models\SelectOption::create([
+            'form_element_id' => 7,
+            'order' => 0,
+            'value' => 0,
+            'text' => 'no'
+        ]);
+
+        #endregion
+
+
         #region expectation options
 
         // competitive
         \App\Models\SelectOption::create([
-            'form_element_id' => 7,
+            'form_element_id' => 8,
             'order' => 1,
             'value' => 1,
             'text' => 'competitive'
@@ -300,7 +336,7 @@ class SelectOptionTableSeeder extends Seeder
 
         // cooperative
         \App\Models\SelectOption::create([
-            'form_element_id' => 7,
+            'form_element_id' => 8,
             'order' => 2,
             'value' => 2,
             'text' => 'cooperative'
@@ -308,7 +344,7 @@ class SelectOptionTableSeeder extends Seeder
 
         // neutral
         \App\Models\SelectOption::create([
-            'form_element_id' => 7,
+            'form_element_id' => 8,
             'order' => 3,
             'value' => 3,
             'text' => 'neutral'
@@ -345,29 +381,3 @@ class SelectOptionTableSeeder extends Seeder
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

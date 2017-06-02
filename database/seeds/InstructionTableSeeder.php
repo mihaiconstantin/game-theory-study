@@ -23,7 +23,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.start',
             'next_url' => 'form.consent',
             'title' => 'Welcome',
-            'text' => 'Welcome in this study to human behavior. First of all, we want to thank you for participation!<br><br>This study consists of several blocks:<ul><li>Self-report questionnaire</li><li>Practice phase of a game</li><li>Playing a game (9 times)</li><li>Self-report questionnaire about a game (9 times)</li><li>End questions</li></ul>Before you start please fill in the consent form.'
+            'text' => 'Welcome in this study to human behavior. First of all, we want to thank you for participation!<br><br>This study consists of several blocks:<ul><li>Self-report questionnaire</li><li>Practice phase of a game</li><li>Playing a game (9 times)</li><li>Self-report questionnaire about a game (9 times)</li><li>End questions</li></ul>Before you start please fill in the informed consent form.'
         ]);
 
 
@@ -32,7 +32,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'form.consent',
             'next_url' => 'form.demographics',
             'title' => 'Informed consent',
-            'text' => '<b>Name of the study:</b> Knowledge and Insight<br><br>You have been invited to participate in this study. Before you begin, we kindly ask you to read this form carefully and sign for consent.<br><br><b>Researchers:</b><br>Prof. Dr. J. J. A. Denissen <i>(j.j.a.denissen@uvt.nl)</i><small> Department of Social Psychology and Department of Developmental Psychology Tilburg University</small><br><br><b>Background:</b><br>The intention of this study is to research and gain knowledge of human behavior. Firstly, we would like to ask you to fill out a questionnaire about how you think about yourself. Subsequently, you will play a game. We are interested in how you make decisions during that game.<br><br><b>Procedure:</b><br>This study will take about 45 minutes. If you at any point wish to withdraw your consent and stop the study, you have the right to do so and will not be penalized.<br><br><b>Compensation:</b><br>For your participation you will receive the credit stated on Amazon Mechanical Turk.<br><br><b>Confidentiality:</b><br>When your role with this project is complete, your data will be anonymized. From that time, there will be no record that links the data collected from you with any personal data from which you could be identified. Once anonymized, these data may be made available to researchers via accessible data repositories and possibly used for novel purposes.<br><br>If you have any questions during your participation, you can email the test leader <i>(e.dietvorst@uvt.nl)</i>.<br>If you have other questions regarding the study, you can contact the project leader prof. Dr. J. J. A. Denissen <i>(j.j.a.denissen@uvt.nl).</i>'
+            'text' => '<b>Name of the study:</b> Knowledge and Insight<br><br>You have been invited to participate in this study. Before you begin, we kindly ask you to read this form carefully and sign for consent.<br><br><b>Researchers:</b><br>Prof. Dr. J. J. A. Denissen<small> - Department of Developmental Psychology Tilburg University</small><br>Prof. Dr. S. M. Lindenberg <small> - Department of Social Psychology Tilburg University</small><br><br><b>Background:</b><br>The intention of this study is to research and gain knowledge of human behavior. Firstly, we would like to ask you to fill out a questionnaire about how you think about yourself. Subsequently, you will play a game. We are interested in how you make decisions during that game.<br><br><b>Procedure:</b><br>This study will take about 45 minutes. If you at any point wish to withdraw your consent and stop the study, you have the right to do so and will not be penalized.<br><br><b>Compensation:</b><br>For your participation you will receive the credit stated on Amazon Mechanical Turk.<br><br><b>Confidentiality:</b><br>When your role with this project is complete, your data will be anonymized. From that time, there will be no record that links the data collected from you with any personal data from which you could be identified. Once anonymized, these data may be made available to researchers via accessible data repositories and possibly used for novel purposes.<br><br>If you have any questions during your participation, you can email the test leader <i>(e.dietvorst@uvt.nl)</i>.<br>If you have other questions regarding the study, the test leader can get you in contact with the project leader prof. Dr. J. J. A. Denissen.'
         ]);
 
 
@@ -89,7 +89,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.condition',
             'next_url' => 'form.expectation',
             'title' => 'Game phase',
-            'text' => 'You finished the practice phase and are about to start the game phase.<br><br>You are expected to play 9 games, each consisting of 10 rounds. After each game you are invited to answer questions about the game you played.<br><br><b>Please pay attention: <span class="text-danger">there are little variations in each games, therefore always read the text and take a close look at the table before making a decision.</span></b><br><br>Good luck!'
+            'text' => 'You finished the practice phase and are about to start the game phase.<br><br>You are expected to play 9 games, each consisting of 10 rounds. After each game you are invited to answer questions about the game you played.<br><br><b>Please pay attention: <span class="text-danger">there are some variations in each game, please read carefully.</span></b><br><br>Good luck!'
         ]);
 
 
@@ -97,8 +97,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'form.expectation',
             'next_url' => 'game.play',
-            'title' => 'Expectations',
-            'text' => 'How do you expect your opponent to behave throughout the games?'
+            'title' => 'Understanding and expectations',
+            'text' => 'Please fill out the following questions.'
         ]);
 
 
@@ -109,8 +109,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'instruction.score',
             'next_url' => 'form.gameQuestion',
-            'title' => 'Points earned for the current game',
-            'text' => 'Feedback regarding the points. Use {{ user_score }} in your text to print the user\'s score for the current game, or {{ pc_score }} to print the score of the pc (without inner spaces).'
+            'title' => 'Money Units transfer',
+            'text' => 'Dynamically pulled from the conditions table.'
         ]);
 
 

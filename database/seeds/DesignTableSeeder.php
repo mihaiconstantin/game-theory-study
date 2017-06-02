@@ -24,11 +24,11 @@ class DesignTableSeeder extends Seeder
             'outcome_2_value' => '1#2;+12#+8',
             'outcome_3_value' => '2#1;+8#+12',
             'outcome_4_value' => '2#2;+1#+1',
-            'label' => 'points',
-            'outcome_1_description' => '1#1;You both choose option 1. You both receive 4 points.',
-            'outcome_2_description' => '1#2;The other player choose option 2, while you choose option 1. De other player receives 12 points. You receive 8 points.',
-            'outcome_3_description' => '2#1;The other player choose option 1, while ou choose option 2. The other player receives 8 points. You receive 12 points.',
-            'outcome_4_description' => '2#2;You both choose option 2. You both receive 1 point.'
+            'label' => 'MUs',
+            'outcome_1_description' => '1#1;You both choose option 1. You both receive 4 MUs.',
+            'outcome_2_description' => '1#2;The other player choose option 2, while you choose option 1. De other player receives 12 MUs. You receive 8 MUs.',
+            'outcome_3_description' => '2#1;The other player choose option 1, while ou choose option 2. The other player receives 8 MUs. You receive 12 MUs.',
+            'outcome_4_description' => '2#2;You both choose option 2. You both receive 1 MU.'
         ]);
 
         // MD
@@ -39,11 +39,11 @@ class DesignTableSeeder extends Seeder
             'outcome_2_value' => '1#2;-20#+40',
             'outcome_3_value' => '2#1;+40#-20',
             'outcome_4_value' => '2#2;+5#+5',
-            'label' => 'points',
-            'outcome_1_description' => '1#1;You both choose option 1. You both receive 80 points.',
-            'outcome_2_description' => '1#2;The other layer choose option 2, while you choose option 1. The other player receives 40 points. You lose 20 points.',
-            'outcome_3_description' => '2#1;The other player choose option 1, while you choose option 2. The other player loses 20 points. You receive 40 points.',
-            'outcome_4_description' => '2#2;You both choose option 2. You both receive 5 points.'
+            'label' => 'MUs',
+            'outcome_1_description' => '1#1;You both choose option 1. You both receive 80 MUs.',
+            'outcome_2_description' => '1#2;The other layer choose option 2, while you choose option 1. The other player receives 40 MUs. You lose 20 MUs.',
+            'outcome_3_description' => '2#1;The other player choose option 1, while you choose option 2. The other player loses 20 MUs. You receive 40 MUs.',
+            'outcome_4_description' => '2#2;You both choose option 2. You both receive 5 MUs.'
         ]);
 
         // PD
@@ -54,11 +54,11 @@ class DesignTableSeeder extends Seeder
             'outcome_2_value' => '1#2;-20#+80',
             'outcome_3_value' => '2#1;+80#-20',
             'outcome_4_value' => '2#2;+5#+5',
-            'label' => 'points',
-            'outcome_1_description' => '1#1;You both choose option 1. You both receive 40 points.',
-            'outcome_2_description' => '1#2;The other layer choose option 2, while you choose option 1. The other player receives 80 points. You lose 20 points.',
-            'outcome_3_description' => '2#1;The other player choose option 1, while you choose option 2. The other player loses 20 points. You receive 80 points.',
-            'outcome_4_description' => '2#2;You both choose option 2. You both receive 5 points.'
+            'label' => 'MUs',
+            'outcome_1_description' => '1#1;You both choose option 1. You both receive 40 MUs.',
+            'outcome_2_description' => '1#2;The other layer choose option 2, while you choose option 1. The other player receives 80 MUs. You lose 20 MUs.',
+            'outcome_3_description' => '2#1;The other player choose option 1, while you choose option 2. The other player loses 20 MUs. You receive 80 MUs.',
+            'outcome_4_description' => '2#2;You both choose option 2. You both receive 5 MUs.'
         ]);
 
         // PT
@@ -69,11 +69,11 @@ class DesignTableSeeder extends Seeder
             'outcome_2_value' => '1#2;0#+52.5',
             'outcome_3_value' => '2#1;+52.5#0',
             'outcome_4_value' => '2#2;0#0',
-            'label' => 'points',
-            'outcome_1_description' => '1#1;You both choose option 1. You both receive 52.5 points.',
-            'outcome_2_description' => '1#2;The other player choose option 2, while you choose option 1. The other player receives 52.5 points. You receive 0 points.',
-            'outcome_3_description' => '2#1;The other player choose option 1, while you choose option 2. The other player receives 0 points. You receive 52.5 points.',
-            'outcome_4_description' => '2#2;You both choose option 2. You both receive 0 points.'
+            'label' => 'MUs',
+            'outcome_1_description' => '1#1;You both choose option 1. You both receive 52.5 MUs.',
+            'outcome_2_description' => '1#2;The other player choose option 2, while you choose option 1. The other player receives 52.5 MUs. You receive 0 MUs.',
+            'outcome_3_description' => '2#1;The other player choose option 1, while you choose option 2. The other player receives 0 MUs. You receive 52.5 MUs.',
+            'outcome_4_description' => '2#2;You both choose option 2. You both receive 0 MUs.'
         ]);
     }
 

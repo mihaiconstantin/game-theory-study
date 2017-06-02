@@ -93,15 +93,27 @@ class FormElementTableSeeder extends Seeder
 
         #region seeds for form/expectation
 
+        // participant understanding
+        \App\Models\FormElement::create([
+            'current_url' => 'form.expectation',
+            'name' => 'expectation.understanding',
+            'order' => '1',
+            'tag_type' => 'select',
+            'attr_name' => 'understanding',
+            'attr_id' => 'understanding',
+            'label' => 'Do you understand how this game is played?',
+        ]);
+
+
         // participant expectation
         \App\Models\FormElement::create([
             'current_url' => 'form.expectation',
             'name' => 'expectation.expectation',
-            'order' => '1',
+            'order' => '2',
             'tag_type' => 'select',
             'attr_name' => 'expectation',
             'attr_id' => 'expectation',
-            'label' => 'Your expectation:',
+            'label' => 'How do you expect your opponent to behave throughout the games?',
         ]);
 
         #endregion

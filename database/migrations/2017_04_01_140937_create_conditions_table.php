@@ -21,6 +21,8 @@ class CreateConditionsTable extends Migration
             $table->text("bias_chain");
             $table->text("text_chain");
 
+            $table->text("text_division")->nullable();
+
             $table->tinyInteger("random_design_iteration");
             $table->tinyInteger("random_design_chain");
 
