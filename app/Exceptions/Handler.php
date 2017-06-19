@@ -44,7 +44,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // Switch between these two when you want to show production-type error messages or debug.
         return parent::render($request, $exception);
+        // return response()->view('error');
     }
 
     /**
@@ -52,7 +54,7 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Auth\AuthenticationException  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsep
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {

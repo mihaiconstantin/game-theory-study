@@ -6,5 +6,5 @@
 {{--main canvas--}}
 
 @section('content')
-    @include('partials._end')
+    @include('partials._error')
 @endsection

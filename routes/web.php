@@ -89,7 +89,6 @@ Route::post('game/store/'                            , 'GameController@store')  
 
 // TODO: Refactor this into a controller and dynamically fetch the names of the questionnaires.
 // Export the dataset for the current study.
-
 Route::get('admin/export', function() {
 
     $study_name = \App\Models\StudyLoader::getLoadedStudy();
@@ -101,3 +100,61 @@ Route::get('admin/export', function() {
 
 })->middleware('auth');
 
+
+// Parsing the emergency data that was saved.
+Route::get('admin/emergency', function()
+{
+    // Handy.
+    // SELECT * FROM data_participants WHERE code = "rJaDWaWet9";//
+    // SELECT * FROM data_configs WHERE data_participant_id = 253;
+    // SELECT * FROM data_forms WHERE data_participant_id = 253;
+    // SELECT * FROM data_questionnaires WHERE data_participant_id = 253;
+    // SELECT * FROM data_game_phases WHERE data_participant_id = 253;
+
+
+    // $json = '';
+    // $assoc = true;
+    // $result = json_decode ($json, $assoc);
+    //
+    // $data_participant_id = 253;
+    //
+    // DB::table('data_forms')->insert([
+    //     [
+    //         'data_participant_id' => $data_participant_id,
+    //         'demographic' => $result[2]['demographic'],
+    //         'expectation' => '{}',
+    //         'feedback' => $result[2]['feedback']
+    //     ]
+    // ]);
+    //
+    // DB::table('data_questionnaires')->insert([
+    //     [
+    //         'data_participant_id' => $data_participant_id,
+    //         'personality' => $result[3]['personality'],
+    //         'game_question' => $result[3]['game_question'],
+    //     ]
+    // ]);
+    //
+    // foreach ($result[4] as $index => $item)
+    // {
+    //     if ($result[4][$index]['game_number'] != null)
+    //     {
+    //         $result[4][$index]['data_participant_id'] = $data_participant_id;
+    //         DB::table('data_game_phases')->insert([$result[4][$index]]);
+    //     }
+    // }
+    //
+    //
+    // dd(
+    //     "Insertion finished.",
+    //     $result
+    // );
+
+    return 'Not in use. Edit source on demand.';
+
+})->middleware('auth');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

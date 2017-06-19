@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 
+use Mockery\Exception;
+
 class DataExportHelper extends DataReconstructHelper
 {
 
@@ -322,7 +324,6 @@ class DataExportHelper extends DataReconstructHelper
             $this->writeDataQuestionnairesGameQuestions(),
             $this->writeDataQuestionnairesPersonality($questionnaire_name_one),
             $this->writeDataQuestionnairesPersonality($questionnaire_name_two),
-            $this->writeDataQuestionnairesPersonality($questionnaire_name_two),
             $this->writeDataGamePhases()
         ];
 
@@ -335,6 +336,7 @@ class DataExportHelper extends DataReconstructHelper
             $zip = new \ZipArchive();
             $zip->open($name, \ZipArchive::CREATE);
 
+            // Add the files to the archive.
             foreach ($files as $file)
             {
                 $zip->addFile($file, basename($file));
@@ -342,11 +344,18 @@ class DataExportHelper extends DataReconstructHelper
 
             $zip->close();
 
+            // Make sure we delete the files once the archive is done.
+            foreach ($files as $file)
+            {
+                unlink($file);
+            }
+
             return $name;
         }
         catch (\Exception $e)
         {
-            die('Failed to write the archive "' . $filename . '". Save the name of the file for future reference and check the storage location.');
+            echo 'error message:' . $e->getMessage() . '<br>';
+            die(PHP_EOL . 'Failed to write the archive "' . $filename . '". Save the name of the file for future reference and check the storage location.');
         }
 
     }

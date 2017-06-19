@@ -109,7 +109,6 @@ class GameController extends Controller
 
         $context = session('temp.passed_practice') ? 'condition' : 'practice';
 
-
         $parameter = SessionHelper::whereNext($context, session('_previous.url'));
 
 

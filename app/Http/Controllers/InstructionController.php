@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Condition;
+use Mockery\Exception;
 
 class InstructionController extends Controller
 {
@@ -52,7 +53,6 @@ class InstructionController extends Controller
 
     public function score($gameNumber)
     {
-
         // Determine the condition played and compute the score division based on the maximum score
         // obtained by the user or the computer. Glue the resulted division to the text variable.
         $condition = session('config.condition.info.name');
