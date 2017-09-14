@@ -26,7 +26,7 @@
   - `cd` into the `game-theory-tilburg` project and run `composer install`
   - once the installation is finished is finished copy the `.env.example` into `.env` and [update the variables](https://laravel.com/docs/5.4/configuration#environment-configuration) with your own values.
   - then, run `php artisan migrate --seed` to build the database and seed it with the default data used in the study
-  - finally, configure `Voyager` by replacing some default files with those found inside `replace_after_voyager_installation.rar`
+  - finally, install and then configure `Voyager` by replacing some default files with those found inside `replace_after_voyager_installation.rar`
   
 ## Screenshots
   
