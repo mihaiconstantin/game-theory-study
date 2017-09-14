@@ -81,15 +81,14 @@ class DataArchiveHelper
                 $this->data_config,
                 $this->data_forms,
                 $this->data_questionnaires,
-                $this->data_game_phases
+                $this->data_game_phases,
+                // Error details below:
+                '# # # ERROR_DETAILS: line: ' . + $e->getLine() . ' | file: ' . $e->getFile() . ' | message: ' . $e->getMessage()
             ]);
-
             $status = false;
         }
 
-
         return $status;
-
     }
 
 
