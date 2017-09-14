@@ -258,7 +258,7 @@ class FormController extends Controller
         session([
             'temp.study_end' => $study_end,
 
-            $base_key . 'study_time'                => session('temp.study_end') - session('temp.study_start'),
+            $base_key . 'study_time'                => session('temp.study_start') - session('temp.study_end'),
             $base_key . 'game_phases_played'        => BasicHelper::totalPhasesPlayed('condition'),
             $base_key . 'practice_phases_played'    => BasicHelper::totalPhasesPlayed('practice')
         ]);
