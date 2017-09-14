@@ -155,6 +155,7 @@ Route::get('admin/emergency', function()
 })->middleware('auth');
 
 
+// Voyager routes.
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
