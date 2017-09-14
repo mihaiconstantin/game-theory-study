@@ -92,8 +92,13 @@ Route::post('game/store/'                            , 'GameController@store')  
 Route::get('admin/export', function() {
 
     $study_name = \App\Models\StudyLoader::getLoadedStudy();
-
-    $export = new \App\Helpers\DataExportHelper($study_name);
+    
+    try {
+        $export = new \App\Helpers\DataExportHelper($study_name);
+    } catch(Exception $e) {
+        return 'An error occured: ' .$e->getMessage();
+    }
+    
     $file = $export->zip('hexaco', 'bfi', $study_name);
 
     return response()->download($file, $name = null, ['Content-Type' => 'application/zip']);
