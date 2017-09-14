@@ -361,7 +361,7 @@ class SelectOptionTableSeeder extends Seeder
 
         // yes
         \App\Models\SelectOption::create([
-            'form_element_id' => 9,
+            'form_element_id' => 10,
             'order' => 1,
             'value' => 1,
             'text' => 'yes'
@@ -369,7 +369,7 @@ class SelectOptionTableSeeder extends Seeder
 
         // no
         \App\Models\SelectOption::create([
-            'form_element_id' => 9,
+            'form_element_id' => 10,
             'order' => 1,
             'value' => 0,
             'text' => 'no'
