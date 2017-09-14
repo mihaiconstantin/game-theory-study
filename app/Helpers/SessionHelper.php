@@ -101,22 +101,12 @@ class SessionHelper
      */
     public static function whereNext(string $context, string $previous_url) : array
     {
-        $debug = $previous_url;
-
         $current_game = null;
         $current_phase = null;
         $next_game = null;
         $next_phase = null;
 
-
         $previous_url = array_values(explode('/', $previous_url));
-
-
-        // make sure that the request comes from game.play URL <- otherwise we cannot determine the previous parameters
-        if ($previous_url[4] != 'play')
-        {
-            throw new \Exception('Posting to GameController@store from an URL other than game.play. Previous: ' . $debug . '. By: ' .  session('storage.data_participants.code') . '.', 1993);
-        }
 
 
         // was the game played in the correct bounds?

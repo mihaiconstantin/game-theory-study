@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\SessionHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 
 class GameController extends Controller
@@ -99,7 +100,6 @@ class GameController extends Controller
             'gameNumber' => 1,
             'phaseNumber' => 1
         ]));
-
     }
 
 
@@ -109,7 +109,7 @@ class GameController extends Controller
 
         $context = session('temp.passed_practice') ? 'condition' : 'practice';
 
-        $parameter = SessionHelper::whereNext($context, session('_previous.url'));
+        $parameter = SessionHelper::whereNext($context, URL::previous());
 
 
         // At this point we know whether the game page for which the post request came from a valid URL.
@@ -261,8 +261,3 @@ class GameController extends Controller
     }
 
 }
-
-/**
- * TODO: Refactor the play and store routes in smarter way. There is quite a bit of anti-DRY.
- *
- */
