@@ -42,12 +42,12 @@
   - finally, run `php artisan serve` to start the developmental server and test out the application. Note that you should not use this server if you intend to collect data using this application. Instead, you need a full-fledged webs server like [`Nginx`](https://www.nginx.com/) or [`Apache`](https://httpd.apache.org/)
 
 ## Using the application
-- to access the default experiment based on the configuration used in this study open http://localhost:8000 in your browser
+- to access the experiment based on the configuration used in this study open http://localhost:8000 in your browser
 - to acess the admin panel where you can find and edit the study configuration access http://localhost:8000/admin with:
   - email: admin@example.com
   - password: admin  
 - the data collected using this application can be exported as several `.csv` files
-  - all the files are in long format and can be linked by a unique `ID` generated for each respondent
+  - all files are in long format and can be linked by a unique `ID` generated for each respondent
  
 ## Screenshots
   
