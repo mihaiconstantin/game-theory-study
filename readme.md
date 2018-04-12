@@ -39,7 +39,7 @@
   	- *see [this resource](https://laravel.com/docs/5.4/configuration#environment-configuration) for more details*
   - then, run `php artisan key:generate` to generate an application-specific secret key that will be added to the `APP_KEY` variable in `.env` automatically
   - next, run `php artisan migrate --seed` to build the database and seed it with the default configuration used in this study
-  - finally, run `php artisan serve` to start the developmental server and test out the application. Note that you should not use this server if you intend to collect data using this application. Instead, you need a full-fledged webs server like [`Nginx`](https://www.nginx.com/) or [`Apache`](https://httpd.apache.org/)
+  - finally, run `php artisan serve` to start the developmental server and test out the application. Note that you should not use this server if you intend to collect data using this application. Instead, you need a full-fledged web server like [`Nginx`](https://www.nginx.com/) or [`Apache`](https://httpd.apache.org/)
 
 ## Using the application
 - to access the experiment based on the configuration used in this study open http://localhost:8000 in your browser
@@ -68,5 +68,5 @@
 
 --- 
 
-Feel free to get in touch if you need more details! Good luck!
+> Feel free to get in touch if you need more details! Good luck!
   
