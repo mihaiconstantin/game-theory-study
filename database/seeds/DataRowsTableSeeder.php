@@ -1,930 +1,1784 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use TCG\Voyager\Models\DataRow;
-use TCG\Voyager\Models\DataType;
 
 class DataRowsTableSeeder extends Seeder
 {
+
     /**
-     * Auto generated seed file.
+     * Auto generated seed file
+     *
+     * @return void
      */
     public function run()
     {
-        $postDataType = DataType::where('slug', 'posts')->firstOrFail();
-        $pageDataType = DataType::where('slug', 'pages')->firstOrFail();
-        $userDataType = DataType::where('slug', 'users')->firstOrFail();
-        $categoryDataType = DataType::where('slug', 'categories')->firstOrFail();
-        $menuDataType = DataType::where('slug', 'menus')->firstOrFail();
-        $roleDataType = DataType::where('slug', 'roles')->firstOrFail();
+        
 
-        $dataRow = $this->dataRow($postDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => 'ID',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 1,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'author_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'Author',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 0,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 2,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'category_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'Category',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 3,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'title');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'Title',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 4,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'excerpt');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text_area',
-                'display_name' => 'excerpt',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 5,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'body');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'rich_text_box',
-                'display_name' => 'Body',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 6,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'image');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'image',
-                'display_name' => 'Post Image',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '
-{
-    "resize": {
-        "width": "1000",
-        "height": "null"
-    },
-    "quality": "70%",
-    "upsize": true,
-    "thumbnails": [
-        {
-            "name": "medium",
-            "scale": "50%"
-        },
-        {
-            "name": "small",
-            "scale": "25%"
-        },
-        {
-            "name": "cropped",
-            "crop": {
-                "width": "300",
-                "height": "250"
-            }
-        }
-    ]
-}',
-                'order'        => 7,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'slug');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'slug',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '
-{
-    "slugify": {
-        "origin": "title",
-        "forceUpdate": true
-    }
-}',
-                'order'        => 8,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'meta_description');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text_area',
-                'display_name' => 'meta_description',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 9,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'meta_keywords');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text_area',
-                'display_name' => 'meta_keywords',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 10,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'status');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'select_dropdown',
-                'display_name' => 'status',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '
-{
-    "default": "DRAFT",
-    "options": {
-        "PUBLISHED": "published",
-        "DRAFT": "draft",
-        "PENDING": "pending"
-    }
-}',
-                'order'        => 11,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'created_at',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 12,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'updated_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 13,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
+        \DB::table('data_rows')->delete();
+        
+        \DB::table('data_rows')->insert(array (
+            0 => 
+            array (
+                'id' => 26,
+                'data_type_id' => 3,
+                'field' => 'id',
+                'type' => 'number',
                 'display_name' => 'id',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 1,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'author_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'author_id',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 2,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'title');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'title',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 3,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'excerpt');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text_area',
-                'display_name' => 'excerpt',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 4,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'body');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'rich_text_box',
-                'display_name' => 'body',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 5,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'slug');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'slug',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => json_encode([
-                    'slugify' => [
-                        'origin' => 'title',
-                    ],
-                ]),
-                'order'        => 6,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'meta_description');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'meta_description',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 7,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'meta_keywords');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'meta_keywords',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 8,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'status');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'select_dropdown',
-                'display_name' => 'status',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => json_encode([
-                    'default' => 'INACTIVE',
-                    'options' => [
-                        'INACTIVE' => 'INACTIVE',
-                        'ACTIVE'   => 'ACTIVE',
-                    ],
-                ]),
-                'order'        => 9,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'created_at',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 10,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'updated_at',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 11,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($pageDataType, 'image');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'image',
-                'display_name' => 'image',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 12,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => 'id',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 1,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 1,
+            ),
+            1 => 
+            array (
+                'id' => 27,
+                'data_type_id' => 3,
+                'field' => 'name',
+                'type' => 'text',
                 'display_name' => 'name',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 2,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'email');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '',
+                'order' => 2,
+            ),
+            2 => 
+            array (
+                'id' => 28,
+                'data_type_id' => 3,
+                'field' => 'email',
+                'type' => 'text',
                 'display_name' => 'email',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 3,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'password');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'password',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '',
+                'order' => 3,
+            ),
+            3 => 
+            array (
+                'id' => 29,
+                'data_type_id' => 3,
+                'field' => 'password',
+                'type' => 'password',
                 'display_name' => 'password',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 4,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'remember_token');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '',
+                'order' => 4,
+            ),
+            4 => 
+            array (
+                'id' => 30,
+                'data_type_id' => 3,
+                'field' => 'remember_token',
+                'type' => 'text',
                 'display_name' => 'remember_token',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 5,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 5,
+            ),
+            5 => 
+            array (
+                'id' => 31,
+                'data_type_id' => 3,
+                'field' => 'created_at',
+                'type' => 'timestamp',
                 'display_name' => 'created_at',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 6,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 6,
+            ),
+            6 => 
+            array (
+                'id' => 32,
+                'data_type_id' => 3,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
                 'display_name' => 'updated_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 7,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'avatar');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'image',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 7,
+            ),
+            7 => 
+            array (
+                'id' => 33,
+                'data_type_id' => 3,
+                'field' => 'avatar',
+                'type' => 'image',
                 'display_name' => 'avatar',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 8,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($menuDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '',
+                'order' => 8,
+            ),
+            8 => 
+            array (
+                'id' => 34,
+                'data_type_id' => 5,
+                'field' => 'id',
+                'type' => 'number',
                 'display_name' => 'id',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 1,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($menuDataType, 'name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 1,
+            ),
+            9 => 
+            array (
+                'id' => 35,
+                'data_type_id' => 5,
+                'field' => 'name',
+                'type' => 'text',
                 'display_name' => 'name',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 2,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($menuDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '',
+                'order' => 2,
+            ),
+            10 => 
+            array (
+                'id' => 36,
+                'data_type_id' => 5,
+                'field' => 'created_at',
+                'type' => 'timestamp',
                 'display_name' => 'created_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 3,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($menuDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 3,
+            ),
+            11 => 
+            array (
+                'id' => 37,
+                'data_type_id' => 5,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
                 'display_name' => 'updated_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 4,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($categoryDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 4,
+            ),
+            12 => 
+            array (
+                'id' => 45,
+                'data_type_id' => 6,
+                'field' => 'id',
+                'type' => 'number',
                 'display_name' => 'id',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 1,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($categoryDataType, 'parent_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'select_dropdown',
-                'display_name' => 'parent_id',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => json_encode([
-                    'default'  => '',
-                    'null'     => '',
-                    'options'  => [
-                        '' => '-- None --',
-                    ],
-                    'relationship' => [
-                        'key'   => 'id',
-                        'label' => 'name',
-                    ],
-                ]),
-                'order'        => 2,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($categoryDataType, 'order');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'order',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => json_encode([
-                    'default' => 1,
-                ]),
-                'order'        => 3,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($categoryDataType, 'name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'name',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 4,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($categoryDataType, 'slug');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'slug',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 5,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($categoryDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'created_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 1,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 6,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($categoryDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
-                'display_name' => 'updated_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 7,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => 'id',
-                'required'     => 1,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 1,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 1,
+            ),
+            13 => 
+            array (
+                'id' => 46,
+                'data_type_id' => 6,
+                'field' => 'name',
+                'type' => 'text',
                 'display_name' => 'Name',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 2,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'created_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '',
+                'order' => 2,
+            ),
+            14 => 
+            array (
+                'id' => 47,
+                'data_type_id' => 6,
+                'field' => 'created_at',
+                'type' => 'timestamp',
                 'display_name' => 'created_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 3,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'updated_at');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'timestamp',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 3,
+            ),
+            15 => 
+            array (
+                'id' => 48,
+                'data_type_id' => 6,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
                 'display_name' => 'updated_at',
-                'required'     => 0,
-                'browse'       => 0,
-                'read'         => 0,
-                'edit'         => 0,
-                'add'          => 0,
-                'delete'       => 0,
-                'details'      => '',
-                'order'        => 4,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($roleDataType, 'display_name');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '',
+                'order' => 4,
+            ),
+            16 => 
+            array (
+                'id' => 49,
+                'data_type_id' => 6,
+                'field' => 'display_name',
+                'type' => 'text',
                 'display_name' => 'Display Name',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 5,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'seo_title');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
-                'display_name' => 'seo_title',
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 14,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($postDataType, 'featured');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'checkbox',
-                'display_name' => 'featured',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 15,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($userDataType, 'role_id');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '',
+                'order' => 5,
+            ),
+            17 => 
+            array (
+                'id' => 52,
+                'data_type_id' => 3,
+                'field' => 'role_id',
+                'type' => 'text',
                 'display_name' => 'role_id',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 9,
-            ])->save();
-        }
-    }
-
-    /**
-     * [dataRow description].
-     *
-     * @param [type] $type  [description]
-     * @param [type] $field [description]
-     *
-     * @return [type] [description]
-     */
-    protected function dataRow($type, $field)
-    {
-        return DataRow::firstOrNew([
-                'data_type_id' => $type->id,
-                'field'        => $field,
-            ]);
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '',
+                'order' => 9,
+            ),
+            18 => 
+            array (
+                'id' => 53,
+                'data_type_id' => 7,
+                'field' => 'id',
+                'type' => 'checkbox',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            19 => 
+            array (
+                'id' => 54,
+                'data_type_id' => 7,
+                'field' => 'name',
+                'type' => 'text',
+                'display_name' => 'Name',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            20 => 
+            array (
+                'id' => 55,
+                'data_type_id' => 7,
+                'field' => 'design_chain',
+                'type' => 'text_area',
+                'display_name' => 'Design Chain',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            21 => 
+            array (
+                'id' => 56,
+                'data_type_id' => 7,
+                'field' => 'bias_chain',
+                'type' => 'text_area',
+                'display_name' => 'Bias Chain',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            22 => 
+            array (
+                'id' => 57,
+                'data_type_id' => 7,
+                'field' => 'text_chain',
+                'type' => 'text_area',
+                'display_name' => 'Text Chain',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            23 => 
+            array (
+                'id' => 58,
+                'data_type_id' => 7,
+                'field' => 'random_design_iteration',
+                'type' => 'checkbox',
+                'display_name' => 'Random Design Iteration',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            24 => 
+            array (
+                'id' => 59,
+                'data_type_id' => 7,
+                'field' => 'random_design_chain',
+                'type' => 'checkbox',
+                'display_name' => 'Random Design Chain',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 7,
+            ),
+            25 => 
+            array (
+                'id' => 60,
+                'data_type_id' => 7,
+                'field' => 'title',
+                'type' => 'text',
+                'display_name' => 'Title',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 8,
+            ),
+            26 => 
+            array (
+                'id' => 61,
+                'data_type_id' => 7,
+                'field' => 'opponent',
+                'type' => 'text',
+                'display_name' => 'Opponent',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 9,
+            ),
+            27 => 
+            array (
+                'id' => 62,
+                'data_type_id' => 7,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 10,
+            ),
+            28 => 
+            array (
+                'id' => 63,
+                'data_type_id' => 7,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 11,
+            ),
+            29 => 
+            array (
+                'id' => 64,
+                'data_type_id' => 8,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            30 => 
+            array (
+                'id' => 65,
+                'data_type_id' => 8,
+                'field' => 'ip',
+                'type' => 'text',
+                'display_name' => 'Ip',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            31 => 
+            array (
+                'id' => 66,
+                'data_type_id' => 8,
+                'field' => 'code',
+                'type' => 'text',
+                'display_name' => 'Code',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            32 => 
+            array (
+                'id' => 67,
+                'data_type_id' => 8,
+                'field' => 'study_name',
+                'type' => 'text',
+                'display_name' => 'Study Name',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            33 => 
+            array (
+                'id' => 68,
+                'data_type_id' => 8,
+                'field' => 'study_time',
+                'type' => 'text',
+                'display_name' => 'Study Time',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            34 => 
+            array (
+                'id' => 69,
+                'data_type_id' => 8,
+                'field' => 'condition_name',
+                'type' => 'text',
+                'display_name' => 'Condition Name',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            35 => 
+            array (
+                'id' => 70,
+                'data_type_id' => 8,
+                'field' => 'game_phases_played',
+                'type' => 'number',
+                'display_name' => 'Game Phases Played',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 7,
+            ),
+            36 => 
+            array (
+                'id' => 71,
+                'data_type_id' => 8,
+                'field' => 'practice_phases_played',
+                'type' => 'text',
+                'display_name' => 'Practice Phases Played',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 8,
+            ),
+            37 => 
+            array (
+                'id' => 72,
+                'data_type_id' => 8,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 9,
+            ),
+            38 => 
+            array (
+                'id' => 73,
+                'data_type_id' => 8,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 10,
+            ),
+            39 => 
+            array (
+                'id' => 74,
+                'data_type_id' => 9,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            40 => 
+            array (
+                'id' => 75,
+                'data_type_id' => 9,
+                'field' => 'name',
+                'type' => 'text',
+                'display_name' => 'Name',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            41 => 
+            array (
+                'id' => 76,
+                'data_type_id' => 9,
+                'field' => 'iterations',
+                'type' => 'number',
+                'display_name' => 'Iterations',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            42 => 
+            array (
+                'id' => 77,
+                'data_type_id' => 9,
+                'field' => 'competitive_option',
+                'type' => 'number',
+                'display_name' => 'Competitive Option',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            43 => 
+            array (
+                'id' => 78,
+                'data_type_id' => 9,
+                'field' => 'outcome_1_value',
+                'type' => 'text',
+                'display_name' => 'Outcome 1 Value',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            44 => 
+            array (
+                'id' => 79,
+                'data_type_id' => 9,
+                'field' => 'outcome_2_value',
+                'type' => 'text',
+                'display_name' => 'Outcome 2 Value',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            45 => 
+            array (
+                'id' => 80,
+                'data_type_id' => 9,
+                'field' => 'outcome_3_value',
+                'type' => 'text',
+                'display_name' => 'Outcome 3 Value',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 7,
+            ),
+            46 => 
+            array (
+                'id' => 81,
+                'data_type_id' => 9,
+                'field' => 'outcome_4_value',
+                'type' => 'text',
+                'display_name' => 'Outcome 4 Value',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 8,
+            ),
+            47 => 
+            array (
+                'id' => 82,
+                'data_type_id' => 9,
+                'field' => 'label',
+                'type' => 'text',
+                'display_name' => 'Label',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 9,
+            ),
+            48 => 
+            array (
+                'id' => 83,
+                'data_type_id' => 9,
+                'field' => 'outcome_1_description',
+                'type' => 'text_area',
+                'display_name' => 'Outcome 1 Description',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 10,
+            ),
+            49 => 
+            array (
+                'id' => 84,
+                'data_type_id' => 9,
+                'field' => 'outcome_2_description',
+                'type' => 'text_area',
+                'display_name' => 'Outcome 2 Description',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 11,
+            ),
+            50 => 
+            array (
+                'id' => 85,
+                'data_type_id' => 9,
+                'field' => 'outcome_3_description',
+                'type' => 'text_area',
+                'display_name' => 'Outcome 3 Description',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 12,
+            ),
+            51 => 
+            array (
+                'id' => 86,
+                'data_type_id' => 9,
+                'field' => 'outcome_4_description',
+                'type' => 'text_area',
+                'display_name' => 'Outcome 4 Description',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 13,
+            ),
+            52 => 
+            array (
+                'id' => 87,
+                'data_type_id' => 9,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 14,
+            ),
+            53 => 
+            array (
+                'id' => 88,
+                'data_type_id' => 9,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 15,
+            ),
+            54 => 
+            array (
+                'id' => 89,
+                'data_type_id' => 10,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            55 => 
+            array (
+                'id' => 90,
+                'data_type_id' => 10,
+                'field' => 'current_url',
+                'type' => 'text',
+                'display_name' => 'Current Url',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            56 => 
+            array (
+                'id' => 91,
+                'data_type_id' => 10,
+                'field' => 'next_url',
+                'type' => 'text',
+                'display_name' => 'Next Url',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            57 => 
+            array (
+                'id' => 92,
+                'data_type_id' => 10,
+                'field' => 'title',
+                'type' => 'text',
+                'display_name' => 'Title',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            58 => 
+            array (
+                'id' => 93,
+                'data_type_id' => 10,
+                'field' => 'text',
+                'type' => 'rich_text_box',
+                'display_name' => 'Text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            59 => 
+            array (
+                'id' => 94,
+                'data_type_id' => 10,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            60 => 
+            array (
+                'id' => 95,
+                'data_type_id' => 10,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 7,
+            ),
+            61 => 
+            array (
+                'id' => 96,
+                'data_type_id' => 11,
+                'field' => 'id',
+                'type' => 'number',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            62 => 
+            array (
+                'id' => 97,
+                'data_type_id' => 11,
+                'field' => 'current_url',
+                'type' => 'text',
+                'display_name' => 'Current Url',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            63 => 
+            array (
+                'id' => 98,
+                'data_type_id' => 11,
+                'field' => 'name',
+                'type' => 'text',
+                'display_name' => 'Name',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            64 => 
+            array (
+                'id' => 99,
+                'data_type_id' => 11,
+                'field' => 'order',
+                'type' => 'number',
+                'display_name' => 'Order',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            65 => 
+            array (
+                'id' => 100,
+                'data_type_id' => 11,
+                'field' => 'tag_type',
+                'type' => 'text',
+                'display_name' => 'Tag Type',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            66 => 
+            array (
+                'id' => 101,
+                'data_type_id' => 11,
+                'field' => 'attr_name',
+                'type' => 'text',
+                'display_name' => 'Attr Name',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            67 => 
+            array (
+                'id' => 102,
+                'data_type_id' => 11,
+                'field' => 'attr_id',
+                'type' => 'text',
+                'display_name' => 'Attr Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 7,
+            ),
+            68 => 
+            array (
+                'id' => 103,
+                'data_type_id' => 11,
+                'field' => 'label',
+                'type' => 'text',
+                'display_name' => 'Label',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 8,
+            ),
+            69 => 
+            array (
+                'id' => 104,
+                'data_type_id' => 11,
+                'field' => 'attr_type',
+                'type' => 'text',
+                'display_name' => 'Attr Type',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 9,
+            ),
+            70 => 
+            array (
+                'id' => 105,
+                'data_type_id' => 11,
+                'field' => 'attr_placeholder',
+                'type' => 'text',
+                'display_name' => 'Attr Placeholder',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 10,
+            ),
+            71 => 
+            array (
+                'id' => 106,
+                'data_type_id' => 11,
+                'field' => 'attr_value',
+                'type' => 'text',
+                'display_name' => 'Attr Value',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 11,
+            ),
+            72 => 
+            array (
+                'id' => 107,
+                'data_type_id' => 11,
+                'field' => 'attr_class',
+                'type' => 'text',
+                'display_name' => 'Attr Class',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 12,
+            ),
+            73 => 
+            array (
+                'id' => 108,
+                'data_type_id' => 11,
+                'field' => 'attr_min',
+                'type' => 'number',
+                'display_name' => 'Attr Min',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 13,
+            ),
+            74 => 
+            array (
+                'id' => 109,
+                'data_type_id' => 11,
+                'field' => 'attr_max',
+                'type' => 'number',
+                'display_name' => 'Attr Max',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 14,
+            ),
+            75 => 
+            array (
+                'id' => 110,
+                'data_type_id' => 11,
+                'field' => 'attr_required',
+                'type' => 'checkbox',
+                'display_name' => 'Attr Required',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 15,
+            ),
+            76 => 
+            array (
+                'id' => 111,
+                'data_type_id' => 11,
+                'field' => 'attr_autocomplete',
+                'type' => 'checkbox',
+                'display_name' => 'Attr Autocomplete',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 16,
+            ),
+            77 => 
+            array (
+                'id' => 112,
+                'data_type_id' => 11,
+                'field' => 'attr_disabled',
+                'type' => 'checkbox',
+                'display_name' => 'Attr Disabled',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 17,
+            ),
+            78 => 
+            array (
+                'id' => 113,
+                'data_type_id' => 11,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 18,
+            ),
+            79 => 
+            array (
+                'id' => 114,
+                'data_type_id' => 11,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 19,
+            ),
+            80 => 
+            array (
+                'id' => 115,
+                'data_type_id' => 12,
+                'field' => 'id',
+                'type' => 'checkbox',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            81 => 
+            array (
+                'id' => 116,
+                'data_type_id' => 12,
+                'field' => 'form_element_id',
+                'type' => 'number',
+                'display_name' => 'Form Element Id',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            82 => 
+            array (
+                'id' => 117,
+                'data_type_id' => 12,
+                'field' => 'order',
+                'type' => 'number',
+                'display_name' => 'Order',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            83 => 
+            array (
+                'id' => 118,
+                'data_type_id' => 12,
+                'field' => 'value',
+                'type' => 'text',
+                'display_name' => 'Value',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            84 => 
+            array (
+                'id' => 119,
+                'data_type_id' => 12,
+                'field' => 'text',
+                'type' => 'text',
+                'display_name' => 'Text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            85 => 
+            array (
+                'id' => 120,
+                'data_type_id' => 12,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            86 => 
+            array (
+                'id' => 121,
+                'data_type_id' => 12,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 7,
+            ),
+            87 => 
+            array (
+                'id' => 122,
+                'data_type_id' => 13,
+                'field' => 'id',
+                'type' => 'checkbox',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            88 => 
+            array (
+                'id' => 123,
+                'data_type_id' => 13,
+                'field' => 'name',
+                'type' => 'text',
+                'display_name' => 'Name',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            89 => 
+            array (
+                'id' => 124,
+                'data_type_id' => 13,
+                'field' => 'condition_set',
+                'type' => 'text_area',
+                'display_name' => 'Condition Set',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            90 => 
+            array (
+                'id' => 125,
+                'data_type_id' => 13,
+                'field' => 'practice',
+                'type' => 'text_area',
+                'display_name' => 'Practice',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            91 => 
+            array (
+                'id' => 126,
+                'data_type_id' => 13,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            92 => 
+            array (
+                'id' => 127,
+                'data_type_id' => 13,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            93 => 
+            array (
+                'id' => 128,
+                'data_type_id' => 15,
+                'field' => 'id',
+                'type' => 'checkbox',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            94 => 
+            array (
+                'id' => 129,
+                'data_type_id' => 15,
+                'field' => 'load_study',
+                'type' => 'text',
+                'display_name' => 'Load Study',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            95 => 
+            array (
+                'id' => 130,
+                'data_type_id' => 15,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            96 => 
+            array (
+                'id' => 131,
+                'data_type_id' => 15,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            97 => 
+            array (
+                'id' => 132,
+                'data_type_id' => 16,
+                'field' => 'id',
+                'type' => 'checkbox',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            98 => 
+            array (
+                'id' => 133,
+                'data_type_id' => 16,
+                'field' => 'order',
+                'type' => 'number',
+                'display_name' => 'Order',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            99 => 
+            array (
+                'id' => 134,
+                'data_type_id' => 16,
+                'field' => 'name',
+                'type' => 'text',
+                'display_name' => 'Name',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            100 => 
+            array (
+                'id' => 135,
+                'data_type_id' => 16,
+                'field' => 'text',
+                'type' => 'text_area',
+                'display_name' => 'Text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            101 => 
+            array (
+                'id' => 136,
+                'data_type_id' => 16,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            102 => 
+            array (
+                'id' => 137,
+                'data_type_id' => 16,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            103 => 
+            array (
+                'id' => 138,
+                'data_type_id' => 17,
+                'field' => 'id',
+                'type' => 'checkbox',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 1,
+            ),
+            104 => 
+            array (
+                'id' => 139,
+                'data_type_id' => 17,
+                'field' => 'order',
+                'type' => 'number',
+                'display_name' => 'Order',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 2,
+            ),
+            105 => 
+            array (
+                'id' => 140,
+                'data_type_id' => 17,
+                'field' => 'name',
+                'type' => 'text',
+                'display_name' => 'Name',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 3,
+            ),
+            106 => 
+            array (
+                'id' => 141,
+                'data_type_id' => 17,
+                'field' => 'text',
+                'type' => 'text_area',
+                'display_name' => 'Text',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 4,
+            ),
+            107 => 
+            array (
+                'id' => 142,
+                'data_type_id' => 17,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 5,
+            ),
+            108 => 
+            array (
+                'id' => 143,
+                'data_type_id' => 17,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => NULL,
+                'order' => 6,
+            ),
+            109 => 
+            array (
+                'id' => 144,
+                'data_type_id' => 7,
+                'field' => 'text_division',
+                'type' => 'text_area',
+                'display_name' => 'Text Division',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => NULL,
+                'order' => 12,
+            ),
+        ));
+        
+        
     }
 }

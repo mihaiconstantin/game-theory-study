@@ -182,6 +182,7 @@ return [
          * Development services
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
 
         /*
          * Custom Service Providers...
