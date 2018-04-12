@@ -66,5 +66,7 @@
 ### Example game evaluation
 ![example Instruction](https://github.com/mihaiconstantin/game-theory-tilburg/blob/master/demo/demo_evaluation.PNG) 
 
-### Good luck!
+--- 
+
+Feel free to get in touch if you need more details! Good luck!
   
