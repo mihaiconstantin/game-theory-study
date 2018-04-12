@@ -68,5 +68,5 @@
 
 --- 
 
-> Feel free to get in touch if you need more details! Good luck!
+*Feel free to get in touch if you need more details! Good luck!*
   
