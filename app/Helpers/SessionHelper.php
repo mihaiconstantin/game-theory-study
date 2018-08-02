@@ -97,7 +97,6 @@ class SessionHelper
      * @param string $context
      * @param string $previous_url
      * @return array
-     * @throws \Exception
      */
     public static function whereNext(string $context, string $previous_url) : array
     {

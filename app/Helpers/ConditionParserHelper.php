@@ -118,7 +118,7 @@ class ConditionParserHelper
         $temp = [];
         foreach ($unique_names as $name)
         {
-            $temp[] = Design::getByName($name, ['iterations'])['iterations'];
+            $temp[] = Design::getByName($name)['iterations'];
         }
         $unique_phases = array_combine(array_values($unique_names), $temp);
         unset($temp);
