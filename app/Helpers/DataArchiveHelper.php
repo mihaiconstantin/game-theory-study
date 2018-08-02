@@ -149,7 +149,7 @@ class DataArchiveHelper
 
         $this->data_questionnaires['personality'] = json_encode($personality);
         $this->data_questionnaires['game_question'] = json_encode($this->session['data_questionnaires']['game_question']);
-
+        $this->data_questionnaires['game_opponent_evaluation'] = json_encode($this->session['data_questionnaires']['game_opponent_evaluation']);
 
         unset($personality);
     }
@@ -234,25 +234,3 @@ class DataArchiveHelper
     #endregion
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
