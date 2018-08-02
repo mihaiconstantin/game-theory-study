@@ -115,6 +115,7 @@ class DataReconstructHelper
         {
             $this->dataQuestionnaires[$index]['personality'] = json_decode($dataQuestionnaire['personality'], true);
             $this->dataQuestionnaires[$index]['game_question'] = json_decode($dataQuestionnaire['game_question'], true);
+            $this->dataQuestionnaires[$index]['game_opponent_evaluation'] = json_decode($dataQuestionnaire['game_opponent_evaluation'], true);
         }
 
         foreach ($this->dataQuestionnaires as $index => $dataQuestionnaire)
@@ -127,6 +128,11 @@ class DataReconstructHelper
             foreach ($dataQuestionnaire['game_question'] as $questionnaire_name => $data)
             {
                 $this->dataQuestionnaires[$index]['game_question'][$questionnaire_name] = json_decode($data, true);
+            }
+
+            foreach ($dataQuestionnaire['game_opponent_evaluation'] as $questionnaire_name => $data)
+            {
+                $this->dataQuestionnaires[$index]['game_opponent_evaluation'][$questionnaire_name] = json_decode($data, true);
             }
         }
     }

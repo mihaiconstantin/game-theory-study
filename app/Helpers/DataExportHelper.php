@@ -40,14 +40,22 @@ class DataExportHelper extends DataReconstructHelper
     private function headerDataQuestionnaires() : string
     {
         return implode(',', array_filter(array_keys($this->dataQuestionnaires[0]), function($key_name){
-            return $key_name != 'personality' && $key_name != 'game_question' ? true : false;
+            return $key_name != 'personality' && $key_name != 'game_question' && $key_name != 'game_opponent_evaluation' ? true : false;
         }));
     }
+
 
     private function headerDataQuestionnairesGameQuestion() : string
     {
         return $this->headerDataQuestionnaires() . ',' . implode(',', array_keys($this->dataQuestionnaires[0]['game_question'][1]));
     }
+
+
+    private function headerDataQuestionnairesGameOpponentEvaluation() : string
+    {
+        return $this->headerDataQuestionnaires() . ',' . implode(',', array_keys($this->dataQuestionnaires[0]['game_opponent_evaluation'][1]));
+    }
+
 
     private function headerDataQuestionnairesPersonality($questionnaire_name) : string
     {
@@ -112,6 +120,24 @@ class DataExportHelper extends DataReconstructHelper
         foreach ($this->dataQuestionnaires as $index => $dataQuestionnaire)
         {
             foreach ($dataQuestionnaire['game_question'] as $data)
+            {
+                $base_content = implode(',', [$dataQuestionnaire['id'], $dataQuestionnaire['data_participant_id'], $dataQuestionnaire['created_at'], $dataQuestionnaire['updated_at']]) . ',';
+                $game_content = implode(',', $data) . PHP_EOL;
+                $content .= $base_content . $game_content;
+            }
+        }
+
+        return $content;
+    }
+
+
+    private function contentDataQuestionnairesGameOpponentEvaluation() : string
+    {
+        $content = null;
+
+        foreach ($this->dataQuestionnaires as $index => $dataQuestionnaire)
+        {
+            foreach ($dataQuestionnaire['game_opponent_evaluation'] as $data)
             {
                 $base_content = implode(',', [$dataQuestionnaire['id'], $dataQuestionnaire['data_participant_id'], $dataQuestionnaire['created_at'], $dataQuestionnaire['updated_at']]) . ',';
                 $game_content = implode(',', $data) . PHP_EOL;
@@ -234,6 +260,19 @@ class DataExportHelper extends DataReconstructHelper
 
 
     /**
+     * Writes the data_questionnaires (game opponent evaluation) table to disk as .csv and returns the filename.
+     *
+     * @param null $notes
+     * @return string
+     */
+    public function writeDataQuestionnairesGameOpponentEvaluation($notes = null) : string
+    {
+        $filename = 'data_game_opponent_evaluation' . time();
+        return $this->poet($filename, $this->headerDataQuestionnairesGameOpponentEvaluation(), $this->contentDataQuestionnairesGameOpponentEvaluation(), $notes);
+    }
+
+
+    /**
      * Writes the data_questionnaires (personality) table to disk as .csv and returns the filename.
      *
      * @param $questionnaire_name
@@ -322,6 +361,7 @@ class DataExportHelper extends DataReconstructHelper
             $this->writeDataConfigs(),
             $this->writeDataForms(),
             $this->writeDataQuestionnairesGameQuestions(),
+            $this->writeDataQuestionnairesGameOpponentEvaluation(),
             $this->writeDataQuestionnairesPersonality($questionnaire_name_one),
             $this->writeDataQuestionnairesPersonality($questionnaire_name_two),
             $this->writeDataGamePhases()
