@@ -21,6 +21,12 @@ class StudyTableSeeder extends Seeder
             'condition_set' => 'community, point, wallstreet',
             'practice' => 'training'
         ]);
+
+        \App\Models\Study::create([
+            'name' => '2018_08_game_theory_10',
+            'condition_set' => 'community, point, wallstreet',
+            'practice' => 'training'
+        ]);
     }
 
 }
