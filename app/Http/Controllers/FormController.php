@@ -104,7 +104,7 @@ class FormController extends Controller
         return view('forms.demographics', [
             'data' => $instruction,
             'elements' => $elements
-            ]);
+        ]);
     }
 
     public function storeDemographics(Request $request)
@@ -168,6 +168,34 @@ class FormController extends Controller
         return redirect(route($this->InstructionLoader('form.expectation')['next_url'], [
             'gameNumber' => 1,
             'phaseNumber' => 1
+        ]));
+    }
+
+
+    /*
+     * Display and store the opponent-evaluation/{gameNumber} form.
+     * */
+    public function opponentEvaluation($gameNumber)
+    {
+        $instruction = $this->InstructionLoader('form.opponent-evaluation');
+        $elements = FormElement::getElementForContext('form.opponent-evaluation');
+
+        return view('forms.opponent_evaluation', [
+            'data' => $instruction,
+            'elements' => $elements,
+            'gameNumber' => $gameNumber,
+            // The name helps us know where in the session object we need to push the results.
+            'name' => 'game_opponent_evaluation'
+        ]);
+    }
+
+    public function storeOpponentEvaluation(Request $request) {
+        // Store the form data into session. In this case we regard the form as a 'questionnaire' because it is recurring.
+        SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire') . '.' . request('_game_number'), ['_token']);
+
+        // Continue to next url.
+        return redirect(route($this->InstructionLoader('form.opponent-evaluation')['next_url'], [
+            'gameNumber' => $request->get('_game_number')
         ]));
     }
 
