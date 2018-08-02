@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Helpers\DataExportHelper;
 use App\Models\StudyLoader;
 use Exception;
-use Illuminate\Http\Request;
 
 class DataController extends Controller
 {
@@ -15,6 +14,12 @@ class DataController extends Controller
     }
 
 
+
+    /**
+     * Zip and export the data.
+     *
+     * @return string|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function export()
     {
         $study_name = StudyLoader::getLoadedStudy();
@@ -31,6 +36,13 @@ class DataController extends Controller
     }
 
 
+
+    /**
+     * Attempt to reconstruct the participant data from the log file in case an error occurred.
+     *
+     * @param $participantId
+     * @param $jsonErrorLog
+     */
     public function emergencyExport($participantId, $jsonErrorLog)
     {
         $result = json_decode($jsonErrorLog, true);
