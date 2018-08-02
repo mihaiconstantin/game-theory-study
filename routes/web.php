@@ -87,82 +87,9 @@ Route::post('game/store/'                            , 'GameController@store')  
 | Routes responsible for handling admin actions.
 |
 */
+Route::get('admin/export' ,             'DataController@export')            ->name('data.export');
+Route::get('admin/emergency-export' ,   'DataController@emergencyExport')   ->name('data.emergency-export');
 
-
-// TODO: Refactor this into a controller and dynamically fetch the names of the questionnaires.
-// Export the dataset for the current study.
-Route::get('admin/export', function() {
-
-    $study_name = \App\Models\StudyLoader::getLoadedStudy();
-    
-    try {
-        $export = new \App\Helpers\DataExportHelper($study_name);
-    } catch(Exception $e) {
-        return 'An error occured: ' .$e->getMessage();
-    }
-    
-    $file = $export->zip('hexaco', 'bfi', $study_name);
-
-    return response()->download($file, $name = null, ['Content-Type' => 'application/zip']);
-
-})->middleware('auth');
-
-
-// Parsing the emergency data that was saved.
-Route::get('admin/emergency', function()
-{
-    // Handy.
-    // SELECT * FROM data_participants WHERE code = "rJaDWaWet9";//
-    // SELECT * FROM data_configs WHERE data_participant_id = 253;
-    // SELECT * FROM data_forms WHERE data_participant_id = 253;
-    // SELECT * FROM data_questionnaires WHERE data_participant_id = 253;
-    // SELECT * FROM data_game_phases WHERE data_participant_id = 253;
-
-
-    // $json = '';
-    // $assoc = true;
-    // $result = json_decode ($json, $assoc);
-    //
-    // $data_participant_id = 253;
-    //
-    // DB::table('data_forms')->insert([
-    //     [
-    //         'data_participant_id' => $data_participant_id,
-    //         'demographic' => $result[2]['demographic'],
-    //         'expectation' => '{}',
-    //         'feedback' => $result[2]['feedback']
-    //     ]
-    // ]);
-    //
-    // DB::table('data_questionnaires')->insert([
-    //     [
-    //         'data_participant_id' => $data_participant_id,
-    //         'personality' => $result[3]['personality'],
-    //         'game_question' => $result[3]['game_question'],
-    //     ]
-    // ]);
-    //
-    // foreach ($result[4] as $index => $item)
-    // {
-    //     if ($result[4][$index]['game_number'] != null)
-    //     {
-    //         $result[4][$index]['data_participant_id'] = $data_participant_id;
-    //         DB::table('data_game_phases')->insert([$result[4][$index]]);
-    //     }
-    // }
-    //
-    //
-    // dd(
-    //     "Insertion finished.",
-    //     $result
-    // );
-
-    return 'Not in use. Edit source on demand.';
-
-})->middleware('auth');
-
-
-// Voyager routes.
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
