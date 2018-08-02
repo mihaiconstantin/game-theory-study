@@ -379,5 +379,67 @@ class SelectOptionTableSeeder extends Seeder
 
     #endregion
 
+
+    #region feedback form elements
+
+        #region opinion
+
+        // option 1
+        \App\Models\SelectOption::create([
+            'form_element_id' => 13,
+            'order' => 1,
+            'value' => 0,
+            'text' => 'option 1'
+        ]);
+
+        // option 2
+        \App\Models\SelectOption::create([
+            'form_element_id' => 13,
+            'order' => 2,
+            'value' => 1,
+            'text' => 'option 2'
+        ]);
+
+        // option 3
+        \App\Models\SelectOption::create([
+            'form_element_id' => 13,
+            'order' => 3,
+            'value' => 2,
+            'text' => 'option 3'
+        ]);
+
+        #endregion
+
+
+        #region realization
+
+        // option 1
+        \App\Models\SelectOption::create([
+            'form_element_id' => 14,
+            'order' => 1,
+            'value' => 0,
+            'text' => 'option 1'
+        ]);
+
+        // option 2
+        \App\Models\SelectOption::create([
+            'form_element_id' => 14,
+            'order' => 2,
+            'value' => 1,
+            'text' => 'option 2'
+        ]);
+
+        // option 3
+        \App\Models\SelectOption::create([
+            'form_element_id' => 14,
+            'order' => 3,
+            'value' => 2,
+            'text' => 'option 3'
+        ]);
+
+        #endregion
+
+    #endregion
+
     }
 }

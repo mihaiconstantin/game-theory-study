@@ -108,9 +108,18 @@ class InstructionTableSeeder extends Seeder
         // instruction.score/{gameNumber}
         Instruction::create([
             'current_url' => 'instruction.score',
-            'next_url' => 'form.gameQuestion',
+            'next_url' => 'form.opponent-evaluation',
             'title' => 'Money Units transfer',
             'text' => 'Dynamically pulled from the conditions table.'
+        ]);
+
+
+        // form.opponentEvaluation/{gameNumber}
+        Instruction::create([
+            'current_url' => 'form.opponent-evaluation',
+            'next_url' => 'form.game-question',
+            'title' => 'Opponent evaluation',
+            'text' => 'Evaluate Robin.'
         ]);
 
 
