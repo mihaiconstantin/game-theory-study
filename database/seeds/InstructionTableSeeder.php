@@ -39,27 +39,9 @@ class InstructionTableSeeder extends Seeder
         // form.demographics
         Instruction::create([
             'current_url' => 'form.demographics',
-            'next_url' => 'form.questionnaire',
+            'next_url' => 'instruction.announcement',
             'title' => 'Demographics',
             'text' => 'Please fill out the following questions about yourself.'
-        ]);
-
-
-        // form.questionnaire/{hexaco}
-        Instruction::create([
-            'current_url' => 'form.questionnaire',
-            'next_url' => 'form.questionnaire',
-            'title' => 'Questionnaire',
-            'text' => 'On the following pages, you will find a series of statements about you. Please read each statement and decide how much you agree or disagree with that statement. Then indicate your response using the following scale:<ul>	<li>5 = strongly agree</li><li>4 = agree</li><li>3 = neutral (neither agree nor disagree)</li><li>2 = disagree</li><li>1 = strongly disagree</li></ul>Please answer every statement, even if you are not completely sure of your response.'
-        ]);
-
-
-        // form.questionnaire/{bfi}
-        Instruction::create([
-            'current_url' => 'form.questionnaire',
-            'next_url' => 'instruction.announcement',
-            'title' => 'Questionnaire',
-            'text' => 'Here are a number of characteristics that may or may not apply to you. For example, do you agree that you are someone who likes to spend time with others? Please indicate your response using the following scale:<ul><li>5 = strongly agree</li><li>4 = agree</li><li>3 = neutral (neither agree nor disagree)</li><li>2 = disagree</li><li>1 = strongly disagree</li></ul> <br><br> I see myself as someone who &hellip;'
         ]);
 
 

@@ -111,7 +111,7 @@ class FormController extends Controller
     {
         SessionHelper::pushSerialized($request, 'storage.data_forms.demographic', ['_token']);
 
-        return redirect(route($this->InstructionLoader('form.demographics')['next_url'], ['name' => 'hexaco']));
+        return redirect(route($this->InstructionLoader('form.demographics')['next_url']));
     }
 
 
@@ -120,6 +120,10 @@ class FormController extends Controller
      * */
     public function questionnaire($name)
     {
+        // Todo: Here is a small bug: regardless of the fact that we get different items for bfi and hexco,
+        // Todo: we get the same instructions, because the Instruction loader does not know how to
+        // Todo: differentiate between two routes with the same current url.
+        // Todo: Take a look at studyEvaluationQuestion() for a workaround and in the instruction table seeder.
         $instruction = $this->InstructionLoader('form.questionnaire');
         $items = PersonalityItem::getItemsForQuestionnaire($name);
         $steps = ItemScale::getScaleForQuestionnaire($name);
