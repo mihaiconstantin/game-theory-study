@@ -301,53 +301,24 @@ class SelectOptionTableSeeder extends Seeder
     #endregion
 
 
-    #region expectation
+    #region pre-game expectation
 
         # region understanding options
 
         // yes
         \App\Models\SelectOption::create([
-            'form_element_id' => 7,
+            'form_element_id' => 8,
             'order' => 1,
             'value' => 1,
-            'text' => 'yes'
+            'text' => 'understanding.yes'
         ]);
 
         // no
         \App\Models\SelectOption::create([
-            'form_element_id' => 7,
+            'form_element_id' => 8,
             'order' => 0,
             'value' => 0,
-            'text' => 'no'
-        ]);
-
-        #endregion
-
-
-        #region expectation options
-
-        // competitive
-        \App\Models\SelectOption::create([
-            'form_element_id' => 8,
-            'order' => 1,
-            'value' => 1,
-            'text' => 'competitive'
-        ]);
-
-        // cooperative
-        \App\Models\SelectOption::create([
-            'form_element_id' => 8,
-            'order' => 2,
-            'value' => 2,
-            'text' => 'cooperative'
-        ]);
-
-        // neutral
-        \App\Models\SelectOption::create([
-            'form_element_id' => 8,
-            'order' => 3,
-            'value' => 3,
-            'text' => 'neutral'
+            'text' => 'understanding.no'
         ]);
 
         #endregion
@@ -355,86 +326,57 @@ class SelectOptionTableSeeder extends Seeder
     #endregion
 
 
-    #region feedback form elements
-
-        #region related options
-
-        // yes
-        \App\Models\SelectOption::create([
-            'form_element_id' => 10,
-            'order' => 1,
-            'value' => 1,
-            'text' => 'yes'
-        ]);
-
-        // no
-        \App\Models\SelectOption::create([
-            'form_element_id' => 10,
-            'order' => 1,
-            'value' => 0,
-            'text' => 'no'
-        ]);
-
-        #endregion
-
-    #endregion
-
-
-    #region feedback form elements
+    #region opponent evaluation form elements (i.e., end of each game)
 
         #region opinion
 
-        // option 1
+        // cooperatively
         \App\Models\SelectOption::create([
-            'form_element_id' => 13,
+            'form_element_id' => 9,
             'order' => 1,
             'value' => 0,
-            'text' => 'option 1'
+            'text' => 'cooperatively'
         ]);
 
-        // option 2
+        // sometimes cooperatively, sometimes competitively
         \App\Models\SelectOption::create([
-            'form_element_id' => 13,
+            'form_element_id' => 9,
             'order' => 2,
             'value' => 1,
-            'text' => 'option 2'
+            'text' => 'sometimes cooperatively, sometimes competitively'
         ]);
 
-        // option 3
+        // competitively
         \App\Models\SelectOption::create([
-            'form_element_id' => 13,
+            'form_element_id' => 9,
             'order' => 3,
             'value' => 2,
-            'text' => 'option 3'
+            'text' => 'competitively'
         ]);
 
         #endregion
 
+    #endregion
+
+
+    #region study evaluation form elements
 
         #region realization
 
-        // option 1
+        // realization option 1
         \App\Models\SelectOption::create([
-            'form_element_id' => 14,
+            'form_element_id' => 10,
             'order' => 1,
             'value' => 0,
-            'text' => 'option 1'
+            'text' => 'realization option 1'
         ]);
 
-        // option 2
+        // realization option 2
         \App\Models\SelectOption::create([
-            'form_element_id' => 14,
+            'form_element_id' => 10,
             'order' => 2,
             'value' => 1,
-            'text' => 'option 2'
-        ]);
-
-        // option 3
-        \App\Models\SelectOption::create([
-            'form_element_id' => 14,
-            'order' => 3,
-            'value' => 2,
-            'text' => 'option 3'
+            'text' => 'realization option 2'
         ]);
 
         #endregion
