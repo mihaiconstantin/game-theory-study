@@ -48,21 +48,26 @@ Route::get('instruction/not-allowed'            , 'InstructionController@notAllo
 | Routes responsible for handling the forms.
 |
 */
-Route::get('form/consent'                           , 'FormController@consent')                 ->name('form.consent');
-Route::get('form/demographics'                      , 'FormController@demographics')            ->name('form.demographics');
-Route::get('form/questionnaire/{name}'              , 'FormController@questionnaire')           ->name('form.questionnaire');
-Route::get('form/expectation'                       , 'FormController@expectation')             ->name('form.expectation');
-Route::get('form/opponent-evaluation/{gameNumber}'  , 'FormController@opponentEvaluation')      ->name('form.opponent-evaluation');
-Route::get('form/game-question/{gameNumber}'        , 'FormController@gameQuestion')            ->name('form.game-question');
-Route::get('form/feedback'                          , 'FormController@feedback')                ->name('form.feedback');
+Route::get('form/consent'                               , 'FormController@consent')                                 ->name('form.consent');
+Route::get('form/demographics'                          , 'FormController@demographics')                            ->name('form.demographics');
+Route::get('form/expectation'                           , 'FormController@expectation')                             ->name('form.expectation');
+Route::get('form/opponent-evaluation/{gameNumber}'      , 'FormController@opponentEvaluation')                      ->name('form.opponent-evaluation');
+Route::get('form/game-question/{gameNumber}'            , 'FormController@gameQuestion')                            ->name('form.game-question');
+Route::get('form/feedback'                              , 'FormController@feedback')                                ->name('form.feedback');
+Route::get('form/study-evaluation-form'                 , 'FormController@studyEvaluationForm')                     ->name('form.study-evaluation-form');
+Route::get('form/study-evaluation-question/{name}'      , 'FormController@studyEvaluationQuestion')                 ->name('form.study-evaluation-question');
 
-Route::post('form/consent'                          , 'FormController@storeConsent')            ->name('form.store-consent');
-Route::post('form/demographics'                     , 'FormController@storeDemographics')       ->name('form.store-demographics');
-Route::post('form/questionnaire'                    , 'FormController@storeQuestionnaire')      ->name('form.store-questionnaire');
-Route::post('form/expectation'                      , 'FormController@storeExpectation')        ->name('form.store-expectation');
-Route::post('form/opponent-evaluation'              , 'FormController@storeOpponentEvaluation') ->name('form.store-opponent-evaluation');
-Route::post('form/game-question'                    , 'FormController@storeGameQuestion')       ->name('form.store-game-question');
-Route::post('form/feedback'                         , 'FormController@storeFeedback')           ->name('form.store-feedback');
+
+Route::post('form/consent'                              , 'FormController@storeConsent')                            ->name('form.store-consent');
+Route::post('form/demographics'                         , 'FormController@storeDemographics')                       ->name('form.store-demographics');
+Route::post('form/questionnaire'                        , 'FormController@storeQuestionnaire')                      ->name('form.store-questionnaire');
+Route::post('form/expectation'                          , 'FormController@storeExpectation')                        ->name('form.store-expectation');
+Route::post('form/opponent-evaluation'                  , 'FormController@storeOpponentEvaluation')                 ->name('form.store-opponent-evaluation');
+Route::post('form/game-question'                        , 'FormController@storeGameQuestion')                       ->name('form.store-game-question');
+Route::post('form/feedback'                             , 'FormController@storeFeedback')                           ->name('form.store-feedback');
+Route::post('form/study-evaluation-form'                , 'FormController@storeStudyEvaluationForm')                ->name('form.store-study-evaluation-form');
+Route::post('form/study-evaluation-question'            , 'FormController@storeStudyEvaluationQuestion')            ->name('form.store-study-evaluation-question');
+
 
 
 /*

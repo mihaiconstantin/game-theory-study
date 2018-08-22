@@ -230,12 +230,72 @@ class FormController extends Controller
 
         if (session('temp.next_game') == 0)
         {
-            return redirect()->route('instruction.debriefing');
+            return redirect()->route('form.study-evaluation-form');
         }
 
         return redirect(route($this->InstructionLoader('form.game-question')['next_url'], [
             'gameNumber' => session('temp.next_game')
         ]));
+    }
+
+
+    /*
+     * Display and store the form/study-evaluation-form/ form.
+     * */
+    public function studyEvaluationForm()
+    {
+        $instruction = $this->InstructionLoader('form.study-evaluation-form');
+        $elements = FormElement::getElementForContext('form.study-evaluation-form');
+
+        return view('forms.study_evaluation_form', [
+            'data' => $instruction,
+            'elements' => $elements
+        ]);
+    }
+
+    public function storeStudyEvaluationForm(Request $request)
+    {
+        // Todo: Check that the way the data is stored to session is okay. What if we have multiple form elements?
+        SessionHelper::pushSerialized($request, 'storage.data_forms.realization', ['_token']);
+
+        return redirect(route($this->InstructionLoader('form.study-evaluation-form')['next_url'], [
+            'name' => 'wallstreet'
+        ]));
+    }
+
+
+    /*
+     * Display and store the form/study-evaluation-question/{wallstreet or community} questionnaire.
+     * Items and scales will change accordingly.
+     * */
+    public function studyEvaluationQuestion($name)
+    {
+        $instruction = $this->InstructionLoader('form.study-evaluation-question.' . $name);
+        $items = PersonalityItem::getItemsForQuestionnaire($name);
+        $steps = ItemScale::getScaleForQuestionnaire($name);
+
+        // dd($instruction);
+
+        return view('forms.study_evaluation_question', [
+            'data' => $instruction,
+            'items' => $items,
+            'steps' => $steps,
+            'name'  => $name
+        ]);
+    }
+
+    public function storeStudyEvaluationQuestion(Request $request)
+    {
+        SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire'), ['_token']);
+
+        if (request('_questionnaire') == 'wallstreet')
+        {
+            return redirect(route('form.study-evaluation-question', [
+                'name' => 'community'
+            ]));
+        }
+
+        return redirect(route('instruction.debriefing'));
     }
 
 

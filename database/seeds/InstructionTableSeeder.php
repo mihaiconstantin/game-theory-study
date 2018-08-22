@@ -126,6 +126,33 @@ class InstructionTableSeeder extends Seeder
         // last instruction.new-game/{gameNumber} will output that there are no games left
 
 
+        // form.study-evaluation-form
+        Instruction::create([
+            'current_url' => 'form.study-evaluation-form',
+            'next_url' => 'form.study-evaluation-question',
+            'title' => 'Form for evaluating the entire study',
+            'text' => 'The instructions for the form used to evaluate the entire study.'
+        ]);
+
+
+        // form.study-evaluation-question/{wallstreet}
+        Instruction::create([
+            'current_url' => 'form.study-evaluation-question.wallstreet',
+            'next_url' => 'form.study-evaluation-question',
+            'title' => 'Questionnaire for WallStreet',
+            'text' => 'The instructions for WallStreet.'
+        ]);
+
+
+        // form.study-evaluation-question/{community}
+        Instruction::create([
+            'current_url' => 'form.study-evaluation-question.community',
+            'next_url' => 'instruction.debriefing',
+            'title' => 'Questionnaire for Community',
+            'text' => 'The instructions for Community.'
+        ]);
+
+
         // debriefing
         Instruction::create([
             'current_url' => 'instruction.debriefing',
