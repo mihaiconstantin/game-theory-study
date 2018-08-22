@@ -133,5 +133,35 @@ class PersonalityItemTableSeeder extends Seeder
 
         #endregion
 
+
+        #region study evaluation items for WallStreet
+
+        $study_evaluation_wallstreet_items = [
+
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'End of study evaluation for WallStreet.', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 2, 'name' => 'wallstreet', 'text' => 'End of study evaluation for WallStreet.', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 3, 'name' => 'wallstreet', 'text' => 'End of study evaluation for WallStreet.', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+
+        ];
+
+        DB::table('personality_items')->insert($study_evaluation_wallstreet_items);
+
+        #endregion
+
+
+        #region study evaluation items for Community
+
+        $study_evaluation_community_items = [
+
+            ['order' => 1, 'name' => 'community', 'text' => 'End of study evaluation for Community.', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 2, 'name' => 'community', 'text' => 'End of study evaluation for Community.', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 3, 'name' => 'community', 'text' => 'End of study evaluation for Community.', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+
+        ];
+
+        DB::table('personality_items')->insert($study_evaluation_community_items);
+
+        #endregion
+
     }
 }
