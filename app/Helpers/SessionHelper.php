@@ -298,9 +298,10 @@ class SessionHelper
 
 
                 'data_forms' => [
-                    'demographic'   => null,
-                    'expectation'   => null,
-                    'feedback'      => null,
+                    'demographic'       => null,
+                    'expectation'       => null,
+                    'realization'       => null,
+                    'feedback'          => null,
                 ],
 
 

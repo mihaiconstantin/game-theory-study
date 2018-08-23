@@ -194,7 +194,7 @@ class FormController extends Controller
     }
 
     public function storeOpponentEvaluation(Request $request) {
-        // Store the form data into session. In this case we regard the form as a 'questionnaire' because it is recurring.
+        // Store the form data into session. In this case we regard the form as a 'questionnaire' because it is recurring after each game.
         SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire') . '.' . request('_game_number'), ['_token']);
 
         // Continue to next url.
@@ -255,7 +255,6 @@ class FormController extends Controller
 
     public function storeStudyEvaluationForm(Request $request)
     {
-        // Todo: Check that the way the data is stored to session is okay. What if we have multiple form elements?
         SessionHelper::pushSerialized($request, 'storage.data_forms.realization', ['_token']);
 
         return redirect(route($this->InstructionLoader('form.study-evaluation-form')['next_url'], [
