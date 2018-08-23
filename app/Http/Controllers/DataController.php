@@ -30,7 +30,7 @@ class DataController extends Controller
             return 'An error occurred: ' . $e->getMessage();
         }
 
-        $file = $export->zip('hexaco', 'bfi', $study_name);
+        $file = $export->zip('wallstreet', 'community', $study_name);
 
         return response()->download($file, $name = null, ['Content-Type' => 'application/zip']);
     }
@@ -45,6 +45,8 @@ class DataController extends Controller
      */
     public function emergencyExport($participantId, $jsonErrorLog)
     {
+        dd('Before use: tweak this accordingly based on the changes in the data for current study.');
+
         $result = json_decode($jsonErrorLog, true);
 
         $data_participant_id = $participantId;

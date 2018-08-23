@@ -97,6 +97,7 @@ class DataReconstructHelper
             $this->dataForms[$index]['file'] = array_merge(
                 json_decode($dataForm['demographic'], true),
                 json_decode($dataForm['expectation'], true),
+                json_decode($dataForm['realization'], true),
                 json_decode($dataForm['feedback'], true)
             );
         }

@@ -70,6 +70,7 @@ class DataExportHelper extends DataReconstructHelper
             return
                 $key_name != 'demographic' &&
                 $key_name != 'expectation' &&
+                $key_name != 'realization' &&
                 $key_name != 'feedback'    &&
                 $key_name != 'file' ? true : false;
         }))
