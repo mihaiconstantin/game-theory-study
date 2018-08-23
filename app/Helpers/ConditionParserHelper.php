@@ -29,6 +29,12 @@ class ConditionParserHelper
         $this->loadConditionInfo();
         $this->loadConditionText();
 
+
+        // Withing `loadConditionText()` we are also injecting the incentive text, that is,
+        // we replace `{{ incentive_text }}` with the text value of `incentive_text` if
+        // `incentive` is set to 1 in the database. So, we stored a parsed text.
+
+
         // randomize the order of the designs (games)
         if ($rawCondition['random_design_chain'] == 1)
         {
@@ -206,11 +212,21 @@ class ConditionParserHelper
      */
     private function loadConditionText()
     {
+        // See the comment in the controller. We are injecting the incentive text before further manipulations.
+        if ($this->rawCondition['incentive'])
+        {
+            $this->rawCondition['text_chain'] = str_replace('{{incentive_text}}', $this->rawCondition['incentive_text'], $this->rawCondition['text_chain']);
+        }
+
         $bias_type = BasicHelper::parseChainLeft($this->rawCondition['text_chain']);
         $text = BasicHelper::parseChainRight($this->rawCondition['text_chain']);
 
         // condition text (value) for each bias type (key)
         $this->conditionText = array_combine(array_values($bias_type), $text);
+
+        // Append other text relevant for this condition.
+        $this->conditionText['division'] = $this->rawCondition['text_division'];
+        $this->conditionText['incentive'] = $this->rawCondition['incentive_text'];
     }
 
 
@@ -225,7 +241,8 @@ class ConditionParserHelper
             'title' => $this->rawCondition['title'],
             'opponent' => $this->rawCondition['opponent'],
             'random_games' => $this->rawCondition['random_design_chain'],
-            'random_phases' => $this->rawCondition['random_design_iteration']
+            'random_phases' => $this->rawCondition['random_design_iteration'],
+            'incentive' => $this->rawCondition['incentive'],
         ];
     }
 
