@@ -139,6 +139,7 @@ class GameController extends Controller
                 $base_key . '.phase_number'      => $data['phase_number'],
                 $base_key . '.start_play_time'   => $data['start_play_time'],
                 $base_key . '.end_play_time'     => $data['end_play_time'],
+                $base_key . '.incentive'         => $data['incentive'],
                 $base_key . '.bias_type'         => $data['bias_type'],
                 $base_key . '.competitive'       => $data['competitive'],
                 $base_key . '.user_choice'       => $data['user_choice'],
