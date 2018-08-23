@@ -23,7 +23,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.start',
             'next_url' => 'form.consent',
             'title' => 'Welcome',
-            'text' => 'Welcome in this study to human behavior. First of all, we want to thank you for participation!<br><br>This study consists of several blocks:<ul><li>Self-report questionnaire</li><li>Practice phase of a game</li><li>Playing a game (9 times)</li><li>Self-report questionnaire about a game (9 times)</li><li>End questions</li></ul>Before you start please fill in the informed consent form.'
+            'text' => 'Welcome in this study to human behavior. First of all, we want to thank you for participation!<br><br>This study consists of several blocks:<ul><li>Self-report questionnaire</li><li>Practice phase of a game</li><li>Playing 9 games, each with 10 rounds</li><li>Self-report questionnaire about a game (9 times)</li><li>End questions</li></ul>Before you start please fill in the informed consent form.'
         ]);
 
 
@@ -50,7 +50,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.announcement',
             'next_url' => 'instruction.practice',
             'title' => 'Games introduction',
-            'text' => 'In this part of the study you are going to play a game with another player. The game consists of a practice phase and a game phase. In each round you both have to make a decision between two alternatives. You make the decision at the same time, so you will not know the choice of the other player while making your decision. The choice of both players together states the amount of money units you both deserve. In each game you will see a table with the amount of money units that are possible to earn in each situation.'
+            'text' => 'In this part of the study you are going to play games with other player. There is first a practice phase to familiarize yourself with playing a game. After that the real games will begin and you will be playing for Money Units (MUs) with a player called Robin. You and Robin will make the decisions at the same time, so you will not know Robin’s choice while making your decision.'
         ]);
 
 
@@ -71,7 +71,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.condition',
             'next_url' => 'form.expectation',
             'title' => 'Game phase',
-            'text' => 'You finished the practice phase and are about to start the game phase.<br><br>You are expected to play 9 games, each consisting of 10 rounds. After each game you are invited to answer questions about the game you played.<br><br><b>Please pay attention: <span class="text-danger">there are some variations in each game, please read carefully.</span></b><br><br>Good luck!'
+            'text' => 'You finished the practice phase and are about to start the game phase.<br><br>You will play 9 different games, and each game will be played 10 times in a row (i.e. 10 rounds). After each round you will be informed about the MUs you earned and the MUs Robin earned. For example, after having played game 6 for the 4th time you will see a screen "Your MUs xx", "Robin’s MUs xx", "game 6/9, round 4/10". After each game, you are invited to answer questions about the game you played.<br><br><b>Please pay attention: <span class="text-danger">there are some variations in each game, please read carefully.</span></b><br><br>{{incentive_text}}<br><br>Good luck!'
         ]);
 
 
@@ -79,8 +79,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'form.expectation',
             'next_url' => 'game.play',
-            'title' => 'Understanding and expectations',
-            'text' => 'Please fill out the following questions.'
+            'title' => 'Understanding',
+            'text' => 'Please fill out the following question.'
         ]);
 
 
@@ -101,7 +101,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'form.opponent-evaluation',
             'next_url' => 'form.game-question',
             'title' => 'Opponent evaluation',
-            'text' => 'Evaluate Robin.'
+            'text' => 'Please fill out the following question.'
         ]);
 
 
@@ -130,8 +130,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'form.study-evaluation-form',
             'next_url' => 'form.study-evaluation-question',
-            'title' => 'Form for evaluating the entire study',
-            'text' => 'The instructions for the form used to evaluate the entire study.'
+            'title' => 'Study evaluation',
+            'text' => 'As you could read in the introduction to this experiment, Robin was ‘instructed’ to be cooperative in some games, competitive in other games, and sometimes cooperative and sometimes competitive in the same game.'
         ]);
 
 
@@ -139,8 +139,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'form.study-evaluation-question.wallstreet',
             'next_url' => 'form.study-evaluation-question',
-            'title' => 'Questionnaire for WallStreet',
-            'text' => 'The instructions for WallStreet.'
+            'title' => 'Understanding of the label',
+            'text' => 'Please indicate the degree to which you agree or disagree with the following statements. When I play a game with others that is called <b>"Wall Street Game"</b> I think that people who play this game generally...'
         ]);
 
 
@@ -148,8 +148,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'form.study-evaluation-question.community',
             'next_url' => 'instruction.debriefing',
-            'title' => 'Questionnaire for Community',
-            'text' => 'The instructions for Community.'
+            'title' => 'Understanding of the label',
+            'text' => 'Please indicate the degree to which you agree or disagree with the following statements. When I play a game with others that is called <b>"Community Game"</b> I think that people who play this game generally...'
         ]);
 
 

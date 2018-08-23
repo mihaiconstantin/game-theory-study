@@ -143,7 +143,7 @@ class FormElementTableSeeder extends Seeder
             'tag_type' => 'select',
             'attr_name' => 'realization',
             'attr_id' => 'realization',
-            'label' => 'Realization? The text for the question comes here.',
+            'label' => 'Did you realize that ‘instructed’ meant ‘programmed’ (i.e., a machine player)?',
         ]);
 
         #endregion
