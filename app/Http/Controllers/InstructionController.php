@@ -62,35 +62,14 @@ class InstructionController extends Controller
         $pc_score = session('score.' . $gameNumber . '.pc');
 
         // Determining what the user and the pc gain.
-        switch ($condition)
-        {
-            case 'wallstreet':
-                $user_gains = $user_score;
-                $pc_gains = $pc_score;
-
-                break;
-            case 'community':
-                $user_gains = ($user_score + $pc_score) / 2;
-                $pc_gains = ($user_score + $pc_score) / 2;
-
-                break;
-            case 'point':
-                $user_gains = (.75 * $user_score) + (.25 * $pc_score);
-                $pc_gains = (.75 * $pc_score) + (.25 * $user_score);
-                break;
-
-            default:
-                throw new \Exception('No score division logic specified for condition "' . $condition . '".');
-                break;
-        }
-
+        $gains = $this->adjustScoreForCondition($condition, $user_score, $pc_score);
 
         // Fetch the appropriate text from the database.
         $text = Condition::where('name', $condition)->value('text_division');
 
         // Insert the score within the placeholders.
-        $text = str_replace('{{user_gains}}', '<span class="badge .badge-pill badge-primary">' . $user_gains . '</span>', $text);
-        $text = str_replace('{{pc_gains}}',   '<span class="badge .badge-pill badge-danger">'  . $pc_gains .   '</span>', $text);
+        $text = str_replace('{{user_gains}}', '<span class="badge .badge-pill badge-primary">' . $gains['user'] . '</span>', $text);
+        $text = str_replace('{{pc_gains}}',   '<span class="badge .badge-pill badge-danger">'  . $gains['pc'] .   '</span>', $text);
 
 
         // Fetch the text associated with this instruction view. Then attach
@@ -152,6 +131,45 @@ class InstructionController extends Controller
     public function notAllowed()
     {
         return view('end', ['data' => $this->InstructionLoader('instruction.not-allowed')]);
+    }
+
+
+
+
+    /**
+     * Computes and returns the proper score after applying the division rules.
+     * Todo: place this somewhere else later.
+     *
+     * @param $condition
+     * @param $user_score
+     * @param $pc_score
+     * @return array
+     * @throws \Exception
+     */
+    function adjustScoreForCondition($condition, $user_score, $pc_score)
+    {
+        $score_gains = [
+            'user' => null,
+            'pc' => null
+        ];
+
+        if ($condition == 'B1' || $condition == 'B2' || $condition == 'D1' || $condition == 'D2' || $condition == 'F1' || $condition == 'F2') {
+            $score_gains['user'] = $user_score;
+            $score_gains['pc'] = $pc_score;
+        }
+        elseif ($condition == 'A1' || $condition == 'A2' || $condition == 'C1' || $condition == 'C2' || $condition == 'E1' || $condition == 'E2') {
+            $score_gains['user'] = ($user_score + $pc_score) / 2;
+            $score_gains['pc'] = ($user_score + $pc_score) / 2;
+        }
+        elseif ($condition == 'G1' || $condition == 'G2' || $condition == 'H1' || $condition == 'H2') {
+            $score_gains['user'] = $user_score;
+            $score_gains['pc'] = $pc_score;
+        }
+        else {
+            throw new \Exception('No score division logic specified for condition "' . $condition . '".');
+        }
+
+        return $score_gains;
     }
 
 }
