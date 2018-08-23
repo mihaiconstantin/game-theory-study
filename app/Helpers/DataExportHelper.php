@@ -40,7 +40,7 @@ class DataExportHelper extends DataReconstructHelper
     private function headerDataQuestionnaires() : string
     {
         return implode(',', array_filter(array_keys($this->dataQuestionnaires[0]), function($key_name){
-            return $key_name != 'personality' && $key_name != 'game_question' && $key_name != 'game_opponent_evaluation' ? true : false;
+            return $key_name != 'study_evaluation' && $key_name != 'game_question' && $key_name != 'game_opponent_evaluation' ? true : false;
         }));
     }
 
@@ -57,9 +57,9 @@ class DataExportHelper extends DataReconstructHelper
     }
 
 
-    private function headerDataQuestionnairesPersonality($questionnaire_name) : string
+    private function headerDataQuestionnairesStudyEvaluation($questionnaire_name) : string
     {
-        return $this->headerDataQuestionnaires() . ',' . implode(',', array_keys($this->dataQuestionnaires[0]['personality'][$questionnaire_name]));
+        return $this->headerDataQuestionnaires() . ',' . implode(',', array_keys($this->dataQuestionnaires[0]['study_evaluation'][$questionnaire_name]));
     }
 
 
@@ -149,7 +149,7 @@ class DataExportHelper extends DataReconstructHelper
     }
 
 
-    private function contentDataQuestionnairesPersonality($questionnaire_name) : string
+    private function contentDataQuestionnairesStudyEvaluation($questionnaire_name) : string
     {
         $content = null;
 
@@ -164,8 +164,8 @@ class DataExportHelper extends DataReconstructHelper
                     ]) . ',';
 
 
-            $personality_content = implode(',', $dataQuestionnaire['personality'][$questionnaire_name]) . PHP_EOL;
-            $content .= $base_content . $personality_content;
+            $study_evaluation_content = implode(',', $dataQuestionnaire['study_evaluation'][$questionnaire_name]) . PHP_EOL;
+            $content .= $base_content . $study_evaluation_content;
         }
 
         return $content;
@@ -273,17 +273,17 @@ class DataExportHelper extends DataReconstructHelper
 
 
     /**
-     * Writes the data_questionnaires (personality) table to disk as .csv and returns the filename.
+     * Writes the data_questionnaires (study_evaluation) table to disk as .csv and returns the filename.
      *
      * @param $questionnaire_name
      * @param null $notes
      * @return string
      */
-    public function writeDataQuestionnairesPersonality($questionnaire_name, $notes = null) :string
+    public function writeDataQuestionnairesStudyEvaluation($questionnaire_name, $notes = null) :string
     {
         $filename = 'data_questionnaires_' . $questionnaire_name . time();
 
-        return $this->poet($filename, $this->headerDataQuestionnairesPersonality($questionnaire_name), $this->contentDataQuestionnairesPersonality($questionnaire_name), $notes);
+        return $this->poet($filename, $this->headerDataQuestionnairesStudyEvaluation($questionnaire_name), $this->contentDataQuestionnairesStudyEvaluation($questionnaire_name), $notes);
     }
 
 
@@ -349,8 +349,8 @@ class DataExportHelper extends DataReconstructHelper
      * Builds a .zip archive with all the relevant datasets collected during study.
      * Returns the created archive file path or success.
      *
-     * @param string $questionnaire_name_one
-     * @param string $questionnaire_name_two
+     * @param string $questionnaire_name_one The name of the first study evaluation questionnaire (i.e., wallstreet).
+     * @param string $questionnaire_name_two The name of the second study evaluation questionnaire (i.e., community).
      * @param string $filename
      * @return string
      */
@@ -362,8 +362,8 @@ class DataExportHelper extends DataReconstructHelper
             $this->writeDataForms(),
             $this->writeDataQuestionnairesGameQuestions(),
             $this->writeDataQuestionnairesGameOpponentEvaluation(),
-            $this->writeDataQuestionnairesPersonality($questionnaire_name_one),
-            $this->writeDataQuestionnairesPersonality($questionnaire_name_two),
+            $this->writeDataQuestionnairesStudyEvaluation($questionnaire_name_one),
+            $this->writeDataQuestionnairesStudyEvaluation($questionnaire_name_two),
             $this->writeDataGamePhases()
         ];
 
