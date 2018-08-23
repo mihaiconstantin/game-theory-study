@@ -217,6 +217,10 @@ class ConditionParserHelper
         {
             $this->rawCondition['text_chain'] = str_replace('{{incentive_text}}', $this->rawCondition['incentive_text'], $this->rawCondition['text_chain']);
         }
+        else
+        {
+            $this->rawCondition['text_chain'] = str_replace('{{incentive_text}}', '', $this->rawCondition['text_chain']);
+        }
 
         $bias_type = BasicHelper::parseChainLeft($this->rawCondition['text_chain']);
         $text = BasicHelper::parseChainRight($this->rawCondition['text_chain']);

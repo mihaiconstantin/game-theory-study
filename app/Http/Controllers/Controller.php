@@ -38,6 +38,10 @@ class Controller extends BaseController
             {
                 $instruction['text'] = str_replace('{{incentive_text}}', session('config.condition.text.incentive'), $instruction['text']);
             }
+            else
+            {
+                $instruction['text'] = str_replace('{{incentive_text}}', '', $instruction['text']);
+            }
         }
 
         return $instruction;
