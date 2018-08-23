@@ -4,7 +4,7 @@
     @include('partials.elements.__description')
 </div>
 
-<form action="{{URL::route('form.storeDemographics')}}" method="POST">
+<form action="{{URL::route('form.store-demographics')}}" method="POST">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
     @include('macros.input')

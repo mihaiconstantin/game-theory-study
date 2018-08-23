@@ -115,5 +115,74 @@ class ItemScaleTableSeeder extends Seeder
 
         #endregion
 
+
+        #region study evaluation items for both WallStreet
+
+        App\Models\ItemScale::create([
+            'order' => '1',
+            'text' => 'strongly disagree',
+            'name' => 'wallstreet'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '2',
+            'text' => 'disagree',
+            'name' => 'wallstreet'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '3',
+            'text' => 'neither agree nor disagree',
+            'name' => 'wallstreet'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '4',
+            'text' => 'agree',
+            'name' => 'wallstreet'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '5',
+            'text' => 'strongly agree',
+            'name' => 'wallstreet'
+        ]);
+
+        #endregion
+
+
+        #region study evaluation items for both Community
+
+        App\Models\ItemScale::create([
+            'order' => '1',
+            'text' => 'strongly disagree',
+            'name' => 'community'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '2',
+            'text' => 'disagree',
+            'name' => 'community'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '3',
+            'text' => 'neither agree nor disagree',
+            'name' => 'community'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '4',
+            'text' => 'agree',
+            'name' => 'community'
+        ]);
+
+        App\Models\ItemScale::create([
+            'order' => '5',
+            'text' => 'strongly agree',
+            'name' => 'community'
+        ]);
+
+        #endregion
     }
 }

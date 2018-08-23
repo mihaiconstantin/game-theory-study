@@ -18,9 +18,10 @@ class Controller extends BaseController
      * using the $current_url as a search phrase.
      *
      * @param string $current_url
+     * @param bool $should_check_incentive
      * @return array
      */
-    protected function InstructionLoader(string $current_url) : array
+    protected function InstructionLoader(string $current_url, bool $should_check_incentive = true) : array
     {
         $instruction = Instruction::getColumnsByUrl($current_url, [
             'current_url', 'next_url', 'title', 'text'
@@ -28,9 +29,20 @@ class Controller extends BaseController
 
         // Assign an array of empty parameters for routes that do not need them.
         // For the routes that require parameters, we will append on demand.
-
         $instruction['parameters'] = [];
 
+        if ($should_check_incentive)
+        {
+            // In case the condition is incentivised, adjust the text accordingly.
+            if (session('config.condition.info.incentive') == 1)
+            {
+                $instruction['text'] = str_replace('{{incentive_text}}', session('config.condition.text.incentive'), $instruction['text']);
+            }
+            else
+            {
+                $instruction['text'] = str_replace('{{incentive_text}}', '', $instruction['text']);
+            }
+        }
 
         return $instruction;
     }

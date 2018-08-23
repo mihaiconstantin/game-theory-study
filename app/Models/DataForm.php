@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DataForm extends Model
 {
 
-    protected $fillable = ['demographic', 'expectation', 'feedback'];
+    protected $fillable = ['demographic', 'expectation', 'realization', 'feedback'];
 
 
 

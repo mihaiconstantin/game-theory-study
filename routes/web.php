@@ -48,19 +48,26 @@ Route::get('instruction/not-allowed'            , 'InstructionController@notAllo
 | Routes responsible for handling the forms.
 |
 */
-Route::get('form/consent'                   , 'FormController@consent')             ->name('form.consent');
-Route::get('form/demographics'              , 'FormController@demographics')        ->name('form.demographics');
-Route::get('form/questionnaire/{name}'      , 'FormController@questionnaire')       ->name('form.questionnaire');
-Route::get('form/expectation'               , 'FormController@expectation')         ->name('form.expectation');
-Route::get('form/game-question/{gameNumber}', 'FormController@gameQuestion')        ->name('form.gameQuestion');
-Route::get('form/feedback'                  , 'FormController@feedback')            ->name('form.feedback');
+Route::get('form/consent'                               , 'FormController@consent')                                 ->name('form.consent');
+Route::get('form/demographics'                          , 'FormController@demographics')                            ->name('form.demographics');
+Route::get('form/expectation'                           , 'FormController@expectation')                             ->name('form.expectation');
+Route::get('form/opponent-evaluation/{gameNumber}'      , 'FormController@opponentEvaluation')                      ->name('form.opponent-evaluation');
+Route::get('form/game-question/{gameNumber}'            , 'FormController@gameQuestion')                            ->name('form.game-question');
+Route::get('form/feedback'                              , 'FormController@feedback')                                ->name('form.feedback');
+Route::get('form/study-evaluation-form'                 , 'FormController@studyEvaluationForm')                     ->name('form.study-evaluation-form');
+Route::get('form/study-evaluation-question/{name}'      , 'FormController@studyEvaluationQuestion')                 ->name('form.study-evaluation-question');
 
-Route::post('form/consent'                  , 'FormController@storeConsent')        ->name('form.storeConsent');
-Route::post('form/demographics'             , 'FormController@storeDemographics')   ->name('form.storeDemographics');
-Route::post('form/questionnaire'            , 'FormController@storeQuestionnaire')  ->name('form.storeQuestionnaire');
-Route::post('form/expectation'              , 'FormController@storeExpectation')    ->name('form.storeExpectation');
-Route::post('form/game-question'            , 'FormController@storeGameQuestion')   ->name('form.storeGameQuestion');
-Route::post('form/feedback'                 , 'FormController@storeFeedback')       ->name('form.storeFeedback');
+
+Route::post('form/consent'                              , 'FormController@storeConsent')                            ->name('form.store-consent');
+Route::post('form/demographics'                         , 'FormController@storeDemographics')                       ->name('form.store-demographics');
+Route::post('form/questionnaire'                        , 'FormController@storeQuestionnaire')                      ->name('form.store-questionnaire');
+Route::post('form/expectation'                          , 'FormController@storeExpectation')                        ->name('form.store-expectation');
+Route::post('form/opponent-evaluation'                  , 'FormController@storeOpponentEvaluation')                 ->name('form.store-opponent-evaluation');
+Route::post('form/game-question'                        , 'FormController@storeGameQuestion')                       ->name('form.store-game-question');
+Route::post('form/feedback'                             , 'FormController@storeFeedback')                           ->name('form.store-feedback');
+Route::post('form/study-evaluation-form'                , 'FormController@storeStudyEvaluationForm')                ->name('form.store-study-evaluation-form');
+Route::post('form/study-evaluation-question'            , 'FormController@storeStudyEvaluationQuestion')            ->name('form.store-study-evaluation-question');
+
 
 
 /*
@@ -85,82 +92,9 @@ Route::post('game/store/'                            , 'GameController@store')  
 | Routes responsible for handling admin actions.
 |
 */
+Route::get('admin/export' ,             'DataController@export')            ->name('data.export');
+Route::get('admin/emergency-export' ,   'DataController@emergencyExport')   ->name('data.emergency-export');
 
-
-// TODO: Refactor this into a controller and dynamically fetch the names of the questionnaires.
-// Export the dataset for the current study.
-Route::get('admin/export', function() {
-
-    $study_name = \App\Models\StudyLoader::getLoadedStudy();
-    
-    try {
-        $export = new \App\Helpers\DataExportHelper($study_name);
-    } catch(Exception $e) {
-        return 'An error occured: ' .$e->getMessage();
-    }
-    
-    $file = $export->zip('hexaco', 'bfi', $study_name);
-
-    return response()->download($file, $name = null, ['Content-Type' => 'application/zip']);
-
-})->middleware('auth');
-
-
-// Parsing the emergency data that was saved.
-Route::get('admin/emergency', function()
-{
-    // Handy.
-    // SELECT * FROM data_participants WHERE code = "rJaDWaWet9";//
-    // SELECT * FROM data_configs WHERE data_participant_id = 253;
-    // SELECT * FROM data_forms WHERE data_participant_id = 253;
-    // SELECT * FROM data_questionnaires WHERE data_participant_id = 253;
-    // SELECT * FROM data_game_phases WHERE data_participant_id = 253;
-
-
-    // $json = '';
-    // $assoc = true;
-    // $result = json_decode ($json, $assoc);
-    //
-    // $data_participant_id = 253;
-    //
-    // DB::table('data_forms')->insert([
-    //     [
-    //         'data_participant_id' => $data_participant_id,
-    //         'demographic' => $result[2]['demographic'],
-    //         'expectation' => '{}',
-    //         'feedback' => $result[2]['feedback']
-    //     ]
-    // ]);
-    //
-    // DB::table('data_questionnaires')->insert([
-    //     [
-    //         'data_participant_id' => $data_participant_id,
-    //         'personality' => $result[3]['personality'],
-    //         'game_question' => $result[3]['game_question'],
-    //     ]
-    // ]);
-    //
-    // foreach ($result[4] as $index => $item)
-    // {
-    //     if ($result[4][$index]['game_number'] != null)
-    //     {
-    //         $result[4][$index]['data_participant_id'] = $data_participant_id;
-    //         DB::table('data_game_phases')->insert([$result[4][$index]]);
-    //     }
-    // }
-    //
-    //
-    // dd(
-    //     "Insertion finished.",
-    //     $result
-    // );
-
-    return 'Not in use. Edit source on demand.';
-
-})->middleware('auth');
-
-
-// Voyager routes.
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });

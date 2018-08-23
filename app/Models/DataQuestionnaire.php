@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DataQuestionnaire extends Model
 {
 
-    protected $fillable = ['personality', 'game_question'];
+    protected $fillable = ['game_question', 'game_opponent_evaluation', 'study_evaluation'];
 
 
     /**

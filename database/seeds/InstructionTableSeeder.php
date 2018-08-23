@@ -23,7 +23,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.start',
             'next_url' => 'form.consent',
             'title' => 'Welcome',
-            'text' => 'Welcome in this study to human behavior. First of all, we want to thank you for participation!<br><br>This study consists of several blocks:<ul><li>Self-report questionnaire</li><li>Practice phase of a game</li><li>Playing a game (9 times)</li><li>Self-report questionnaire about a game (9 times)</li><li>End questions</li></ul>Before you start please fill in the informed consent form.'
+            'text' => 'Welcome in this study to human behavior. First of all, we want to thank you for participation!<br><br>This study consists of several blocks:<ul><li>Self-report questionnaire</li><li>Practice phase of a game</li><li>Playing 9 games, each with 10 rounds</li><li>Self-report questionnaire about a game (9 times)</li><li>End questions</li></ul>Before you start please fill in the informed consent form.'
         ]);
 
 
@@ -39,27 +39,9 @@ class InstructionTableSeeder extends Seeder
         // form.demographics
         Instruction::create([
             'current_url' => 'form.demographics',
-            'next_url' => 'form.questionnaire',
+            'next_url' => 'instruction.announcement',
             'title' => 'Demographics',
             'text' => 'Please fill out the following questions about yourself.'
-        ]);
-
-
-        // form.questionnaire/{hexaco}
-        Instruction::create([
-            'current_url' => 'form.questionnaire',
-            'next_url' => 'form.questionnaire',
-            'title' => 'Questionnaire',
-            'text' => 'On the following pages, you will find a series of statements about you. Please read each statement and decide how much you agree or disagree with that statement. Then indicate your response using the following scale:<ul>	<li>5 = strongly agree</li><li>4 = agree</li><li>3 = neutral (neither agree nor disagree)</li><li>2 = disagree</li><li>1 = strongly disagree</li></ul>Please answer every statement, even if you are not completely sure of your response.'
-        ]);
-
-
-        // form.questionnaire/{bfi}
-        Instruction::create([
-            'current_url' => 'form.questionnaire',
-            'next_url' => 'instruction.announcement',
-            'title' => 'Questionnaire',
-            'text' => 'Here are a number of characteristics that may or may not apply to you. For example, do you agree that you are someone who likes to spend time with others? Please indicate your response using the following scale:<ul><li>5 = strongly agree</li><li>4 = agree</li><li>3 = neutral (neither agree nor disagree)</li><li>2 = disagree</li><li>1 = strongly disagree</li></ul> <br><br> I see myself as someone who &hellip;'
         ]);
 
 
@@ -68,7 +50,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.announcement',
             'next_url' => 'instruction.practice',
             'title' => 'Games introduction',
-            'text' => 'In this part of the study you are going to play a game with another player. The game consists of a practice phase and a game phase. In each round you both have to make a decision between two alternatives. You make the decision at the same time, so you will not know the choice of the other player while making your decision. The choice of both players together states the amount of money units you both deserve. In each game you will see a table with the amount of money units that are possible to earn in each situation.'
+            'text' => 'In this part of the study you are going to play games with other player. There is first a practice phase to familiarize yourself with playing a game. After that the real games will begin and you will be playing for Money Units (MUs) with a player called Robin. You and Robin will make the decisions at the same time, so you will not know Robin’s choice while making your decision.'
         ]);
 
 
@@ -89,7 +71,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.condition',
             'next_url' => 'form.expectation',
             'title' => 'Game phase',
-            'text' => 'You finished the practice phase and are about to start the game phase.<br><br>You are expected to play 9 games, each consisting of 10 rounds. After each game you are invited to answer questions about the game you played.<br><br><b>Please pay attention: <span class="text-danger">there are some variations in each game, please read carefully.</span></b><br><br>Good luck!'
+            'text' => 'You finished the practice phase and are about to start the game phase.<br><br>You will play 9 different games, and each game will be played 10 times in a row (i.e. 10 rounds). After each round you will be informed about the MUs you earned and the MUs Robin earned. For example, after having played game 6 for the 4th time you will see a screen "Your MUs xx", "Robin’s MUs xx", "game 6/9, round 4/10". After each game, you are invited to answer questions about the game you played.<br><br><b>Please pay attention: <span class="text-danger">there are some variations in each game, please read carefully.</span></b><br><br>{{incentive_text}}<br><br>Good luck!'
         ]);
 
 
@@ -97,8 +79,8 @@ class InstructionTableSeeder extends Seeder
         Instruction::create([
             'current_url' => 'form.expectation',
             'next_url' => 'game.play',
-            'title' => 'Understanding and expectations',
-            'text' => 'Please fill out the following questions.'
+            'title' => 'Understanding',
+            'text' => 'Please fill out the following question.'
         ]);
 
 
@@ -108,9 +90,18 @@ class InstructionTableSeeder extends Seeder
         // instruction.score/{gameNumber}
         Instruction::create([
             'current_url' => 'instruction.score',
-            'next_url' => 'form.gameQuestion',
+            'next_url' => 'form.opponent-evaluation',
             'title' => 'Money Units transfer',
             'text' => 'Dynamically pulled from the conditions table.'
+        ]);
+
+
+        // form.opponentEvaluation/{gameNumber}
+        Instruction::create([
+            'current_url' => 'form.opponent-evaluation',
+            'next_url' => 'form.game-question',
+            'title' => 'Opponent evaluation',
+            'text' => 'Please fill out the following question.'
         ]);
 
 
@@ -133,6 +124,33 @@ class InstructionTableSeeder extends Seeder
 
 
         // last instruction.new-game/{gameNumber} will output that there are no games left
+
+
+        // form.study-evaluation-form
+        Instruction::create([
+            'current_url' => 'form.study-evaluation-form',
+            'next_url' => 'form.study-evaluation-question',
+            'title' => 'Study evaluation',
+            'text' => 'As you could read in the introduction to this experiment, Robin was ‘instructed’ to be cooperative in some games, competitive in other games, and sometimes cooperative and sometimes competitive in the same game.'
+        ]);
+
+
+        // form.study-evaluation-question/{wallstreet}
+        Instruction::create([
+            'current_url' => 'form.study-evaluation-question.wallstreet',
+            'next_url' => 'form.study-evaluation-question',
+            'title' => 'Understanding of the label',
+            'text' => 'Please indicate the degree to which you agree or disagree with the following statements. When I play a game with others that is called <b>"Wall Street Game"</b> I think that people who play this game generally...'
+        ]);
+
+
+        // form.study-evaluation-question/{community}
+        Instruction::create([
+            'current_url' => 'form.study-evaluation-question.community',
+            'next_url' => 'instruction.debriefing',
+            'title' => 'Understanding of the label',
+            'text' => 'Please indicate the degree to which you agree or disagree with the following statements. When I play a game with others that is called <b>"Community Game"</b> I think that people who play this game generally...'
+        ]);
 
 
         // debriefing

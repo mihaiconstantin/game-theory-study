@@ -133,5 +133,48 @@ class PersonalityItemTableSeeder extends Seeder
 
         #endregion
 
+
+        #region study evaluation items for WallStreet
+
+        $study_evaluation_wallstreet_items = [
+
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Know each other', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Don\'t help each other much', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Live in disharmony', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Grab what they can for themselves', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Grant the other as little as possible', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Compete rather than cooperate', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Do things for themselves', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Distrust each other', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Control each other', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'wallstreet', 'text' => 'Are not very kind to each other', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+
+        ];
+
+        DB::table('personality_items')->insert($study_evaluation_wallstreet_items);
+
+        #endregion
+
+
+        #region study evaluation items for Community
+
+        $study_evaluation_community_items = [
+
+            ['order' => 1, 'name' => 'community', 'text' => 'Know each other', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'community', 'text' => 'Help each other a lot', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'community', 'text' => 'Live in harmony', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'community', 'text' => 'Share things', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'community', 'text' => 'Go for equality with others', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'community', 'text' => 'Cooperate rather than compete', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'community', 'text' => 'Do things together', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'community', 'text' => 'Trust each other', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'community', 'text' => 'Control each other', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+            ['order' => 1, 'name' => 'community', 'text' => 'Are kind to each other', 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()],
+        ];
+
+        DB::table('personality_items')->insert($study_evaluation_community_items);
+
+        #endregion
+
     }
 }

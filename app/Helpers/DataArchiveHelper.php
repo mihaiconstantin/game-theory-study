@@ -112,6 +112,7 @@ class DataArchiveHelper
                     'game_number'       => $phase['game_number'],
                     'phase_number'      => $phase['phase_number'],
                     'play_time'         => $phase['end_play_time'] - $phase['start_play_time'],
+                    'incentive'         => $phase['incentive'],
                     'bias_type'         => $phase['bias_type'],
                     'competitive'       => $phase['competitive'],
                     'user_choice'       => (int) $phase['user_choice'],
@@ -137,21 +138,19 @@ class DataArchiveHelper
 
     private function loadDataQuestionnaire()
     {
-        $personality = [];
+        $study_evaluation = [];
 
         foreach ($this->session['data_questionnaires'] as $questionnaire_name => $data)
         {
             if (!is_array($data))
             {
-                $personality[$questionnaire_name] = $data;
+                $study_evaluation[$questionnaire_name] = $data;
             }
         }
 
-        $this->data_questionnaires['personality'] = json_encode($personality);
+        $this->data_questionnaires['study_evaluation'] = json_encode($study_evaluation);
         $this->data_questionnaires['game_question'] = json_encode($this->session['data_questionnaires']['game_question']);
-
-
-        unset($personality);
+        $this->data_questionnaires['game_opponent_evaluation'] = json_encode($this->session['data_questionnaires']['game_opponent_evaluation']);
     }
 
 
@@ -159,6 +158,7 @@ class DataArchiveHelper
     {
         $this->data_forms['demographic'] = $this->session['data_forms']['demographic'];
         $this->data_forms['expectation'] = $this->session['data_forms']['expectation'];
+        $this->data_forms['realization'] = $this->session['data_forms']['realization'];
         $this->data_forms['feedback'] = $this->session['data_forms']['feedback'];
     }
 
@@ -234,25 +234,3 @@ class DataArchiveHelper
     #endregion
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

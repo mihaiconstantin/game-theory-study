@@ -22,7 +22,7 @@
                 </tr>
 
                 <tr>
-                    <td>Phase:</td>
+                    <td>Round:</td>
                     <td id="gameIterationXXX" class="text-right" data-current-iteration="{{$data['phase_number']}}" data-total-iteration="{{$data['total_phases']}}">{{$data['phase_number']}}/{{$data['total_phases']}}</td>
                 </tr>
             </tbody>

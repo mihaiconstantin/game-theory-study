@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\StudyLoader;
 use Illuminate\Database\Seeder;
 
 class StudyLoaderTableSeeder extends Seeder
@@ -17,8 +18,9 @@ class StudyLoaderTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
         // Training
-        \App\Models\StudyLoader::create([
-            'load_study' => '2017_04_game_theory_02',
+        StudyLoader::create([
+            // 'load_study' => '2017_04_game_theory_02',
+            'load_study' => '2018_08_game_theory_10',
         ]);
     }
 }

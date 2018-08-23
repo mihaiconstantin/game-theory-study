@@ -301,53 +301,24 @@ class SelectOptionTableSeeder extends Seeder
     #endregion
 
 
-    #region expectation
+    #region pre-game expectation
 
         # region understanding options
 
         // yes
         \App\Models\SelectOption::create([
-            'form_element_id' => 7,
+            'form_element_id' => 8,
             'order' => 1,
             'value' => 1,
-            'text' => 'yes'
+            'text' => 'understanding.yes'
         ]);
 
         // no
         \App\Models\SelectOption::create([
-            'form_element_id' => 7,
+            'form_element_id' => 8,
             'order' => 0,
             'value' => 0,
-            'text' => 'no'
-        ]);
-
-        #endregion
-
-
-        #region expectation options
-
-        // competitive
-        \App\Models\SelectOption::create([
-            'form_element_id' => 8,
-            'order' => 1,
-            'value' => 1,
-            'text' => 'competitive'
-        ]);
-
-        // cooperative
-        \App\Models\SelectOption::create([
-            'form_element_id' => 8,
-            'order' => 2,
-            'value' => 2,
-            'text' => 'cooperative'
-        ]);
-
-        // neutral
-        \App\Models\SelectOption::create([
-            'form_element_id' => 8,
-            'order' => 3,
-            'value' => 3,
-            'text' => 'neutral'
+            'text' => 'understanding.no'
         ]);
 
         #endregion
@@ -355,24 +326,57 @@ class SelectOptionTableSeeder extends Seeder
     #endregion
 
 
-    #region feedback form elements
+    #region opponent evaluation form elements (i.e., end of each game)
 
-        #region related options
+        #region opinion
 
-        // yes
+        // cooperatively
         \App\Models\SelectOption::create([
-            'form_element_id' => 10,
+            'form_element_id' => 9,
             'order' => 1,
-            'value' => 1,
-            'text' => 'yes'
+            'value' => 0,
+            'text' => 'cooperatively'
         ]);
 
-        // no
+        // sometimes cooperatively, sometimes competitively
+        \App\Models\SelectOption::create([
+            'form_element_id' => 9,
+            'order' => 2,
+            'value' => 1,
+            'text' => 'sometimes cooperatively, sometimes competitively'
+        ]);
+
+        // competitively
+        \App\Models\SelectOption::create([
+            'form_element_id' => 9,
+            'order' => 3,
+            'value' => 2,
+            'text' => 'competitively'
+        ]);
+
+        #endregion
+
+    #endregion
+
+
+    #region study evaluation form elements
+
+        #region realization
+
+        // realization option 1
         \App\Models\SelectOption::create([
             'form_element_id' => 10,
             'order' => 1,
             'value' => 0,
-            'text' => 'no'
+            'text' => 'realization option 1'
+        ]);
+
+        // realization option 2
+        \App\Models\SelectOption::create([
+            'form_element_id' => 10,
+            'order' => 2,
+            'value' => 1,
+            'text' => 'realization option 2'
         ]);
 
         #endregion

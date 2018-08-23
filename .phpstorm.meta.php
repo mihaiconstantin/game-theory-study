@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-04-12 17:56:24.
+    * Generated on 2018-07-28 14:18:39.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -47,6 +47,8 @@ namespace PHPSTORM_META {
         'voyager.alert.components.title' => \TCG\Voyager\Alert\Components\TitleComponent::class,
         'voyager.alert.components.text' => \TCG\Voyager\Alert\Components\TextComponent::class,
         'voyager.alert.components.button' => \TCG\Voyager\Alert\Components\ButtonComponent::class,
+        'iseed' => \Orangehill\Iseed\Iseed::class,
+        'command.iseed' => \Orangehill\Iseed\IseedCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -177,6 +179,8 @@ namespace PHPSTORM_META {
         'voyager.alert.components.title' => \TCG\Voyager\Alert\Components\TitleComponent::class,
         'voyager.alert.components.text' => \TCG\Voyager\Alert\Components\TextComponent::class,
         'voyager.alert.components.button' => \TCG\Voyager\Alert\Components\ButtonComponent::class,
+        'iseed' => \Orangehill\Iseed\Iseed::class,
+        'command.iseed' => \Orangehill\Iseed\IseedCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -307,6 +311,8 @@ namespace PHPSTORM_META {
         'voyager.alert.components.title' => \TCG\Voyager\Alert\Components\TitleComponent::class,
         'voyager.alert.components.text' => \TCG\Voyager\Alert\Components\TextComponent::class,
         'voyager.alert.components.button' => \TCG\Voyager\Alert\Components\ButtonComponent::class,
+        'iseed' => \Orangehill\Iseed\Iseed::class,
+        'command.iseed' => \Orangehill\Iseed\IseedCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -437,6 +443,8 @@ namespace PHPSTORM_META {
         'voyager.alert.components.title' => \TCG\Voyager\Alert\Components\TitleComponent::class,
         'voyager.alert.components.text' => \TCG\Voyager\Alert\Components\TextComponent::class,
         'voyager.alert.components.button' => \TCG\Voyager\Alert\Components\ButtonComponent::class,
+        'iseed' => \Orangehill\Iseed\Iseed::class,
+        'command.iseed' => \Orangehill\Iseed\IseedCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -567,6 +575,8 @@ namespace PHPSTORM_META {
         'voyager.alert.components.title' => \TCG\Voyager\Alert\Components\TitleComponent::class,
         'voyager.alert.components.text' => \TCG\Voyager\Alert\Components\TextComponent::class,
         'voyager.alert.components.button' => \TCG\Voyager\Alert\Components\ButtonComponent::class,
+        'iseed' => \Orangehill\Iseed\Iseed::class,
+        'command.iseed' => \Orangehill\Iseed\IseedCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -697,6 +707,8 @@ namespace PHPSTORM_META {
         'voyager.alert.components.title' => \TCG\Voyager\Alert\Components\TitleComponent::class,
         'voyager.alert.components.text' => \TCG\Voyager\Alert\Components\TextComponent::class,
         'voyager.alert.components.button' => \TCG\Voyager\Alert\Components\ButtonComponent::class,
+        'iseed' => \Orangehill\Iseed\Iseed::class,
+        'command.iseed' => \Orangehill\Iseed\IseedCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -827,6 +839,8 @@ namespace PHPSTORM_META {
         'voyager.alert.components.title' => \TCG\Voyager\Alert\Components\TitleComponent::class,
         'voyager.alert.components.text' => \TCG\Voyager\Alert\Components\TextComponent::class,
         'voyager.alert.components.button' => \TCG\Voyager\Alert\Components\ButtonComponent::class,
+        'iseed' => \Orangehill\Iseed\Iseed::class,
+        'command.iseed' => \Orangehill\Iseed\IseedCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,

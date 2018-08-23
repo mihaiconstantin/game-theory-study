@@ -97,6 +97,7 @@ class DataReconstructHelper
             $this->dataForms[$index]['file'] = array_merge(
                 json_decode($dataForm['demographic'], true),
                 json_decode($dataForm['expectation'], true),
+                json_decode($dataForm['realization'], true),
                 json_decode($dataForm['feedback'], true)
             );
         }
@@ -113,20 +114,26 @@ class DataReconstructHelper
     {
         foreach ($this->dataQuestionnaires as $index => $dataQuestionnaire)
         {
-            $this->dataQuestionnaires[$index]['personality'] = json_decode($dataQuestionnaire['personality'], true);
             $this->dataQuestionnaires[$index]['game_question'] = json_decode($dataQuestionnaire['game_question'], true);
+            $this->dataQuestionnaires[$index]['game_opponent_evaluation'] = json_decode($dataQuestionnaire['game_opponent_evaluation'], true);
+            $this->dataQuestionnaires[$index]['study_evaluation'] = json_decode($dataQuestionnaire['study_evaluation'], true);
         }
 
         foreach ($this->dataQuestionnaires as $index => $dataQuestionnaire)
         {
-            foreach ($dataQuestionnaire['personality'] as $questionnaire_name => $data)
+            foreach ($dataQuestionnaire['study_evaluation'] as $questionnaire_name => $data)
             {
-                $this->dataQuestionnaires[$index]['personality'][$questionnaire_name] = json_decode($data, true);
+                $this->dataQuestionnaires[$index]['study_evaluation'][$questionnaire_name] = json_decode($data, true);
             }
 
             foreach ($dataQuestionnaire['game_question'] as $questionnaire_name => $data)
             {
                 $this->dataQuestionnaires[$index]['game_question'][$questionnaire_name] = json_decode($data, true);
+            }
+
+            foreach ($dataQuestionnaire['game_opponent_evaluation'] as $questionnaire_name => $data)
+            {
+                $this->dataQuestionnaires[$index]['game_opponent_evaluation'][$questionnaire_name] = json_decode($data, true);
             }
         }
     }

@@ -1,9 +1,8 @@
 {{--Personality questionaire determined on route parameter--}}
 
-<form action="{{URL::route('form.store-game-question')}}" method="POST">
+<form action="{{URL::route('form.store-study-evaluation-question')}}" method="POST">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="_questionnaire" value="{{$name}}">
-    <input type="hidden" name="_game_number" value="{{$gameNumber}}">
 
     @include('macros.questionnaire')
 

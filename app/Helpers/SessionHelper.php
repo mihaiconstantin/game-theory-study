@@ -74,6 +74,7 @@ class SessionHelper
             'phase_number'      => $current_phase,
             'start_play_time'   => $request->input('_time'),
             'end_play_time'     => microtime(true),
+            'incentive'         => session('config.' . $context . '.info.incentive'),
             'bias_type'         => session('config.' . $context . '.biases')[$current_game],
             'competitive'       => $competitive,
             'user_choice'       => $user_choice,
@@ -97,7 +98,6 @@ class SessionHelper
      * @param string $context
      * @param string $previous_url
      * @return array
-     * @throws \Exception
      */
     public static function whereNext(string $context, string $previous_url) : array
     {
@@ -298,9 +298,10 @@ class SessionHelper
 
 
                 'data_forms' => [
-                    'demographic'   => null,
-                    'expectation'   => null,
-                    'feedback'      => null,
+                    'demographic'       => null,
+                    'expectation'       => null,
+                    'realization'       => null,
+                    'feedback'          => null,
                 ],
 
 
@@ -343,6 +344,7 @@ class SessionHelper
                     'phase_number'      => null,
                     'start_play_time'   => null,
                     'end_play_time'     => null,
+                    'incentive'         => null,
                     'bias_type'         => null,
                     'competitive'       => null,
                     'user_choice'       => null,
@@ -373,6 +375,7 @@ class SessionHelper
                     'phase_number'      => null,
                     'start_play_time'   => null,
                     'end_play_time'     => null,
+                    'incentive'         => null,
                     'bias_type'         => null,
                     'competitive'       => null,
                     'user_choice'       => null,

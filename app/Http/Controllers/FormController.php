@@ -104,14 +104,14 @@ class FormController extends Controller
         return view('forms.demographics', [
             'data' => $instruction,
             'elements' => $elements
-            ]);
+        ]);
     }
 
     public function storeDemographics(Request $request)
     {
         SessionHelper::pushSerialized($request, 'storage.data_forms.demographic', ['_token']);
 
-        return redirect(route($this->InstructionLoader('form.demographics')['next_url'], ['name' => 'hexaco']));
+        return redirect(route($this->InstructionLoader('form.demographics')['next_url']));
     }
 
 
@@ -120,6 +120,10 @@ class FormController extends Controller
      * */
     public function questionnaire($name)
     {
+        // Todo: Here is a small bug: regardless of the fact that we get different items for bfi and hexco,
+        // Todo: we get the same instructions, because the Instruction loader does not know how to
+        // Todo: differentiate between two routes with the same current url.
+        // Todo: Take a look at studyEvaluationQuestion() for a workaround and in the instruction table seeder.
         $instruction = $this->InstructionLoader('form.questionnaire');
         $items = PersonalityItem::getItemsForQuestionnaire($name);
         $steps = ItemScale::getScaleForQuestionnaire($name);
@@ -173,6 +177,34 @@ class FormController extends Controller
 
 
     /*
+     * Display and store the opponent-evaluation/{gameNumber} form.
+     * */
+    public function opponentEvaluation($gameNumber)
+    {
+        $instruction = $this->InstructionLoader('form.opponent-evaluation');
+        $elements = FormElement::getElementForContext('form.opponent-evaluation');
+
+        return view('forms.opponent_evaluation', [
+            'data' => $instruction,
+            'elements' => $elements,
+            'gameNumber' => $gameNumber,
+            // The name helps us know where in the session object we need to push the results.
+            'name' => 'game_opponent_evaluation'
+        ]);
+    }
+
+    public function storeOpponentEvaluation(Request $request) {
+        // Store the form data into session. In this case we regard the form as a 'questionnaire' because it is recurring after each game.
+        SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire') . '.' . request('_game_number'), ['_token']);
+
+        // Continue to next url.
+        return redirect(route($this->InstructionLoader('form.opponent-evaluation')['next_url'], [
+            'gameNumber' => $request->get('_game_number')
+        ]));
+    }
+
+
+    /*
      * Display and store the game-question/{gameNumber} form.
      * */
     public function gameQuestion($gameNumber)
@@ -198,12 +230,71 @@ class FormController extends Controller
 
         if (session('temp.next_game') == 0)
         {
-            return redirect()->route('instruction.debriefing');
+            return redirect()->route('form.study-evaluation-form');
         }
 
         return redirect(route($this->InstructionLoader('form.game-question')['next_url'], [
             'gameNumber' => session('temp.next_game')
         ]));
+    }
+
+
+    /*
+     * Display and store the form/study-evaluation-form/ form.
+     * */
+    public function studyEvaluationForm()
+    {
+        $instruction = $this->InstructionLoader('form.study-evaluation-form');
+        $elements = FormElement::getElementForContext('form.study-evaluation-form');
+
+        return view('forms.study_evaluation_form', [
+            'data' => $instruction,
+            'elements' => $elements
+        ]);
+    }
+
+    public function storeStudyEvaluationForm(Request $request)
+    {
+        SessionHelper::pushSerialized($request, 'storage.data_forms.realization', ['_token']);
+
+        return redirect(route($this->InstructionLoader('form.study-evaluation-form')['next_url'], [
+            'name' => 'wallstreet'
+        ]));
+    }
+
+
+    /*
+     * Display and store the form/study-evaluation-question/{wallstreet or community} questionnaire.
+     * Items and scales will change accordingly.
+     * */
+    public function studyEvaluationQuestion($name)
+    {
+        $instruction = $this->InstructionLoader('form.study-evaluation-question.' . $name);
+        $items = PersonalityItem::getItemsForQuestionnaire($name);
+        $steps = ItemScale::getScaleForQuestionnaire($name);
+
+        // dd($instruction);
+
+        return view('forms.study_evaluation_question', [
+            'data' => $instruction,
+            'items' => $items,
+            'steps' => $steps,
+            'name'  => $name
+        ]);
+    }
+
+    public function storeStudyEvaluationQuestion(Request $request)
+    {
+        SessionHelper::pushSerialized($request, 'storage.data_questionnaires.' . request('_questionnaire'), ['_token']);
+
+        if (request('_questionnaire') == 'wallstreet')
+        {
+            return redirect(route('form.study-evaluation-question', [
+                'name' => 'community'
+            ]));
+        }
+
+        return redirect(route('instruction.debriefing'));
     }
 
 

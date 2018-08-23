@@ -87,6 +87,16 @@ class FormElementTableSeeder extends Seeder
             'label' => 'What is your current employment status?',
         ]);
 
+        // origin country
+        \App\Models\FormElement::create([
+            'current_url' => 'form.demographics',
+            'name' => 'demographics.country',
+            'order' => '7',
+            'tag_type' => 'input',
+            'attr_name' => 'country',
+            'attr_id' => 'country',
+            'label' => 'What is your current country?',
+        ]);
 
         #endregion
 
@@ -104,16 +114,36 @@ class FormElementTableSeeder extends Seeder
             'label' => 'Do you understand how this game is played?',
         ]);
 
+        #endregion
 
-        // participant expectation
+
+        #region seeds for form/opponent-evaluation
+
+        // opinion
         \App\Models\FormElement::create([
-            'current_url' => 'form.expectation',
-            'name' => 'expectation.expectation',
-            'order' => '2',
+            'current_url' => 'form.opponent-evaluation',
+            'name' => 'opponent-evaluation.opinion',
+            'order' => '1',
             'tag_type' => 'select',
-            'attr_name' => 'expectation',
-            'attr_id' => 'expectation',
-            'label' => 'How do you expect your opponent to behave throughout the games?',
+            'attr_name' => 'opinion',
+            'attr_id' => 'opinion',
+            'label' => 'How do you think other players than Robin would have played in this game?',
+        ]);
+
+        #endregion
+
+
+        #region seeds for form/study-evaluation-form
+
+        // realization
+        \App\Models\FormElement::create([
+            'current_url' => 'form.study-evaluation-form',
+            'name' => 'study-evaluation-form.realization',
+            'order' => '1',
+            'tag_type' => 'select',
+            'attr_name' => 'realization',
+            'attr_id' => 'realization',
+            'label' => 'Did you realize that ‘instructed’ meant ‘programmed’ (i.e., a machine player)?',
         ]);
 
         #endregion
@@ -130,29 +160,6 @@ class FormElementTableSeeder extends Seeder
             'attr_name' => 'unclear',
             'attr_id' => 'unclear',
             'label' => 'I did not understand the following instructions:',
-        ]);
-
-        // related parts
-        \App\Models\FormElement::create([
-            'current_url' => 'form.feedback',
-            'name' => 'feedback.related',
-            'order' => '2',
-            'tag_type' => 'select',
-            'attr_name' => 'related',
-            'attr_id' => 'related',
-            'label' => 'Do you think the different components of this study are related?',
-        ]);
-
-        // details
-        \App\Models\FormElement::create([
-            'current_url' => 'form.feedback',
-            'name' => 'feedback.details',
-            'order' => '3',
-            'tag_type' => 'textarea',
-            'attr_name' => 'details',
-            'attr_id' => 'details',
-            'attr_required' => 0,
-            'label' => 'If yes, please explain why you think the different components of this study are related',
         ]);
 
         #endregion
