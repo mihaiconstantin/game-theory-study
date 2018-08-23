@@ -12,6 +12,7 @@ class DataGamePhase extends Model
         'game_number',
         'phase_number',
         'play_time',
+        'incentive',
         'bias_type',
         'competitive',
         'user_choice',
