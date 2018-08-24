@@ -310,7 +310,7 @@ class SelectOptionTableSeeder extends Seeder
             'form_element_id' => 8,
             'order' => 1,
             'value' => 1,
-            'text' => 'understanding.yes'
+            'text' => 'yes'
         ]);
 
         // no
@@ -318,7 +318,7 @@ class SelectOptionTableSeeder extends Seeder
             'form_element_id' => 8,
             'order' => 0,
             'value' => 0,
-            'text' => 'understanding.no'
+            'text' => 'no'
         ]);
 
         #endregion
@@ -363,20 +363,20 @@ class SelectOptionTableSeeder extends Seeder
 
         #region realization
 
-        // realization option 1
+        // realization option 1: no
+        \App\Models\SelectOption::create([
+            'form_element_id' => 10,
+            'order' => 0,
+            'value' => 0,
+            'text' => 'no'
+        ]);
+
+        // realization option 2: yes
         \App\Models\SelectOption::create([
             'form_element_id' => 10,
             'order' => 1,
-            'value' => 0,
-            'text' => 'realization option 1'
-        ]);
-
-        // realization option 2
-        \App\Models\SelectOption::create([
-            'form_element_id' => 10,
-            'order' => 2,
             'value' => 1,
-            'text' => 'realization option 2'
+            'text' => 'yes'
         ]);
 
         #endregion

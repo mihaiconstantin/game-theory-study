@@ -32,7 +32,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'form.consent',
             'next_url' => 'form.demographics',
             'title' => 'Informed consent',
-            'text' => '<b>Name of the study:</b> Knowledge and Insight<br><br>You have been invited to participate in this study. Before you begin, we kindly ask you to read this form carefully and sign for consent.<br><br><b>Researchers:</b><br>Prof. Dr. J. J. A. Denissen<small> - Department of Developmental Psychology Tilburg University</small><br>Prof. Dr. S. M. Lindenberg <small> - Department of Social Psychology Tilburg University</small><br><br><b>Background:</b><br>The intention of this study is to research and gain knowledge of human behavior. Firstly, we would like to ask you to fill out a questionnaire about how you think about yourself. Subsequently, you will play a game. We are interested in how you make decisions during that game.<br><br><b>Procedure:</b><br>This study will take about 45 minutes. If you at any point wish to withdraw your consent and stop the study, you have the right to do so and will not be penalized.<br><br><b>Compensation:</b><br>For your participation you will receive the credit stated on Amazon Mechanical Turk.<br><br><b>Confidentiality:</b><br>When your role with this project is complete, your data will be anonymized. From that time, there will be no record that links the data collected from you with any personal data from which you could be identified. Once anonymized, these data may be made available to researchers via accessible data repositories and possibly used for novel purposes.<br><br>If you have any questions during your participation, you can email the test leader <i>(e.dietvorst@uvt.nl)</i>.<br>If you have other questions regarding the study, the test leader can get you in contact with the project leader prof. Dr. J. J. A. Denissen.'
+            'text' => '<b>Name of the study:</b> Knowledge and Insight<br><br>You have been invited to participate in this study. Before you begin, we kindly ask you to read this form carefully and sign for consent.<br><br><b>Researchers:</b><br>Prof. Dr. J. J. A. Denissen<small> - Department of Developmental Psychology Tilburg University</small><br>Prof. Dr. S. M. Lindenberg <small> - Department of Social Psychology Tilburg University</small><br><br><b>Background:</b><br>The intention of this study is to research and gain knowledge of human behavior. Firstly, we would like to ask you to fill out geberal questions about yourself. Subsequently, you will play a game. We are interested in how you make decisions during that game.<br><br><b>Procedure:</b><br>This study will take about 25 minutes.<br><br><b>Compensation:</b><br>For your participation you will receive the credit stated on Amazon Mechanical Turk.<br><br><b>Confidentiality:</b><br>When your role with this project is complete, your data will be anonymized. From that time, there will be no record that links the data collected from you with any personal data from which you could be identified. Once anonymized, these data may be made available to researchers via accessible data repositories and possibly used for novel purposes.<br><br>If you have any questions during your participation, you can email the test leader <i>(e.dietvorst@uvt.nl)</i>.<br>If you have other questions regarding the study, the test leader can get you in contact with the project leaders.'
         ]);
 
 
@@ -50,7 +50,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.announcement',
             'next_url' => 'instruction.practice',
             'title' => 'Games introduction',
-            'text' => 'In this part of the study you are going to play games with other player. There is first a practice phase to familiarize yourself with playing a game. After that the real games will begin and you will be playing for Money Units (MUs) with a player called Robin. You and Robin will make the decisions at the same time, so you will not know Robin’s choice while making your decision.'
+            'text' => 'In this part of the study you are going to play games with another player. There is first a practice phase to familiarize yourself with playing a game. After that the real games will begin and you will be playing for Money Units (MUs) with a player called Robin. You and Robin will make the decisions at the same time, so you will not know Robin’s choice while making your decision.'
         ]);
 
 
@@ -59,7 +59,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'instruction.practice',
             'next_url' => 'game.play',
             'title' => 'Practice game',
-            'text' => 'You are about to play the practice phase with another player. The practice phase consists of three rounds. The money units you can earn in each situation are displayed in the table of each game.'
+            'text' => 'You are about to play the practice game with another player which consists of three rounds. The money units you can earn in each situation are displayed in the table of each game.'
         ]);
 
 
@@ -167,7 +167,7 @@ class InstructionTableSeeder extends Seeder
             'current_url' => 'form.feedback',
             'next_url' => 'instruction.amazon-code',
             'title' => 'Feedback',
-            'text' => 'Thank you for filling out the last questionnaire about the game you just played.<br><br>We kindly ask you to answer the following questions about our study.'
+            'text' => 'Thank you for filling our the questionnaires.<br><br>We kindly ask you to answer the following questions about our study.'
         ]);
 
 
